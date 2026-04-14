@@ -7,6 +7,7 @@ import { useDemoDialog } from "@/contexts/DemoDialogContext";
 const HeroSection = () => {
   const { setOpen } = useDemoDialog();
   return (
+    <section className="bg-hero pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
     <div className="container grid md:grid-cols-2 gap-12 items-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
