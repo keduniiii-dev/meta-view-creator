@@ -4,7 +4,7 @@ import { Eye, Zap, Users, CheckCircle } from "lucide-react";
 const features = [
   { icon: Eye, title: "3D Visualisation", desc: "Photorealistic renders and interactive 3D walkthroughs of your project." },
   { icon: Zap, title: "Faster Approvals", desc: "Help planning officers instantly understand your development." },
-  { icon: Users, title: "Stakeholder Alignment", desc: "Get everyone — investors, buyers, councils — on the same page." },
+  { icon: Users, title: "Stakeholder Alignment", desc: "Get everyone - investors, buyers, councils - on the same page." },
   { icon: CheckCircle, title: "Better Decisions", desc: "Spot design issues early, saving time and money on revisions." },
 ];
 
@@ -22,7 +22,7 @@ const SolutionSection = () => (
           3D experiences that win approvals
         </h2>
         <p className="mt-4 text-muted-foreground text-lg">
-          We transform your plans into stunning, interactive 3D visualisations — so every stakeholder sees exactly what you're building.
+          We transform your plans into stunning, interactive 3D visualisations - so every stakeholder sees exactly what you're building.
         </p>
       </motion.div>
 

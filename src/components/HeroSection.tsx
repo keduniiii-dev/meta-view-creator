@@ -19,7 +19,7 @@ const HeroSection = () => {
           <span className="text-gradient">visualise projects in 3D</span>
         </h1>
         <p className="mt-6 text-hero-muted text-lg md:text-xl max-w-lg leading-relaxed">
-          Speed up approvals, improve stakeholder communication, and bring your developments to life — before a single brick is laid.
+          Speed up approvals, improve stakeholder communication, and bring your developments to life - before a single brick is laid.
         </p>
 
         <ul className="mt-6 space-y-3">
