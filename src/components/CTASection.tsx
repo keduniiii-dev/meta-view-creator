@@ -31,6 +31,7 @@ const CTASection = () => {
       </motion.div>
     </div>
   </section>
-);
+  );
+};
 
 export default CTASection;
