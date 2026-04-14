@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDemoDialog } from "@/contexts/DemoDialogContext";
 
-const CTASection = () => (
+const CTASection = () => {
+  const { setOpen } = useDemoDialog();
+  return (
   <section id="contact" className="bg-hero section-padding">
     <div className="container">
       <motion.div
@@ -18,7 +21,7 @@ const CTASection = () => (
           Book a free consultation and see how 3D visualisation can transform your next development.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base">
+          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
             Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Button size="lg" variant="outline" className="rounded-full px-8 text-base border-hero-muted/30 text-hero-foreground hover:bg-hero-muted/10">
