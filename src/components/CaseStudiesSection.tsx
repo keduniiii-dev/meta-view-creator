@@ -7,7 +7,7 @@ const studies = [
   {
     image: caseStudy1,
     tag: "Residential",
-    title: "Riverside Apartments — 40% Faster Approval",
+    title: "Riverside Apartments - 40% Faster Approval",
     problem: "A developer struggled with multiple planning rejections for a 200-unit residential project.",
     solution: "We created photorealistic 3D walkthroughs showing the development in context with its surroundings.",
     result: "Planning approval granted on first resubmission, saving 6 months and £120K in delays.",
@@ -15,10 +15,10 @@ const studies = [
   {
     image: caseStudy2,
     tag: "Infrastructure",
-    title: "City Bridge Project — Stakeholder Buy-In",
+    title: "City Bridge Project - Stakeholder Buy-In",
     problem: "A local authority couldn't align 12 stakeholder groups on a major infrastructure project.",
     solution: "Interactive 3D model with flythrough animations presented at council meetings.",
-    result: "Unanimous stakeholder approval achieved in a single session — a first for the authority.",
+    result: "Unanimous stakeholder approval achieved in a single session - a first for the authority.",
   },
 ];
 

@@ -15,7 +15,7 @@ const problems = [
   {
     icon: MessageSquareX,
     title: "Poor Communication",
-    description: "Investors, councils, and buyers can't see what you see — misalignment kills deals before they start.",
+    description: "Investors, councils, and buyers can't see what you see - misalignment kills deals before they start.",
   },
 ];
 
