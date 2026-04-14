@@ -61,6 +61,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10" />
       </motion.div>
     </div>
+    </section>
   );
 };
 
