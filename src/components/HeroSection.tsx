@@ -39,8 +39,8 @@ const HeroSection = () => {
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
             Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <Button size="lg" variant="outline" className="rounded-full px-8 text-base border-hero-muted/30 text-hero-foreground hover:bg-hero-muted/10">
-            View Case Studies
+          <Button size="lg" variant="outline" className="rounded-full px-8 text-base border-hero-muted/30 text-hero-foreground hover:bg-hero-muted/10" asChild>
+            <a href="#case-studies">View Case Studies</a>
           </Button>
         </div>
       </motion.div>
