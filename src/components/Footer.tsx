@@ -13,24 +13,38 @@ const Footer = () => (
         {[
           {
             title: "Company",
-            links: ["Services", "Case Studies", "Blog", "About"],
+            links: [
+              { label: "Services", href: "/services" },
+              { label: "Case Studies", href: "/case-studies" },
+              { label: "Blog", href: "/blog" },
+              { label: "About", href: "/about" },
+            ],
           },
           {
             title: "Resources",
-            links: ["How It Works", "FAQ", "Privacy Policy", "Terms"],
+            links: [
+              { label: "How It Works", href: "#how-it-works" },
+              { label: "FAQ", href: "#" },
+              { label: "Privacy Policy", href: "#" },
+              { label: "Terms", href: "#" },
+            ],
           },
           {
             title: "Contact",
-            links: ["Book a Demo", "hello@meta-dology.com", "LinkedIn"],
+            links: [
+              { label: "Book a Demo", href: "#" },
+              { label: "hello@meta-dology.com", href: "mailto:hello@meta-dology.com" },
+              { label: "LinkedIn", href: "#" },
+            ],
           },
         ].map((col) => (
           <div key={col.title}>
             <h4 className="text-hero-foreground font-semibold text-sm mb-4">{col.title}</h4>
             <ul className="space-y-2">
               {col.links.map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-hero-muted text-sm hover:text-hero-foreground transition-colors">
-                    {link}
+                <li key={link.label}>
+                  <a href={link.href} className="text-hero-muted text-sm hover:text-hero-foreground transition-colors">
+                    {link.label}
                   </a>
                 </li>
               ))}
