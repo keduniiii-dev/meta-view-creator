@@ -23,10 +23,10 @@ const Footer = () => (
           {
             title: "Resources",
             links: [
-              { label: "How It Works", href: "#how-it-works" },
-              { label: "FAQ", href: "#" },
-              { label: "Privacy Policy", href: "#" },
-              { label: "Terms", href: "#" },
+              { label: "How It Works", href: "/how-it-works" },
+              { label: "FAQ", href: "/faq" },
+              { label: "Privacy Policy", href: "/privacy-policy" },
+              { label: "Terms", href: "/terms" },
             ],
           },
           {
