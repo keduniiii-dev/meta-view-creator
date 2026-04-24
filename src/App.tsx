@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import Index from "./pages/Index.tsx";
 import Services from "./pages/Services.tsx";
@@ -15,6 +14,7 @@ import FAQ from "./pages/FAQ.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import Terms from "./pages/Terms.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import LearnMoreCaseStudy from "./pages/LearnMoreCaseStudy.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +28,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
           <Route path="/case-studies" element={<CaseStudies />} />
+          <Route path="/case-studies/:id" element={<LearnMoreCaseStudy />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} />

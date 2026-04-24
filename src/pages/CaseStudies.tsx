@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
@@ -154,8 +155,11 @@ const CaseStudies = () => {
                         variant="outline"
                         size="lg"
                         className="rounded-full px-8"
+                        asChild
                       >
-                        Learn More
+                        <Link to={`/case-studies/${study.id}`}>
+                          Learn More
+                        </Link>
                       </Button>
                     </div>
                   </div>

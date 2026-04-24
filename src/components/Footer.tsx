@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-hero border-t border-hero-muted/10 py-12">
       <div className="container">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           <div>
             <Link to="/" className="text-hero-foreground font-heading font-extrabold text-xl">
               Meta<span className="text-gradient">-Verse</span>
@@ -18,7 +18,6 @@ const Footer = () => {
             {
               title: "Resources",
               links: [
-                { label: "Blog", href: "/blog" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Privacy Policy", href: "/privacy-policy" },
                 { label: "Terms", href: "/terms" },

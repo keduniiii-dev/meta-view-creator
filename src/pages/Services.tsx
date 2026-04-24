@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { FaArrowRight, FaCube, FaUsers, FaChartBar, FaPalette, FaClock, FaShieldAlt } from "react-icons/fa";
+import { ArrowRight } from "lucide-react";
+import { FaCube, FaUsers, FaChartLine, FaPaintBrush, FaClock, FaShieldAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
@@ -19,13 +20,13 @@ const services = [
     features: ["Custom animations", "Real-time adjustments", "Multi-format delivery"],
   },
   {
-    icon: FaChartBar,
+    icon: FaChartLine,
     title: "Planning Approval Support",
     description: "Comprehensive visual documentation to accelerate planning approvals and reduce rejection cycles.",
     features: ["Compliance documentation", "Impact analysis visuals", "Regulatory alignment"],
   },
   {
-    icon: FaPalette,
+    icon: FaPaintBrush,
     title: "Design Iteration",
     description: "Rapid visualization of design alternatives, enabling faster decision-making and design refinement.",
     features: ["Quick turnarounds", "Multiple variants", "Version control"],
@@ -165,9 +166,9 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="relative"
+                  className="relative flex items-center"
                 >
-                  <div className="bg-card rounded-2xl p-6 border border-border h-full">
+                  <div className="bg-card rounded-2xl p-6 border border-border h-full w-full">
                     <div className="absolute -top-4 -left-4 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm">
                       {item.step}
                     </div>
@@ -177,8 +178,8 @@ const Services = () => {
                     </p>
                   </div>
                   {i < process.length - 1 && (
-                    <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2">
-                      <FaArrowRight className="h-6 w-6 text-muted-foreground/30" />
+                    <div className="hidden md:block absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+                      <ArrowRight className="h-5 w-5 text-muted-foreground/50" />
                     </div>
                   )}
                 </motion.div>
@@ -207,7 +208,7 @@ const Services = () => {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
                 onClick={() => setOpen(true)}
               >
-                Book a Consultation <FaArrowRight className="ml-2 h-4 w-4" />
+                Book a Consultation <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </motion.div>
           </div>

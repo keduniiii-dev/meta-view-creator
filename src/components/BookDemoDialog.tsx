@@ -57,43 +57,43 @@ const BookDemoDialog = () => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="w-[95vw] max-w-md sm:max-w-lg bg-background [&>button]:hidden max-h-[85vh] overflow-hidden flex flex-col" hideClose>
-        <DialogHeader className="flex-shrink-0">
-          <DialogTitle className="text-xl sm:text-2xl font-bold">Request a demo</DialogTitle>
-          <DialogDescription className="text-sm">
+      <DialogContent className="w-[95vw] max-w-md bg-background [&>button]:hidden max-h-[85vh] overflow-hidden flex flex-col" hideClose>
+        <DialogHeader className="flex-shrink-0 space-y-1">
+          <DialogTitle className="text-xl font-bold">Request a demo</DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground">
             Fill in your details and we'll get back to you within 24 hours.
           </DialogDescription>
         </DialogHeader>
         <div className="flex-1 overflow-y-auto pr-1 hide-scrollbar">
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="space-y-1.5 sm:space-y-2">
-                <Label htmlFor="firstName" className="text-sm">First Name</Label>
+          <form onSubmit={handleSubmit} className="space-y-3 pr-2">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="firstName" className="text-sm font-medium">First Name</Label>
                 <Input id="firstName" placeholder="John" value={form.firstName} onChange={(e) => handleChange("firstName", e.target.value)} />
               </div>
-              <div className="space-y-1.5 sm:space-y-2">
-                <Label htmlFor="lastName" className="text-sm">Last Name</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="lastName" className="text-sm font-medium">Last Name</Label>
                 <Input id="lastName" placeholder="Doe" value={form.lastName} onChange={(e) => handleChange("lastName", e.target.value)} />
               </div>
             </div>
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="email" className="text-sm">Work Email *</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="email" className="text-sm font-medium">Work Email *</Label>
               <Input id="email" type="email" placeholder="john@company.com" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
             </div>
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="phone" className="text-sm">Phone</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="phone" className="text-sm font-medium">Phone</Label>
               <Input id="phone" type="tel" placeholder="+1 234 567 890" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} />
             </div>
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="company" className="text-sm">Company *</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="company" className="text-sm font-medium">Company *</Label>
               <Input id="company" placeholder="Acme Developments" value={form.company} onChange={(e) => handleChange("company", e.target.value)} />
             </div>
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="jobTitle" className="text-sm">Job Title</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="jobTitle" className="text-sm font-medium">Job Title</Label>
               <Input id="jobTitle" placeholder="Development Manager" value={form.jobTitle} onChange={(e) => handleChange("jobTitle", e.target.value)} />
             </div>
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label className="text-sm">Country</Label>
+            <div className="space-y-1.5">
+              <Label className="text-sm font-medium">Country</Label>
               <Select value={form.country} onValueChange={(v) => handleChange("country", v)}>
                 <SelectTrigger><SelectValue placeholder="Select country" /></SelectTrigger>
                 <SelectContent>
@@ -109,8 +109,8 @@ const BookDemoDialog = () => {
                 I'd like to receive emails about Meta-Verse's products, events, and promotions. I can unsubscribe at any time.
               </Label>
             </div>
-            <div className="flex gap-2 pt-1">
-              <Button type="button" variant="outline" className="flex-1 text-sm" onClick={() => setOpen(false)}>
+            <div className="flex gap-2 pt-2">
+              <Button type="button" className="flex-1 text-sm bg-muted text-foreground hover:bg-muted/80" onClick={() => setOpen(false)}>
                 Cancel
               </Button>
               <Button type="submit" className="flex-1 text-sm">

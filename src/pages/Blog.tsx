@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, User, Check } from "lucide-react";
+import { Calendar, User, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
@@ -78,15 +79,54 @@ const blogPosts = [
     icon: FaVrCardboard,
     gradient: "from-indigo-600 to-blue-500",
   },
+  {
+    id: 7,
+    title: "Maximizing Marketing Impact with Hyper-Realistic Renders",
+    excerpt: "Learn how high-quality 3D renders can transform your property marketing and accelerate sales.",
+    category: "Marketing",
+    author: "Anna Wilson",
+    date: "January 28, 2026",
+    readTime: "6 min read",
+    icon: FaBuilding,
+    gradient: "from-pink-600 to-rose-500",
+  },
+  {
+    id: 8,
+    title: "VR and AR: The New Frontier in Property Sales",
+    excerpt: "How virtual and augmented reality are changing the way developers showcase off-plan properties.",
+    category: "Technology",
+    author: "Chris Lee",
+    date: "January 20, 2026",
+    readTime: "8 min read",
+    icon: FaVrCardboard,
+    gradient: "from-cyan-600 to-blue-500",
+  },
+  {
+    id: 9,
+    title: "Community Engagement: Winning Over Local Stakeholders",
+    excerpt: "Best practices for presenting development proposals to community groups and gaining public support.",
+    category: "Communication",
+    author: "Rachel Green",
+    date: "January 12, 2026",
+    readTime: "7 min read",
+    icon: FaComments,
+    gradient: "from-violet-600 to-purple-500",
+  },
 ];
 
-const categories = ["All", "Industry Trends", "Business Strategy", "Communication", "Technology", "Sustainability", "Case Studies"];
+const categories = ["All", "Industry Trends", "Business Strategy", "Communication", "Technology", "Sustainability", "Case Studies", "Marketing"];
 
 const Blog = () => {
-  const { open, setOpen } = useDemoDialogStore();
+  const { setOpen } = useDemoDialogStore();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredPosts = selectedCategory === "All" 
+    ? blogPosts 
+    : blogPosts.filter(post => post.category === selectedCategory);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -130,8 +170,9 @@ const Blog = () => {
               {categories.map((cat) => (
                 <Badge
                   key={cat}
-                  variant={cat === "All" ? "default" : "outline"}
+                  variant={selectedCategory === cat ? "default" : "outline"}
                   className="cursor-pointer px-4 py-2 text-sm"
+                  onClick={() => setSelectedCategory(cat)}
                 >
                   {cat}
                 </Badge>
@@ -139,7 +180,7 @@ const Blog = () => {
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post, index) => (
+              {filteredPosts.map((post, index) => (
                 <motion.article
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -176,20 +217,24 @@ const Blog = () => {
                       </div>
                     </div>
 
-                    <Button
-                      variant="link"
-                      className="p-0 h-auto text-primary hover:text-primary/80"
-                    >
-                      Read Article <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="mt-3 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
-                      onClick={() => setOpen(true)}
-                    >
-                      Request a Demo
-                    </Button>
+                    <div className="flex gap-2 mt-3">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                        onClick={() => navigate("/case-studies")}
+                      >
+                        View Case Studies
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                        onClick={() => setOpen(true)}
+                      >
+                        Request a Demo
+                      </Button>
+                    </div>
                   </div>
                 </motion.article>
               ))}
