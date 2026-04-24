@@ -1,43 +1,43 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, Users, BarChart3, Palette, Clock, Shield } from "lucide-react";
+import { FaArrowRight, FaCube, FaUsers, FaChartBar, FaPalette, FaClock, FaShieldAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const services = [
   {
-    icon: Zap,
+    icon: FaCube,
     title: "3D Visualization",
     description: "Photorealistic 3D renders of your architectural projects, bringing designs to life before construction begins.",
     features: ["High-fidelity renders", "Multiple viewing angles", "Environmental context"],
   },
   {
-    icon: Users,
+    icon: FaUsers,
     title: "Stakeholder Presentations",
     description: "Interactive walkthroughs and presentations tailored for planning committees, investors, and community consultations.",
     features: ["Custom animations", "Real-time adjustments", "Multi-format delivery"],
   },
   {
-    icon: BarChart3,
+    icon: FaChartBar,
     title: "Planning Approval Support",
     description: "Comprehensive visual documentation to accelerate planning approvals and reduce rejection cycles.",
     features: ["Compliance documentation", "Impact analysis visuals", "Regulatory alignment"],
   },
   {
-    icon: Palette,
+    icon: FaPalette,
     title: "Design Iteration",
     description: "Rapid visualization of design alternatives, enabling faster decision-making and design refinement.",
     features: ["Quick turnarounds", "Multiple variants", "Version control"],
   },
   {
-    icon: Clock,
+    icon: FaClock,
     title: "Timeline Acceleration",
     description: "Cut approval timelines by months through clear visual communication that eliminates ambiguity.",
     features: ["Faster consensus", "Reduced delays", "Early visibility"],
   },
   {
-    icon: Shield,
+    icon: FaShieldAlt,
     title: "Risk Mitigation",
     description: "Identify potential issues early through comprehensive visualization and stakeholder alignment.",
     features: ["Issue identification", "Stakeholder buy-in", "Project confidence"],
@@ -68,7 +68,7 @@ const process = [
 ];
 
 const Services = () => {
-  const { setOpen } = useDemoDialog();
+  const { setOpen } = useDemoDialogStore();
 
   return (
     <>
@@ -178,7 +178,7 @@ const Services = () => {
                   </div>
                   {i < process.length - 1 && (
                     <div className="hidden md:block absolute -right-4 top-1/2 -translate-y-1/2">
-                      <ArrowRight className="h-6 w-6 text-muted-foreground/30" />
+                      <FaArrowRight className="h-6 w-6 text-muted-foreground/30" />
                     </div>
                   )}
                 </motion.div>
@@ -207,7 +207,7 @@ const Services = () => {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
                 onClick={() => setOpen(true)}
               >
-                Book a Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                Book a Consultation <FaArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </motion.div>
           </div>

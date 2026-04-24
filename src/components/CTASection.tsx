@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { FaArrowRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 
 const CTASection = () => {
-  const { setOpen } = useDemoDialog();
+  const { setOpen } = useDemoDialogStore();
   return (
   <section id="contact" className="bg-hero section-padding">
     <div className="container">
@@ -22,7 +22,7 @@ const CTASection = () => {
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
-            Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+            Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base">
             View Our Work

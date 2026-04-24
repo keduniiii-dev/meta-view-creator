@@ -8,7 +8,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -56,7 +56,7 @@ const faqs = [
 ];
 
 const FAQ = () => {
-  const { setOpen } = useDemoDialog();
+  const { setOpen } = useDemoDialogStore();
   const [openItem, setOpenItem] = useState<string | undefined>(undefined);
 
   return (

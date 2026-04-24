@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 
 const countries = [
   "United Kingdom", "United States", "Australia", "Canada", "Germany",
@@ -25,13 +26,9 @@ const countries = [
   "Spain", "Sweden", "Switzerland", "United Arab Emirates", "Other",
 ];
 
-interface BookDemoDialogProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
+const BookDemoDialog = () => {
   const { toast } = useToast();
+  const { open, setOpen } = useDemoDialogStore();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -54,63 +51,74 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
       return;
     }
     toast({ title: "Demo request sent!", description: "We'll be in touch shortly." });
-    onOpenChange(false);
+    setOpen(false);
     setForm({ firstName: "", lastName: "", email: "", phone: "", company: "", jobTitle: "", country: "", consent: false });
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto bg-background">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">Request a demo</DialogTitle>
-          <DialogDescription>Fill in your details and we'll get back to you.</DialogDescription>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="w-[95vw] max-w-md sm:max-w-lg bg-background [&>button]:hidden max-h-[85vh] overflow-hidden flex flex-col" hideClose>
+        <DialogHeader className="flex-shrink-0">
+          <DialogTitle className="text-xl sm:text-2xl font-bold">Request a demo</DialogTitle>
+          <DialogDescription className="text-sm">
+            Fill in your details and we'll get back to you within 24 hours.
+          </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4 mt-2">
-          <div>
-            <Label htmlFor="firstName">First Name *</Label>
-            <Input id="firstName" placeholder="First Name" value={form.firstName} onChange={(e) => handleChange("firstName", e.target.value)} />
-          </div>
-          <div>
-            <Label htmlFor="lastName">Last Name</Label>
-            <Input id="lastName" placeholder="Last Name" value={form.lastName} onChange={(e) => handleChange("lastName", e.target.value)} />
-          </div>
-          <div>
-            <Label htmlFor="email">Work Email *</Label>
-            <Input id="email" type="email" placeholder="Work Email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
-          </div>
-          <div>
-            <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" type="tel" placeholder="Phone" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} />
-          </div>
-          <div>
-            <Label htmlFor="company">Company *</Label>
-            <Input id="company" placeholder="Company" value={form.company} onChange={(e) => handleChange("company", e.target.value)} />
-          </div>
-          <div>
-            <Label htmlFor="jobTitle">Job Title</Label>
-            <Input id="jobTitle" placeholder="Job Title" value={form.jobTitle} onChange={(e) => handleChange("jobTitle", e.target.value)} />
-          </div>
-          <div>
-            <Label>Country</Label>
-            <Select value={form.country} onValueChange={(v) => handleChange("country", v)}>
-              <SelectTrigger><SelectValue placeholder="Country" /></SelectTrigger>
-              <SelectContent>
-                {countries.map((c) => (
-                  <SelectItem key={c} value={c}>{c}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex items-start gap-2">
-            <Checkbox id="consent" checked={form.consent} onCheckedChange={(v) => handleChange("consent", !!v)} className="mt-1" />
-            <Label htmlFor="consent" className="text-xs text-muted-foreground leading-snug">
-              Yes, I'd like to receive emails about Meta-Verse's products, events, and promotions. I understand I can unsubscribe at any time.
-            </Label>
-          </div>
-          <Button type="submit" size="lg" className="w-full rounded-full bg-primary text-primary-foreground hover:bg-primary/90 text-base">
-            Request Demo
-          </Button>
-        </form>
+        <div className="flex-1 overflow-y-auto pr-1 hide-scrollbar">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="space-y-1.5 sm:space-y-2">
+                <Label htmlFor="firstName" className="text-sm">First Name</Label>
+                <Input id="firstName" placeholder="John" value={form.firstName} onChange={(e) => handleChange("firstName", e.target.value)} />
+              </div>
+              <div className="space-y-1.5 sm:space-y-2">
+                <Label htmlFor="lastName" className="text-sm">Last Name</Label>
+                <Input id="lastName" placeholder="Doe" value={form.lastName} onChange={(e) => handleChange("lastName", e.target.value)} />
+              </div>
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="email" className="text-sm">Work Email *</Label>
+              <Input id="email" type="email" placeholder="john@company.com" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="phone" className="text-sm">Phone</Label>
+              <Input id="phone" type="tel" placeholder="+1 234 567 890" value={form.phone} onChange={(e) => handleChange("phone", e.target.value)} />
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="company" className="text-sm">Company *</Label>
+              <Input id="company" placeholder="Acme Developments" value={form.company} onChange={(e) => handleChange("company", e.target.value)} />
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="jobTitle" className="text-sm">Job Title</Label>
+              <Input id="jobTitle" placeholder="Development Manager" value={form.jobTitle} onChange={(e) => handleChange("jobTitle", e.target.value)} />
+            </div>
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label className="text-sm">Country</Label>
+              <Select value={form.country} onValueChange={(v) => handleChange("country", v)}>
+                <SelectTrigger><SelectValue placeholder="Select country" /></SelectTrigger>
+                <SelectContent>
+                  {countries.map((c) => (
+                    <SelectItem key={c} value={c}>{c}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-start gap-2">
+              <Checkbox id="consent" checked={form.consent} onCheckedChange={(v) => handleChange("consent", !!v)} className="mt-0.5" />
+              <Label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                I'd like to receive emails about Meta-Verse's products, events, and promotions. I can unsubscribe at any time.
+              </Label>
+            </div>
+            <div className="flex gap-2 pt-1">
+              <Button type="button" variant="outline" className="flex-1 text-sm" onClick={() => setOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" className="flex-1 text-sm">
+                Request Demo
+              </Button>
+            </div>
+          </form>
+        </div>
       </DialogContent>
     </Dialog>
   );

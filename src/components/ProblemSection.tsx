@@ -1,19 +1,19 @@
 import { motion } from "framer-motion";
-import { AlertTriangle, Clock, MessageSquareX } from "lucide-react";
+import { FaHardHat, FaClock, FaCommentSlash } from "react-icons/fa";
 
 const problems = [
   {
-    icon: AlertTriangle,
+    icon: FaHardHat,
     title: "Planning Rejections",
     description: "Traditional 2D blueprints fail to communicate your vision, leading to costly delays and rejected applications.",
   },
   {
-    icon: Clock,
+    icon: FaClock,
     title: "Slow Approvals",
     description: "Stakeholders struggle to understand flat plans, causing endless back-and-forth and months of wasted time.",
   },
   {
-    icon: MessageSquareX,
+    icon: FaCommentSlash,
     title: "Poor Communication",
     description: "Investors, councils, and buyers can't see what you see - misalignment kills deals before they start.",
   },

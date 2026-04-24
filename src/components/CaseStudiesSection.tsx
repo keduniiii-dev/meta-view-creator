@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { FaArrowRight } from "react-icons/fa";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
 
@@ -66,7 +66,7 @@ const CaseStudiesSection = () => (
                 <p><strong className="text-foreground">Result:</strong> {s.result}</p>
               </div>
               <a href="#contact" className="inline-flex items-center gap-2 mt-6 text-primary font-semibold text-sm hover:gap-3 transition-all">
-                Read full case study <ArrowRight className="h-4 w-4" />
+                Read full case study <FaArrowRight className="h-4 w-4" />
               </a>
             </div>
           </motion.div>

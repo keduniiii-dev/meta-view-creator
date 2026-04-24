@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Award, Users, Globe, Zap } from "lucide-react";
+import { FaArrowRight, FaTrophy, FaUsers, FaGlobe, FaLightbulb } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -30,29 +30,29 @@ const teamMembers = [
 
 const values = [
   {
-    icon: Zap,
+    icon: FaLightbulb,
     title: "Innovation",
     description: "We constantly push the boundaries of what's possible in 3D visualization technology and techniques.",
   },
   {
-    icon: Award,
+    icon: FaTrophy,
     title: "Excellence",
     description: "We're committed to delivering the highest quality visualizations that exceed expectations.",
   },
   {
-    icon: Users,
+    icon: FaUsers,
     title: "Collaboration",
     description: "We work closely with our clients to understand their vision and translate it perfectly.",
   },
   {
-    icon: Globe,
+    icon: FaGlobe,
     title: "Sustainability",
     description: "We're dedicated to supporting sustainable development through better visualization and communication.",
   },
 ];
 
 const About = () => {
-  const { setOpen } = useDemoDialog();
+  const { setOpen } = useDemoDialogStore();
 
   return (
     <>
@@ -249,7 +249,7 @@ const About = () => {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
                 onClick={() => setOpen(true)}
               >
-                Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+                Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </motion.div>
           </div>

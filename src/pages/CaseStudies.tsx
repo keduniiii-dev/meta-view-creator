@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BookDemoDialog from "@/components/BookDemoDialog";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
 
@@ -44,7 +45,7 @@ const caseStudies = [
 ];
 
 const CaseStudies = () => {
-  const { setOpen } = useDemoDialog();
+  const { open, setOpen } = useDemoDialogStore();
 
   return (
     <>
@@ -141,12 +142,22 @@ const CaseStudies = () => {
                       ))}
                     </div>
 
-                    <Button
-                      size="lg"
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8"
-                    >
-                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                    <div className="flex flex-wrap gap-3">
+                      <Button
+                        size="lg"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8"
+                        onClick={() => setOpen(true)}
+                      >
+                        Request a Demo <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="rounded-full px-8"
+                      >
+                        Learn More
+                      </Button>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -181,6 +192,7 @@ const CaseStudies = () => {
         </section>
       </main>
       <Footer />
+      <BookDemoDialog />
     </>
   );
 };

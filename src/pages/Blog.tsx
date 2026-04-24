@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, User, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BookDemoDialog from "@/components/BookDemoDialog";
+
+import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } from "react-icons/fa";
 
 const blogPosts = [
   {
@@ -15,7 +20,8 @@ const blogPosts = [
     author: "Sarah Mitchell",
     date: "March 15, 2026",
     readTime: "8 min read",
-    image: "url-placeholder",
+    icon: FaBuilding,
+    gradient: "from-blue-600 to-cyan-500",
   },
   {
     id: 2,
@@ -25,7 +31,8 @@ const blogPosts = [
     author: "James Chen",
     date: "March 8, 2026",
     readTime: "6 min read",
-    image: "url-placeholder",
+    icon: FaChartLine,
+    gradient: "from-green-600 to-emerald-500",
   },
   {
     id: 3,
@@ -35,7 +42,8 @@ const blogPosts = [
     author: "Emma Rodriguez",
     date: "February 28, 2026",
     readTime: "7 min read",
-    image: "url-placeholder",
+    icon: FaComments,
+    gradient: "from-purple-600 to-pink-500",
   },
   {
     id: 4,
@@ -45,7 +53,8 @@ const blogPosts = [
     author: "David Park",
     date: "February 20, 2026",
     readTime: "10 min read",
-    image: "url-placeholder",
+    icon: FaRobot,
+    gradient: "from-orange-600 to-amber-500",
   },
   {
     id: 5,
@@ -55,7 +64,8 @@ const blogPosts = [
     author: "Lisa Thompson",
     date: "February 12, 2026",
     readTime: "9 min read",
-    image: "url-placeholder",
+    icon: FaLeaf,
+    gradient: "from-teal-600 to-green-500",
   },
   {
     id: 6,
@@ -65,20 +75,32 @@ const blogPosts = [
     author: "Michael Brown",
     date: "February 5, 2026",
     readTime: "5 min read",
-    image: "url-placeholder",
+    icon: FaVrCardboard,
+    gradient: "from-indigo-600 to-blue-500",
   },
 ];
 
 const categories = ["All", "Industry Trends", "Business Strategy", "Communication", "Technology", "Sustainability", "Case Studies"];
 
 const Blog = () => {
-  const { setOpen } = useDemoDialog();
+  const { open, setOpen } = useDemoDialogStore();
+  const { toast } = useToast();
+  const [subscribeEmail, setSubscribeEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (subscribeEmail) {
+      setSubscribed(true);
+      toast({ title: "Subscribed!", description: "You'll receive our latest updates." });
+      setSubscribeEmail("");
+    }
+  };
 
   return (
     <>
       <Navbar />
       <main>
-        {/* Hero Section */}
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
           <div className="container">
             <motion.div
@@ -97,10 +119,8 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Blog Section */}
         <section className="section-padding bg-background">
           <div className="container">
-            {/* Category Filter */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -118,7 +138,6 @@ const Blog = () => {
               ))}
             </motion.div>
 
-            {/* Blog Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {blogPosts.map((post, index) => (
                 <motion.article
@@ -129,8 +148,8 @@ const Blog = () => {
                   transition={{ delay: index * 0.1 }}
                   className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-colors group cursor-pointer"
                 >
-                  <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center overflow-hidden">
-                    <div className="w-full h-full bg-muted group-hover:scale-105 transition-transform duration-300" />
+                  <div className={`h-48 bg-gradient-to-br ${post.gradient} flex items-center justify-center overflow-hidden`}>
+                    <post.icon className="w-16 h-16 text-white/80" />
                   </div>
 
                   <div className="p-6">
@@ -163,6 +182,14 @@ const Blog = () => {
                     >
                       Read Article <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mt-3 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => setOpen(true)}
+                    >
+                      Request a Demo
+                    </Button>
                   </div>
                 </motion.article>
               ))}
@@ -170,7 +197,6 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="bg-hero section-padding">
           <div className="container">
             <motion.div
@@ -185,18 +211,34 @@ const Blog = () => {
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
                 Subscribe to our newsletter for insights and trends in architectural visualization.
               </p>
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
-                onClick={() => setOpen(true)}
-              >
-                Subscribe <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubscribe}>
+                {subscribed ? (
+                  <div className="flex items-center gap-2 text-green-400 justify-center">
+                    <Check className="h-5 w-5" />
+                    <span>Thanks for subscribing!</span>
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      value={subscribeEmail}
+                      onChange={(e) => setSubscribeEmail(e.target.value)}
+                      required
+                      className="flex-1 px-4 py-3 rounded-full bg-background/10 border border-hero-muted/20 text-hero-foreground placeholder:text-hero-muted/60 focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <Button type="submit" size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base">
+                      Subscribe
+                    </Button>
+                  </>
+                )}
+              </form>
             </motion.div>
           </div>
         </section>
       </main>
       <Footer />
+      <BookDemoDialog />
     </>
   );
 };

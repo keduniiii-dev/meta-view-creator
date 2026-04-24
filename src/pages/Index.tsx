@@ -7,10 +7,8 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
-import { DemoDialogProvider, useDemoDialog } from "@/contexts/DemoDialogContext";
 
-const IndexContent = () => {
-  const { open, setOpen } = useDemoDialog();
+const Index = () => {
   return (
     <>
       <Navbar />
@@ -21,15 +19,9 @@ const IndexContent = () => {
       <HowItWorksSection />
       <CTASection />
       <Footer />
-      <BookDemoDialog open={open} onOpenChange={setOpen} />
+      <BookDemoDialog />
     </>
   );
 };
-
-const Index = () => (
-  <DemoDialogProvider>
-    <IndexContent />
-  </DemoDialogProvider>
-);
 
 export default Index;

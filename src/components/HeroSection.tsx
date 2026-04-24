@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { FaArrowRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-3d.jpg";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 
 const HeroSection = () => {
-  const { setOpen } = useDemoDialog();
+  const { setOpen } = useDemoDialogStore();
   return (
     <section className="bg-hero pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
     <div className="container grid md:grid-cols-2 gap-12 items-center">
@@ -37,7 +37,7 @@ const HeroSection = () => {
 
         <div className="mt-8 flex flex-wrap gap-4">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
-            Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+            Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" asChild>
             <a href="#case-studies">View Case Studies</a>

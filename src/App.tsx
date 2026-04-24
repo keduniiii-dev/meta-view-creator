@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
+import BookDemoDialog from "@/components/BookDemoDialog";
 import Index from "./pages/Index.tsx";
 import Services from "./pages/Services.tsx";
 import CaseStudies from "./pages/CaseStudies.tsx";
@@ -32,9 +34,9 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <BookDemoDialog />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

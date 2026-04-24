@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
+import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useDemoDialog } from "@/contexts/DemoDialogContext";
+import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -66,7 +67,7 @@ const benefits = [
 ];
 
 const HowItWorks = () => {
-  const { setOpen } = useDemoDialog();
+  const { setOpen } = useDemoDialogStore();
 
   return (
     <>
@@ -182,7 +183,7 @@ const HowItWorks = () => {
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
                 onClick={() => setOpen(true)}
               >
-                Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+                Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </motion.div>
           </div>
