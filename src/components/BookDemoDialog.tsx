@@ -57,7 +57,7 @@ const BookDemoDialog = () => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="w-[95vw] max-w-md bg-background [&>button]:hidden max-h-[85vh] overflow-hidden flex flex-col" hideClose>
+      <DialogContent className="w-[95vw] max-w-md bg-background max-h-[85vh] overflow-hidden flex flex-col">
         <DialogHeader className="flex-shrink-0 space-y-1">
           <DialogTitle className="text-xl font-bold">Request a demo</DialogTitle>
           <DialogDescription className="text-sm text-muted-foreground">
