@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,16 +10,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
+import { demoService } from "@/services/demo";
 
 const categories = ["Construction", "Architecture", "Urban Development", "Infrastructure"];
 
 const BookDemoDialog = () => {
   const { open, setOpen } = useDemoDialogStore();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
-    name: "",
-    email: "",
+    fullName: "",
+    workEmail: "",
     company: "",
     role: "",
     phone: "",
@@ -28,11 +32,26 @@ const BookDemoDialog = () => {
 
   const handleChange = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
+    setError(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!form.category) {
+      setError("Please select an industry");
+      return;
+    }
+    setLoading(true);
+    setError(null);
+
+    try {
+      await demoService.submitRequest(form);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to submit request. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleOpenChange = (next: boolean) => {
@@ -40,7 +59,7 @@ const BookDemoDialog = () => {
     if (!next) {
       setTimeout(() => {
         setSubmitted(false);
-        setForm({ name: "", email: "", company: "", role: "", phone: "", category: "" });
+        setForm({ fullName: "", workEmail: "", company: "", role: "", phone: "", category: "" });
       }, 200);
     }
   };
@@ -70,11 +89,11 @@ const BookDemoDialog = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <Label htmlFor="name" className="text-sm text-muted-foreground">Full Name</Label>
-                  <Input id="name" required placeholder="John Smith" value={form.name} onChange={(e) => handleChange("name", e.target.value)} />
+                  <Input id="fullName" required placeholder="John Smith" value={form.fullName} onChange={(e) => handleChange("fullName", e.target.value)} />
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="email" className="text-sm text-muted-foreground">Work Email</Label>
-                  <Input id="email" type="email" required placeholder="john@company.com" value={form.email} onChange={(e) => handleChange("email", e.target.value)} />
+                  <Input id="workEmail" type="email" required placeholder="john@company.com" value={form.workEmail} onChange={(e) => handleChange("workEmail", e.target.value)} />
                 </div>
               </div>
 
@@ -96,29 +115,40 @@ const BookDemoDialog = () => {
                 </div>
                 <div className="space-y-1.5">
                   <Label htmlFor="category" className="text-sm text-muted-foreground">Industry</Label>
-                  <select
-                    id="category"
-                    required
-                    value={form.category}
-                    onChange={(e) => handleChange("category", e.target.value)}
-                    className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ring-offset-background"
-                  >
-                    <option value="">Select industry</option>
-                    {categories.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
+                  <Select value={form.category || undefined} onValueChange={(v) => handleChange("category", v)}>
+                    <SelectTrigger id="category">
+                      <SelectValue placeholder="Select industry" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categories.map((c) => (
+                        <SelectItem key={c} value={c}>{c}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 text-base px-8 py-6 animate-pulse-glow"
+                disabled={loading}
+                className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 text-base px-8 py-6 animate-pulse-glow disabled:opacity-70"
               >
-                Start Generating Leads
-                <ArrowRight className="ml-2 w-5 h-5" />
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    Start Generating Leads
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </>
+                )}
               </Button>
+              {error && (
+                <p className="text-xs text-center text-red-500">{error}</p>
+              )}
               <p className="text-xs text-center text-muted-foreground">
                 No credit card required. Get your personalized lead report in 24h.
               </p>
