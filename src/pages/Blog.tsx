@@ -211,7 +211,7 @@ const Blog = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex gap-2">
                       <Button
                         variant="outline"
                         size="sm"
