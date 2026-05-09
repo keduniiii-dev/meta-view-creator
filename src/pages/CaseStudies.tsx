@@ -352,7 +352,7 @@ const CaseStudies = () => {
                         className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8"
                         onClick={() => setOpen(true)}
                       >
-                        Request a Demo <ArrowRight className="ml-2 h-4 w-4" />
+                        Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                       <Button variant="outline" size="lg" className="rounded-full px-8" asChild>
                         <Link to={`/case-studies/${study.id}`}>Learn More</Link>

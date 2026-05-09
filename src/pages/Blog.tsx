@@ -114,7 +114,7 @@ const blogPosts = [
   },
 ];
 
-const categories = ["All", "Industry Trends", "Business Strategy", "Communication", "Technology", "Sustainability", "Case Studies", "Marketing"];
+const categories = ["Twinblueprint Trending"];
 
 const Blog = () => {
   const { setOpen } = useDemoDialogStore();
@@ -122,11 +122,9 @@ const Blog = () => {
   const navigate = useNavigate();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("Twinblueprint Trending");
 
-  const filteredPosts = selectedCategory === "All" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
+  const filteredPosts = blogPosts;
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();

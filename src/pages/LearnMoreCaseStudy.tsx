@@ -178,7 +178,7 @@ const LearnMoreCaseStudy = () => {
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full"
                     onClick={() => setOpen(true)}
                   >
-                    Request a Demo <ArrowRight className="ml-2 h-4 w-4" />
+                    Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </motion.div>
               </div>
