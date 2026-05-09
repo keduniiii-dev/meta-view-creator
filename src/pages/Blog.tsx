@@ -192,11 +192,7 @@ const Blog = () => {
                   </div>
 
                   <div className="p-6">
-                    <Badge className="mb-3 bg-primary/10 text-primary border-0 text-xs">
-                      {post.category}
-                    </Badge>
-
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
 
