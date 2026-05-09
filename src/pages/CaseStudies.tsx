@@ -37,7 +37,7 @@ const successStories = [
     size: "29 Subways",
     duration: "10 Years",
     status: "Ongoing",
-    description: "An intelligent, fully explorable digital twin uniting an entire metro network into one cohesive, interactive experience — bringing every station, tunnel and surrounding point of interest to life for smarter planning, proactive maintenance and public engagement.",
+    description: "An intelligent, fully explorable digital twin uniting an entire metro network into one cohesive, interactive experience - bringing every station, tunnel and surrounding point of interest to life for smarter planning, proactive maintenance and public engagement.",
   },
   {
     title: "Foster's Farm",
@@ -55,7 +55,7 @@ const successStories = [
     size: "368 Villa Lofts across 5 phases",
     duration: "5 Years",
     status: "Ongoing",
-    description: "A multi-country portfolio of six premium second-home developments in unique destinations. The platform serves every stage — funding, planning, sales, rentals and property management — for a global audience.",
+    description: "A multi-country portfolio of six premium second-home developments in unique destinations. The platform serves every stage - funding, planning, sales, rentals and property management - for a global audience.",
   },
   {
     title: "Mount Royal",
@@ -64,7 +64,7 @@ const successStories = [
     size: "600 Family Home Opportunities",
     duration: "3 Years",
     status: "Ongoing",
-    description: "A gated lifestyle estate where buyers can virtually fly to their chosen plot, toggle through home layouts and instantly see how a property maximises views, space and lifestyle — accelerating the sales cycle across phases.",
+    description: "A gated lifestyle estate where buyers can virtually fly to their chosen plot, toggle through home layouts and instantly see how a property maximises views, space and lifestyle - accelerating the sales cycle across phases.",
   },
   {
     title: "AEHECA",
@@ -91,7 +91,7 @@ const successStories = [
     size: "4 Industrial Warehouses",
     duration: "1 Year",
     status: "Ongoing",
-    description: "A modern industrial park delivered as a hyperrealistic 3D walkthrough in just 10 days — enabling tenant signage, truck-turning simulations, shelving layouts and office positioning all before move-in.",
+    description: "A modern industrial park delivered as a hyperrealistic 3D walkthrough in just 10 days - enabling tenant signage, truck-turning simulations, shelving layouts and office positioning all before move-in.",
   },
   {
     title: "Absa",
@@ -100,7 +100,7 @@ const successStories = [
     size: "3 Office Buildings",
     duration: "2 Months",
     status: "Complete",
-    description: "Helped Absa offload portfolio assets at above-market value by enabling investors to toggle between commercial and residential layouts instantly — unlocking versatility and maximum return.",
+    description: "Helped Absa offload portfolio assets at above-market value by enabling investors to toggle between commercial and residential layouts instantly - unlocking versatility and maximum return.",
   },
   {
     title: "Discovery",
@@ -109,7 +109,7 @@ const successStories = [
     size: "3 Premium Floors of 3,000m² each",
     duration: "2 Months",
     status: "Complete",
-    description: "An urgent commercial rental delivered in 10 days. Prospective tenants toggled between open- and closed-plan layouts with embedded real-time rental metrics — accelerating leasing conversations and conversion.",
+    description: "An urgent commercial rental delivered in 10 days. Prospective tenants toggled between open- and closed-plan layouts with embedded real-time rental metrics - accelerating leasing conversations and conversion.",
   },
   {
     title: "Fourways Gardens",
