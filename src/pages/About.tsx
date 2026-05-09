@@ -170,7 +170,7 @@ const About = () => {
               {[
                 { label: "Projects Completed", value: "200+" },
                 { label: "Approvals Achieved", value: "98%" },
-                { label: "Years Experience", value: "15+" },
+                { label: "Years Experience", value: "5+" },
                 { label: "Team Members", value: "50+" },
               ].map((stat, i) => (
                 <motion.div
