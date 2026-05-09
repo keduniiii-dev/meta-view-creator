@@ -157,6 +157,65 @@ const Blog = () => {
           </div>
         </section>
 
+        <section className="section-padding bg-background pb-0">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-16"
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <Star className="h-5 w-5 text-primary fill-primary" />
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                  Featured <span className="text-gradient">Twinblueprint Trending</span>
+                </h2>
+              </div>
+
+              {(() => {
+                const featured = blogPosts[0];
+                const FeaturedIcon = featured.icon;
+                return (
+                  <article className="grid md:grid-cols-2 gap-0 bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-colors group">
+                    <div className={`min-h-[280px] md:min-h-[360px] bg-gradient-to-br ${featured.gradient} flex items-center justify-center`}>
+                      <FeaturedIcon className="w-24 h-24 md:w-32 md:h-32 text-white/80" />
+                    </div>
+                    <div className="p-8 md:p-10 flex flex-col justify-center">
+                      <Badge className="mb-4 bg-primary/10 text-primary border-0 text-xs w-fit">
+                        Featured
+                      </Badge>
+                      <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors leading-tight">
+                        {featured.title}
+                      </h3>
+                      <p className="text-muted-foreground text-base mb-6 leading-relaxed">
+                        {featured.excerpt}
+                      </p>
+                      <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground mb-6">
+                        <div className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4" />
+                          {featured.date}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <User className="h-4 w-4" />
+                          {featured.author} • {featured.readTime}
+                        </div>
+                      </div>
+                      <Button
+                        size="lg"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-fit"
+                        onClick={() => navigate("/case-studies")}
+                      >
+                        Read Full Article
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </article>
+                );
+              })()}
+            </motion.div>
+          </div>
+        </section>
+
         <section className="section-padding bg-background">
           <div className="container">
             <motion.div
