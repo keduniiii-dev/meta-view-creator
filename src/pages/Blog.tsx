@@ -124,7 +124,7 @@ const Blog = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Twinblueprint Trending");
 
-  const filteredPosts = blogPosts;
+  const filteredPosts = blogPosts.slice(1);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
