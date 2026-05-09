@@ -114,7 +114,7 @@ const blogPosts = [
   },
 ];
 
-const categories = ["All", "Industry Trends", "Business Strategy", "Communication", "Technology", "Sustainability", "Case Studies", "Marketing"];
+const categories = ["Twinblueprint Trending"];
 
 const Blog = () => {
   const { setOpen } = useDemoDialogStore();
