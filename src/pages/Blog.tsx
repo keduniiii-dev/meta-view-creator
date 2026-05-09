@@ -192,7 +192,7 @@ const Blog = () => {
                   </div>
 
                   <div className="p-6">
-                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
                       {post.title}
                     </h3>
 
@@ -211,7 +211,7 @@ const Blog = () => {
                       </div>
                     </div>
 
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex gap-2">
                       <Button
                         variant="outline"
                         size="sm"
