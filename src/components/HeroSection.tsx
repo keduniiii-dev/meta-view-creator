@@ -50,6 +50,7 @@ const HeroSection = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative"
+        style={{ perspective: 1200 }}
       >
         <motion.img
           src={heroImg}
@@ -57,10 +58,11 @@ const HeroSection = () => {
           className="rounded-2xl shadow-2xl w-full"
           width={1280}
           height={800}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{ transformStyle: "preserve-3d" }}
+          animate={{ rotateY: 360 }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
         />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10" />
+        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10 pointer-events-none" />
       </motion.div>
     </div>
     </section>
