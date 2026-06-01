@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, useRef } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
-import { BackSide } from "three";
+import { BackSide, PerspectiveCamera } from "three";
 import panorama from "@/assets/tour-panorama.jpg";
 
 const PanoramaSphere = () => {
