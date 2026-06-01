@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, useRef } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
-import { BackSide } from "three";
+import { BackSide, PerspectiveCamera } from "three";
 import panorama from "@/assets/tour-panorama.jpg";
 
 const PanoramaSphere = () => {
@@ -14,6 +14,40 @@ const PanoramaSphere = () => {
   );
 };
 
+const ResizeHandler = () => {
+  const { gl, camera } = useThree();
+  const observerRef = useRef<ResizeObserver | null>(null);
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const parent = canvas.parentElement;
+    if (!parent) return;
+
+    const updateSize = () => {
+      const width = parent.clientWidth;
+      const height = parent.clientHeight;
+
+      if (camera instanceof PerspectiveCamera) {
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+
+      gl.setSize(width, height, false);
+    };
+
+    observerRef.current = new ResizeObserver(updateSize);
+    observerRef.current.observe(parent);
+
+    updateSize();
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, [gl, camera]);
+
+  return null;
+};
+
 const VirtualTour = () => {
   return (
     <Canvas
@@ -22,6 +56,7 @@ const VirtualTour = () => {
       dpr={[1, 2]}
       style={{ width: '100%', height: '100%' }}
     >
+      <ResizeHandler />
       <Suspense fallback={null}>
         <PanoramaSphere />
       </Suspense>
