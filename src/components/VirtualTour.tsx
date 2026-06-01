@@ -31,6 +31,8 @@ const VirtualTour = () => {
         minDistance={0.1}
         maxDistance={5}
         zoomSpeed={0.6}
+        autoRotate
+        autoRotateSpeed={0.3}
       />
     </Canvas>
   );
