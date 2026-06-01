@@ -20,6 +20,7 @@ const VirtualTour = () => {
       camera={{ position: [0, 0, 0.1], fov: 75 }}
       gl={{ antialias: true }}
       dpr={[1, 2]}
+      style={{ width: '100%', height: '100%' }}
     >
       <Suspense fallback={null}>
         <PanoramaSphere />
