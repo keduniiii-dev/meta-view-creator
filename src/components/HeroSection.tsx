@@ -51,12 +51,14 @@ const HeroSection = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative"
       >
-        <img
+        <motion.img
           src={heroImg}
           alt="metaverse architectural visualisation of a modern development project"
           className="rounded-2xl shadow-2xl w-full"
           width={1280}
           height={800}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10" />
       </motion.div>
