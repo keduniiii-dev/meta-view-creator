@@ -59,8 +59,33 @@ const HeroSection = () => {
           width={1280}
           height={800}
           style={{ transformStyle: "preserve-3d" }}
-          animate={{ rotateY: 360 }}
-          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+          animate={{
+            rotateY: 360,
+            filter: [
+              "brightness(1) contrast(1)",
+              "brightness(1.4) contrast(1.1)",
+              "brightness(0.9) contrast(1)",
+              "brightness(1.5) contrast(1.15)",
+              "brightness(1) contrast(1)",
+            ],
+          }}
+          transition={{
+            rotateY: { duration: 12, repeat: Infinity, ease: "linear" },
+            filter: { duration: 12, repeat: Infinity, ease: "easeInOut", times: [0, 0.25, 0.5, 0.75, 1] },
+          }}
+        />
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none mix-blend-overlay"
+          animate={{
+            background: [
+              "radial-gradient(circle at 30% 40%, hsl(var(--primary) / 0.0), transparent 60%)",
+              "radial-gradient(circle at 30% 40%, hsl(var(--primary) / 0.6), transparent 60%)",
+              "radial-gradient(circle at 70% 60%, hsl(var(--primary) / 0.0), transparent 60%)",
+              "radial-gradient(circle at 70% 60%, hsl(var(--primary) / 0.7), transparent 60%)",
+              "radial-gradient(circle at 30% 40%, hsl(var(--primary) / 0.0), transparent 60%)",
+            ],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10 pointer-events-none" />
       </motion.div>
