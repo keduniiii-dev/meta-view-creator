@@ -1,11 +1,25 @@
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaExpand } from "react-icons/fa";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-3d.jpg";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 
 const HeroSection = () => {
   const { setOpen } = useDemoDialogStore();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState({ x: 50, y: 50 });
+  const [active, setActive] = useState(false);
+
+  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const point = "touches" in e ? e.touches[0] : e;
+    const x = ((point.clientX - rect.left) / rect.width) * 100;
+    const y = ((point.clientY - rect.top) / rect.height) * 100;
+    setPos({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
+  };
   return (
     <section className="bg-hero pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
     <div className="container grid md:grid-cols-2 gap-12 items-center">
@@ -50,54 +64,43 @@ const HeroSection = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative"
-        style={{ perspective: 1200 }}
       >
-        <motion.img
-          src={heroImg}
-          alt="metaverse architectural visualisation of a modern development project"
-          className="rounded-2xl shadow-2xl w-full"
-          width={1280}
-          height={800}
-          style={{ transformStyle: "preserve-3d" }}
-          animate={{
-            rotateY: 360,
-            filter: [
-              "brightness(1.5) contrast(1.15)",
-              "brightness(1.1) contrast(1.05)",
-              "brightness(0.7) contrast(0.95)",
-              "brightness(1.1) contrast(1.05)",
-              "brightness(1.5) contrast(1.15)",
-            ],
-          }}
-          transition={{
-            rotateY: { duration: 12, repeat: Infinity, ease: "linear" },
-            filter: {
-              duration: 12,
-              repeat: Infinity,
-              ease: "linear",
-              times: [0, 0.25, 0.5, 0.75, 1],
-            },
-          }}
-        />
-        <motion.div
-          className="absolute inset-0 rounded-2xl pointer-events-none mix-blend-overlay"
-          animate={{
-            background: [
-              "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.7), transparent 65%)",
-              "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.2), transparent 65%)",
-              "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.0), transparent 65%)",
-              "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.2), transparent 65%)",
-              "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.7), transparent 65%)",
-            ],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-            times: [0, 0.25, 0.5, 0.75, 1],
-          }}
-        />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10 pointer-events-none" />
+        <div
+          ref={containerRef}
+          className="relative w-full overflow-hidden rounded-2xl shadow-2xl cursor-grab active:cursor-grabbing aspect-[16/10] group"
+          onMouseEnter={() => setActive(true)}
+          onMouseLeave={() => { setActive(false); setPos({ x: 50, y: 50 }); }}
+          onMouseMove={handleMove}
+          onTouchStart={() => setActive(true)}
+          onTouchMove={handleMove}
+          onTouchEnd={() => setActive(false)}
+          role="application"
+          aria-label="Interactive virtual tour — drag or move cursor to look around"
+        >
+          <img
+            src={heroImg}
+            alt="virtual tour of a modern architectural development"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out will-change-transform"
+            style={{
+              objectPosition: `${pos.x}% ${pos.y}%`,
+              transform: active ? "scale(1.25)" : "scale(1.1)",
+            }}
+            draggable={false}
+          />
+
+          {/* Virtual tour HUD */}
+          <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-background/70 backdrop-blur px-3 py-1.5 text-xs font-medium text-foreground shadow">
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+            Virtual Tour
+          </div>
+          <div className="absolute bottom-3 right-3 flex items-center gap-2 rounded-full bg-background/70 backdrop-blur px-3 py-1.5 text-xs text-foreground/80 shadow opacity-0 group-hover:opacity-100 transition-opacity">
+            <FaExpand className="h-3 w-3" /> Move cursor to look around
+          </div>
+
+          {/* Subtle vignette for depth */}
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_55%,hsl(var(--background)/0.35))]" />
+          <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-hero-muted/10 pointer-events-none" />
+        </div>
       </motion.div>
     </div>
     </section>
