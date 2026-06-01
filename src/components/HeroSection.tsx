@@ -1,11 +1,25 @@
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaExpand } from "react-icons/fa";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-3d.jpg";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 
 const HeroSection = () => {
   const { setOpen } = useDemoDialogStore();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState({ x: 50, y: 50 });
+  const [active, setActive] = useState(false);
+
+  const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const point = "touches" in e ? e.touches[0] : e;
+    const x = ((point.clientX - rect.left) / rect.width) * 100;
+    const y = ((point.clientY - rect.top) / rect.height) * 100;
+    setPos({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });
+  };
   return (
     <section className="bg-hero pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
     <div className="container grid md:grid-cols-2 gap-12 items-center">
