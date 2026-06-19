@@ -28,9 +28,8 @@ const ProblemSection = () => (
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
-        <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">The Problem</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground">Still relying on flat blueprints?</h2>
-        <p className="mt-4 text-muted-foreground text-lg">
+        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Still relying on flat blueprints?</h2>
+        <p className="text-muted-foreground text-lg">
           The construction industry loses billions every year to miscommunication and delayed approvals.
         </p>
       </motion.div>
