@@ -16,16 +16,16 @@ const HeroSection = () => {
       >
         <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground">
           We help developers and architects{" "}
-          <span className="text-gradient">visualise projects in metaverse</span>
+          <span className="text-gradient">visualise projects in interactive 3D</span>
         </h1>
         <p className="mt-6 text-hero-muted text-lg md:text-xl max-w-lg leading-relaxed">
-          Speed up approvals, improve stakeholder communication, and bring your developments to life before a single brick is laid.
+          Support design review, respond to planning feedback, consult communities and coordinate stakeholders — all through clear, immersive visualisation.
         </p>
 
         <ul className="mt-6 space-y-3">
           {[
-            "Photorealistic metaverse renders & walkthroughs",
-            "Faster planning approvals with visual clarity",
+            "Photorealistic interactive 3D renders & virtual walkthroughs",
+            "Clearer planning decisions through visual communication",
             "Better communication across every stakeholder",
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-hero-muted text-sm md:text-base">

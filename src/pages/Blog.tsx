@@ -15,8 +15,8 @@ import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } f
 const blogPosts = [
   {
     id: 1,
-    title: "How Metaverse Visualization is Transforming Planning Approvals",
-    excerpt: "Discover why planning authorities are embracing photorealistic metaverse renders as the new standard for development applications.",
+    title: "How Immersive Visualisation is Transforming Planning Approvals",
+    excerpt: "Discover why planning authorities are embracing photorealistic interactive 3D experiences as the new standard for development applications.",
     category: "Industry Trends",
     author: "Sarah Mitchell",
     date: "March 15, 2026",
@@ -26,8 +26,8 @@ const blogPosts = [
   },
   {
     id: 2,
-    title: "The ROI of Early Visualization: A Developer's Guide",
-    excerpt: "Learn how investing in metaverse visualization early in the project lifecycle can save months and millions in approval delays.",
+    title: "The ROI of Early Visualisation: A Developer's Guide",
+    excerpt: "Learn how investing in immersive visualisation early in the project lifecycle can support faster planning decisions and reduce review cycles.",
     category: "Business Strategy",
     author: "James Chen",
     date: "March 8, 2026",
@@ -38,7 +38,7 @@ const blogPosts = [
   {
     id: 3,
     title: "Stakeholder Communication: From Drawings to Digital Experiences",
-    excerpt: "Explore how interactive metaverse models bridge the communication gap between architects, planners, and community stakeholders.",
+    excerpt: "Explore how interactive 3D models bridge the communication gap between architects, planners, and community stakeholders.",
     category: "Communication",
     author: "Emma Rodriguez",
     date: "February 28, 2026",
@@ -48,8 +48,8 @@ const blogPosts = [
   },
   {
     id: 4,
-    title: "The Future of Architectural Visualization",
-    excerpt: "A deep dive into emerging technologies like AI-powered rendering and real-time collaboration in metaverse visualization.",
+    title: "The Future of Architectural Visualisation",
+    excerpt: "A deep dive into emerging technologies like AI-powered rendering and real-time collaboration in digital twin visualisation.",
     category: "Technology",
     author: "David Park",
     date: "February 20, 2026",
@@ -59,8 +59,8 @@ const blogPosts = [
   },
   {
     id: 5,
-    title: "Environmental Impact Visualization: Making Sustainability Visible",
-    excerpt: "How metaverse visualization helps communicate environmental considerations and sustainability features to all stakeholders.",
+    title: "Environmental Impact Visualisation: Making Sustainability Visible",
+    excerpt: "How immersive visualisation helps communicate environmental considerations and sustainability features to all stakeholders.",
     category: "Sustainability",
     author: "Lisa Thompson",
     date: "February 12, 2026",
@@ -70,8 +70,8 @@ const blogPosts = [
   },
   {
     id: 6,
-    title: "Case Study: Virtual Site Walkthroughs During the Planning Process",
-    excerpt: "An in-depth look at how virtual walkthroughs have revolutionized the way planners review and evaluate proposals.",
+    title: "Case Study: Virtual Walkthroughs During the Planning Process",
+    excerpt: "An in-depth look at how virtual walkthroughs have transformed the way planners review and evaluate proposals.",
     category: "Case Studies",
     author: "Michael Brown",
     date: "February 5, 2026",
@@ -81,8 +81,8 @@ const blogPosts = [
   },
   {
     id: 7,
-    title: "Maximizing Marketing Impact with Hyper-Realistic Renders",
-    excerpt: "Learn how high-quality metaverse renders can transform your property marketing and accelerate sales.",
+    title: "Maximising Marketing Impact with Hyper-Realistic Renders",
+    excerpt: "Learn how high-quality interactive 3D renders can transform your property marketing and support off-plan sales.",
     category: "Marketing",
     author: "Anna Wilson",
     date: "January 28, 2026",
@@ -148,10 +148,10 @@ const Blog = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                Our <span className="text-gradient">Blog</span>
+                Our <span className="text-gradient">Digital Visualisation</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Insights, trends, and best practices in metaverse architectural visualization and the future of development approvals.
+                Insights, trends, and best practices in digital architectural visualisation and the future of development approvals.
               </p>
             </motion.div>
           </div>
@@ -218,7 +218,7 @@ const Blog = () => {
                         className="flex-1 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
                         onClick={() => navigate("/case-studies")}
                       >
-                        View Case Studies
+                        Read Article
                       </Button>
                       <Button
                         variant="outline"
@@ -245,10 +245,10 @@ const Blog = () => {
               className="text-center max-w-2xl mx-auto"
             >
               <h2 className="text-3xl md:text-4xl text-hero-foreground mb-6">
-                Stay updated on the latest in visualization
+                Stay updated on the latest in visualisation
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Subscribe to our newsletter for insights and trends in architectural visualization.
+                Subscribe to our newsletter for insights and trends in architectural visualisation.
               </p>
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubscribe}>
                 {subscribed ? (
