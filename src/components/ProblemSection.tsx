@@ -30,10 +30,7 @@ const ProblemSection = () => (
       >
         <h2 className="text-3xl md:text-4xl text-foreground mb-4">Are technical drawings giving every stakeholder the clarity they need?</h2>
         <p className="text-muted-foreground text-lg">
-          Even the best designs can face delays when decision-makers struggle to visualise the final outcome.
-        </p>
-        <p className="text-muted-foreground text-lg mt-4">
-          Developers, planning authorities, investors, and community stakeholders often need more than technical drawings to understand a project's impact and value.
+          Miscommunication and delayed decisions can add cost, risk and time to development programmes.
         </p>
       </motion.div>
 
