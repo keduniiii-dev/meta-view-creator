@@ -7,34 +7,35 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 const HeroSection = () => {
   const { setOpen } = useDemoDialogStore();
   return (
-    <section className="bg-hero pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-    <div className="container grid md:grid-cols-2 gap-12 items-center">
+    <section className="bg-hero pt-24 pb-12 md:pt-32 md:pb-20 overflow-hidden">
+    <div className="container grid md:grid-cols-2 gap-8 md:gap-12 items-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
+        className="max-w-xl"
       >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-hero-foreground text-balance">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-hero-foreground text-balance">
           Digital visualisation for <span className="text-gradient">property infrastructure and planning projects</span>
         </h1>
-        <p className="mt-6 text-hero-muted text-lg md:text-xl max-w-lg leading-relaxed">
+        <p className="mt-5 text-hero-muted text-base md:text-lg leading-relaxed text-pretty">
           Speed up approvals, improve stakeholder communication, and bring your developments to life before a single brick is laid.
         </p>
 
-        <ul className="mt-6 space-y-3">
+        <ul className="mt-6 space-y-2.5">
           {[
             "Photorealistic metaverse renders & walkthroughs",
             "Faster planning approvals with visual clarity",
             "Better communication across every stakeholder",
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-hero-muted text-sm md:text-base">
-              <span className="mt-1.5 h-2 w-2 rounded-full bg-primary shrink-0" />
-              {item}
+              <span className="mt-2 h-2 w-2 rounded-full bg-primary shrink-0" />
+              <span>{item}</span>
             </li>
           ))}
         </ul>
 
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-wrap gap-3">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
             Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
           </Button>
