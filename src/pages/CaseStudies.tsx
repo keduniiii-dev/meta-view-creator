@@ -131,7 +131,7 @@ const caseStudies = [
     location: "London, UK",
     developer: "Thames Development Co.",
     challenge: "A developer struggled with multiple planning rejections for a 200-unit residential project. The local planning authority had concerns about the visual impact and integration with the surrounding Victorian buildings.",
-    solution: "We created photorealistic metaverse walkthroughs showing the development in context with its surroundings. The visualization included seasonal variations and different times of day to demonstrate how the building would integrate with the neighborhood.",
+    solution: "We created photorealistic interactive 3D walkthroughs showing the development in context with its surroundings. The visualization included seasonal variations and different times of day to demonstrate how the building would integrate with the neighborhood.",
     result: "Planning approval granted on first resubmission, saving 6 months and £120K in delays.",
     metrics: [
       { label: "Time Saved", value: "6 months" },
@@ -183,7 +183,7 @@ const CaseStudies = () => {
                 Case <span className="text-gradient">Studies</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Real projects, real results. See how our metaverse visualizations have transformed approval timelines and stakeholder communication across the world.
+                Real projects, real results. See how our digital twins have transformed approval timelines and stakeholder communication across the world.
               </p>
             </motion.div>
           </div>
@@ -378,7 +378,7 @@ const CaseStudies = () => {
                 Ready to be a case study?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss how our metaverse visualization services can accelerate your next project.
+                Let's discuss how our architectural visualisation services can accelerate your next project.
               </p>
               <Button
                 size="lg"

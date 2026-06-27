@@ -32,7 +32,7 @@ const values = [
   {
     icon: FaLightbulb,
     title: "Innovation",
-    description: "We constantly push the boundaries of what's possible in metaverse visualization technology and techniques.",
+    description: "We constantly push the boundaries of what's possible in architectural visualisation technology and techniques.",
   },
   {
     icon: FaTrophy,
@@ -91,7 +91,7 @@ const About = () => {
                   Our Mission
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To revolutionize the architectural industry by making photorealistic metaverse visualization accessible and affordable for developers, architects, and urban planners worldwide.
+                  To revolutionize the architectural industry by making photorealistic digital twins accessible and affordable for developers, architects, and urban planners worldwide.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   We believe that better visualization leads to better decision-making, faster approvals, and ultimately, better buildings and cities.
@@ -203,7 +203,7 @@ const About = () => {
                 Let's create something amazing together
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Ready to transform your project with stunning metaverse visualization?
+                Ready to transform your project with a stunning virtual project environment?
               </p>
               <Button
                 size="lg"

@@ -18,7 +18,7 @@ const CTASection = () => {
           Ready to bring your project to life?
         </h2>
         <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-          Book a free consultation and see how metaverse visualisation can transform your next development.
+          Book a free consultation and see how architectural visualisation can transform your next development.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>

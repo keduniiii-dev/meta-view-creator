@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 const services = [
   {
     icon: FaCube,
-    title: "Metaverse Visualization",
+    title: "Architectural Visualisation",
     description: "Photorealistic metaverse renders of your architectural projects, bringing designs to life before construction begins.",
     features: ["High-fidelity renders", "Multiple viewing angles", "Environmental context"],
   },
@@ -88,7 +88,7 @@ const Services = () => {
                 Our <span className="text-gradient">Services</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Comprehensive metaverse visualization and architectural communication solutions designed to accelerate your project approvals and stakeholder alignment.
+                Comprehensive architectural visualisation and architectural communication solutions designed to accelerate your project approvals and stakeholder alignment.
               </p>
             </motion.div>
           </div>
@@ -154,7 +154,7 @@ const Services = () => {
             >
               <h2 className="text-3xl md:text-4xl text-foreground mb-4">Our Process</h2>
               <p className="text-muted-foreground text-lg">
-                A streamlined approach to delivering exceptional metaverse visualizations
+                A streamlined approach to delivering exceptional planning visualisations
               </p>
             </motion.div>
 

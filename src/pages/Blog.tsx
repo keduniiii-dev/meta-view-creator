@@ -15,7 +15,7 @@ import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } f
 const blogPosts = [
   {
     id: 1,
-    title: "How Metaverse Visualization is Transforming Planning Approvals",
+    title: "How Architectural Visualisation is Transforming Planning Approvals",
     excerpt: "Discover why planning authorities are embracing photorealistic metaverse renders as the new standard for development applications.",
     category: "Industry Trends",
     author: "Sarah Mitchell",
@@ -27,7 +27,7 @@ const blogPosts = [
   {
     id: 2,
     title: "The ROI of Early Visualization: A Developer's Guide",
-    excerpt: "Learn how investing in metaverse visualization early in the project lifecycle can save months and millions in approval delays.",
+    excerpt: "Learn how investing in planning visualisation early in the project lifecycle can save months and millions in approval delays.",
     category: "Business Strategy",
     author: "James Chen",
     date: "March 8, 2026",
@@ -49,7 +49,7 @@ const blogPosts = [
   {
     id: 4,
     title: "The Future of Architectural Visualization",
-    excerpt: "A deep dive into emerging technologies like AI-powered rendering and real-time collaboration in metaverse visualization.",
+    excerpt: "A deep dive into emerging technologies like AI-powered rendering and real-time collaboration in architectural visualisation.",
     category: "Technology",
     author: "David Park",
     date: "February 20, 2026",
@@ -60,7 +60,7 @@ const blogPosts = [
   {
     id: 5,
     title: "Environmental Impact Visualization: Making Sustainability Visible",
-    excerpt: "How metaverse visualization helps communicate environmental considerations and sustainability features to all stakeholders.",
+    excerpt: "How contextual renders help communicate environmental considerations and sustainability features to all stakeholders.",
     category: "Sustainability",
     author: "Lisa Thompson",
     date: "February 12, 2026",
