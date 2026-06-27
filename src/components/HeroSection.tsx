@@ -14,9 +14,8 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground">
-          Digital visualisation for{" "}
-          <span className="text-gradient">property infrastructure and planning projects</span>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-hero-foreground text-balance">
+          Digital visualisation for <span className="text-gradient">property infrastructure and planning projects</span>
         </h1>
         <p className="mt-6 text-hero-muted text-lg md:text-xl max-w-lg leading-relaxed">
           Speed up approvals, improve stakeholder communication, and bring your developments to life before a single brick is laid.
