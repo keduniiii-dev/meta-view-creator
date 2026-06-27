@@ -4,18 +4,18 @@ import { FaHardHat, FaClock, FaCommentSlash } from "react-icons/fa";
 const problems = [
   {
     icon: FaHardHat,
-    title: "Planning Challenges",
-    description: "Technical drawings are essential, but non-technical audiences may find them difficult to interpret.",
+    title: "Planning Rejections",
+    description: "Traditional 2D blueprints fail to communicate your vision, leading to costly delays and rejected applications.",
   },
   {
     icon: FaClock,
     title: "Slow Approvals",
-    description: "Stakeholders can struggle to interpret flat plans, leading to extended review cycles and delayed decisions.",
+    description: "Stakeholders struggle to understand flat plans, causing endless back-and-forth and months of wasted time.",
   },
   {
     icon: FaCommentSlash,
     title: "Poor Communication",
-    description: "Investors, councils, and buyers can't see what you see - misalignment can delay decisions, weaken confidence and increase commercial risk.",
+    description: "Investors, councils, and buyers can't see what you see - misalignment kills deals before they start.",
   },
 ];
 
@@ -28,9 +28,9 @@ const ProblemSection = () => (
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
-        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Are technical drawings giving every stakeholder the clarity they need?</h2>
+        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Still relying on flat blueprints?</h2>
         <p className="text-muted-foreground text-lg">
-          Miscommunication and delayed decisions can add cost, risk and time to development programmes.
+          The construction industry loses billions every year to miscommunication and delayed approvals.
         </p>
       </motion.div>
 

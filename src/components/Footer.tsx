@@ -10,7 +10,7 @@ const Footer = () => {
               Twin<span className="text-gradient">blueprint</span>
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
-              Digital visualisation for property, infrastructure and planning projects.
+              Global leaders in metaverse property experiences for developers, architects, and urban planners.
             </p>
           </div>
           {[

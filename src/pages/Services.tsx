@@ -9,38 +9,38 @@ import Footer from "@/components/Footer";
 const services = [
   {
     icon: FaCube,
-    title: "Interactive 3D Experiences",
-    description: "Photorealistic interactive 3D experiences of your architectural projects, supporting design review and planning feedback.",
+    title: "Metaverse Visualization",
+    description: "Photorealistic metaverse renders of your architectural projects, bringing designs to life before construction begins.",
     features: ["High-fidelity renders", "Multiple viewing angles", "Environmental context"],
   },
   {
     icon: FaUsers,
     title: "Stakeholder Presentations",
-    description: "Virtual walkthroughs and presentations tailored for planning committees, investors, and community consultations.",
+    description: "Interactive walkthroughs and presentations tailored for planning committees, investors, and community consultations.",
     features: ["Custom animations", "Real-time adjustments", "Multi-format delivery"],
   },
   {
     icon: FaChartLine,
     title: "Planning Approval Support",
-    description: "Comprehensive visual documentation to support clearer planning decisions and reduce review cycles.",
+    description: "Comprehensive visual documentation to accelerate planning approvals and reduce rejection cycles.",
     features: ["Compliance documentation", "Impact analysis visuals", "Regulatory alignment"],
   },
   {
     icon: FaPaintBrush,
     title: "Design Iteration",
-    description: "Rapid digital twin visualisation of design alternatives, enabling faster decision-making and design refinement.",
+    description: "Rapid visualization of design alternatives, enabling faster decision-making and design refinement.",
     features: ["Quick turnarounds", "Multiple variants", "Version control"],
   },
   {
     icon: FaClock,
-    title: "Timeline Efficiency",
-    description: "Help planning and project teams review proposals more efficiently through clear visual communication.",
+    title: "Timeline Acceleration",
+    description: "Cut approval timelines by months through clear visual communication that eliminates ambiguity.",
     features: ["Faster consensus", "Reduced delays", "Early visibility"],
   },
   {
     icon: FaShieldAlt,
     title: "Risk Mitigation",
-    description: "Identify potential issues early through comprehensive immersive visualisation and stakeholder alignment.",
+    description: "Identify potential issues early through comprehensive visualization and stakeholder alignment.",
     features: ["Issue identification", "Stakeholder buy-in", "Project confidence"],
   },
 ];
@@ -49,7 +49,7 @@ const process = [
   {
     step: 1,
     title: "Initial Consultation",
-    description: "Understand your project scope, timeline, and specific visualisation requirements.",
+    description: "Understand your project scope, timeline, and specific visualization requirements.",
   },
   {
     step: 2,
@@ -58,13 +58,13 @@ const process = [
   },
   {
     step: 3,
-    title: "Digital Twin Modelling",
-    description: "Create detailed digital twin models with photorealistic rendering and environmental integration.",
+    title: "Metaverse Modeling",
+    description: "Create detailed metaverse models with photorealistic rendering and environmental integration.",
   },
   {
     step: 4,
     title: "Refinement & Delivery",
-    description: "Incorporate feedback and deliver final visualisations in your preferred formats.",
+    description: "Incorporate feedback and deliver final visualizations in your preferred formats.",
   },
 ];
 
@@ -85,10 +85,10 @@ const Services = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                <span className="text-gradient">Digital visualisation</span> for property, infrastructure and planning projects
+                Our <span className="text-gradient">Services</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Comprehensive immersive visualisation solutions that support planning decisions, stakeholder alignment and clearer communication across every project stage.
+                Comprehensive metaverse visualization and architectural communication solutions designed to accelerate your project approvals and stakeholder alignment.
               </p>
             </motion.div>
           </div>
@@ -154,7 +154,7 @@ const Services = () => {
             >
               <h2 className="text-3xl md:text-4xl text-foreground mb-4">Our Process</h2>
               <p className="text-muted-foreground text-lg">
-                A streamlined approach to delivering exceptional immersive visualisations
+                A streamlined approach to delivering exceptional metaverse visualizations
               </p>
             </motion.div>
 
