@@ -4,18 +4,18 @@ import { FaHardHat, FaClock, FaCommentSlash } from "react-icons/fa";
 const problems = [
   {
     icon: FaHardHat,
-    title: "Planning uncertainty",
-    description: "Traditional 2D blueprints fail to communicate your vision, leading to costly delays and rejected applications.",
+    title: "Planning Approval Challenges",
+    description: "Traditional 2D plans often fail to communicate scale, context, and design intent, increasing the likelihood of planning queries, revisions, and approval delays.",
   },
   {
     icon: FaClock,
-    title: "Fragmented decision-making",
-    description: "Stakeholders struggle to understand flat plans, causing endless back-and-forth and months of wasted time.",
+    title: "Extended Approval Timelines",
+    description: "When stakeholders cannot easily interpret project documentation, approval processes become longer and more complex.",
   },
   {
     icon: FaCommentSlash,
-    title: "Stakeholder misalignment",
-    description: "Investors, councils, and buyers can't see what you see - misalignment kills deals before they start.",
+    title: "Stakeholder Misalignment",
+    description: "Different project stakeholders often interpret plans differently, creating uncertainty, additional revisions, and delayed decision-making.",
   },
 ];
 
