@@ -15,7 +15,7 @@ const problems = [
   {
     icon: FaCommentSlash,
     title: "Poor Communication",
-    description: "Investors, councils, and buyers can't see what you see — misalignment can delay decisions, weaken confidence and increase commercial risk.",
+    description: "Investors, councils, and buyers can't see what you see - misalignment can delay decisions, weaken confidence and increase commercial risk.",
   },
 ];
 

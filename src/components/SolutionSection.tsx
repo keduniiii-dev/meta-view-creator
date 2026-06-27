@@ -22,7 +22,7 @@ const SolutionSection = () => (
           Interactive 3D experiences that support clearer planning decisions
         </h2>
         <p className="mt-4 text-muted-foreground text-lg">
-          We transform your plans into engaging, interactive 3D experiences — supporting design review, responding to planning feedback, consulting communities and coordinating stakeholders.
+          We transform your plans into engaging, interactive 3D experiences - supporting design review, responding to planning feedback, consulting communities and coordinating stakeholders.
         </p>
       </motion.div>
 
