@@ -85,10 +85,10 @@ const Services = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                Our <span className="text-gradient">Immersive Visualisation</span>
+                <span className="text-gradient">Digital visualisation</span> for property, infrastructure and planning projects
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Comprehensive immersive visualisation and architectural communication solutions designed to support planning decisions and stakeholder alignment.
+                Comprehensive immersive visualisation solutions that support planning decisions, stakeholder alignment and clearer communication across every project stage.
               </p>
             </motion.div>
           </div>
