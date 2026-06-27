@@ -22,9 +22,9 @@ const caseStudiesData = {
     year: "2025",
     timeline: "8 weeks",
     challenge: "A developer struggled with multiple planning rejections for a 200-unit residential project. The local planning authority had concerns about the visual impact and integration with the surrounding Victorian buildings.",
-    solution: "We created photorealistic metaverse walkthroughs showing the development in context with its surroundings. The visualization included seasonal variations and different times of day to demonstrate how the building would integrate with the neighborhood.",
+    solution: "We created photorealistic interactive 3D walkthroughs showing the development in context with its surroundings. The visualization included seasonal variations and different times of day to demonstrate how the building would integrate with the neighborhood.",
     result: "Planning approval granted on first resubmission, saving 6 months and £120K in delays.",
-    services: ["Metaverse Visualization", "Interactive Walkthroughs", "Contextual Renders", "VR Experience"],
+    services: ["Architectural Visualisation", "Interactive Walkthroughs", "Contextual Renders", "VR Experience"],
     metrics: [
       { label: "Time Saved", value: "6 months" },
       { label: "Cost Saved", value: "£120K" },
@@ -221,7 +221,7 @@ const LearnMoreCaseStudy = () => {
                 Ready to transform your project?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss how our metaverse visualization services can help you achieve faster approvals.
+                Let's discuss how our digital twin services can help you achieve faster approvals.
               </p>
               <Button
                 size="lg"

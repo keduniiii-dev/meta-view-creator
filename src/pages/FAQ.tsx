@@ -31,7 +31,7 @@ const faqs = [
   {
     question: "What's included in the final deliverables?",
     answer:
-      "Each project includes high-resolution images (print-ready), interactive metaverse walkthroughs, VR-ready exports if requested, and a comprehensive usage license. Marketing teams love the versatility of having assets ready for web, print, and immersive presentations.",
+      "Each project includes high-resolution images (print-ready), interactive 3D walkthroughs, VR-ready exports if requested, and a comprehensive usage license. Marketing teams love the versatility of having assets ready for web, print, and immersive presentations.",
   },
   {
     question: "Do you offer ongoing support after project delivery?",
@@ -75,7 +75,7 @@ const FAQ = () => {
                 Frequently Asked <span className="text-gradient">Questions</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Find answers to common questions about our metaverse visualization services, process, and deliverables.
+                Find answers to common questions about our architectural visualisation services, process, and deliverables.
               </p>
             </motion.div>
           </div>

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaEye, FaBolt, FaUsers, FaCheckCircle } from "react-icons/fa";
 
 const features = [
-  { icon: FaEye, title: "Metaverse Visualisation", desc: "Photorealistic renders and interactive metaverse walkthroughs of your project." },
+  { icon: FaEye, title: "Architectural Visualisation", desc: "Photorealistic renders and interactive 3D walkthroughs of your project." },
   { icon: FaBolt, title: "Faster Approvals", desc: "Help planning officers instantly understand your development." },
   { icon: FaUsers, title: "Stakeholder Alignment", desc: "Get everyone - investors, buyers, councils - on the same page." },
   { icon: FaCheckCircle, title: "Better Decisions", desc: "Spot design issues early, saving time and money on revisions." },
@@ -22,7 +22,7 @@ const SolutionSection = () => (
           Immersive Property Visualisation that supports clearer planning decisions
         </h2>
         <p className="mt-4 text-muted-foreground text-base md:text-lg leading-relaxed text-pretty max-w-2xl mx-auto">
-          We transform your plans into stunning, interactive metaverse visualisations - so every stakeholder sees exactly what you're building.
+          We transform your plans into stunning, interactive digital twins - so every stakeholder sees exactly what you're building.
         </p>
       </motion.div>
 

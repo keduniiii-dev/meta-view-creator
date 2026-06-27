@@ -9,7 +9,7 @@ const studies = [
     tag: "Residential",
     title: "Riverside Apartments - 40% Faster Approval",
     problem: "A developer struggled with multiple planning rejections for a 200-unit residential project.",
-    solution: "We created photorealistic metaverse walkthroughs showing the development in context with its surroundings.",
+    solution: "We created photorealistic interactive 3D walkthroughs showing the development in context with its surroundings.",
     result: "Planning approval granted on first resubmission, saving 6 months and £120K in delays.",
   },
   {
