@@ -19,7 +19,7 @@ const SolutionSection = () => (
       >
         <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">Our Solution</p>
         <h2 className="text-3xl md:text-4xl text-foreground">
-          metaverse experiences that win approvals
+          Immersive Property Visualisation that supports clearer planning decisions
         </h2>
         <p className="mt-4 text-muted-foreground text-lg">
           We transform your plans into stunning, interactive metaverse visualisations - so every stakeholder sees exactly what you're building.
