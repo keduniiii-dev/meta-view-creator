@@ -28,9 +28,9 @@ const ProblemSection = () => (
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
-        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Still relying on flat blueprints?</h2>
+        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Are technical drawings giving every stakeholder the clarity they need?</h2>
         <p className="text-muted-foreground text-lg">
-          The construction industry loses billions every year to miscommunication and delayed approvals.
+          Miscommunication and delayed decisions can add cost, risk and time to development programmes.
         </p>
       </motion.div>
 
