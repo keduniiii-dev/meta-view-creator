@@ -108,7 +108,7 @@ const About = () => {
                   Our Vision
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  To be a trusted partner in architectural visualisation — combining quality, innovation and client service to deliver one complete, focused vision: helping every project be understood with clarity before construction begins, enabling confident decision-making and clearer planning outcomes.
+                  To be a trusted partner in architectural visualisation - combining quality, innovation and client service to deliver one complete, focused vision: helping every project be understood with clarity before construction begins, enabling confident decision-making and clearer planning outcomes.
                 </p>
               </motion.div>
             </div>

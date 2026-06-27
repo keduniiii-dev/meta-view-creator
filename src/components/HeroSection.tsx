@@ -19,7 +19,7 @@ const HeroSection = () => {
           <span className="text-gradient">visualise projects in interactive 3D</span>
         </h1>
         <p className="mt-6 text-hero-muted text-lg md:text-xl max-w-lg leading-relaxed">
-          Support design review, respond to planning feedback, consult communities and coordinate stakeholders — all through clear, immersive visualisation.
+          Support design review, respond to planning feedback, consult communities and coordinate stakeholders - all through clear, immersive visualisation.
         </p>
 
         <ul className="mt-6 space-y-3">
