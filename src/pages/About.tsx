@@ -9,12 +9,12 @@ const teamMembers = [
   {
     name: "Sarah Chen",
     role: "Founder & CEO",
-    bio: "20+ years in architectural visualization and metaverse technology. Former head of visualization at a major UK architecture firm.",
+    bio: "20+ years in architectural visualisation and digital twin technology. Former head of visualisation at a major UK architecture firm.",
   },
   {
     name: "James Murphy",
     role: "Chief Technology Officer",
-    bio: "Expert in photorealistic rendering and real-time metaverse. Previously led visualization tech at a FTSE 100 company.",
+    bio: "Expert in photorealistic rendering and real-time 3D. Previously led visualisation tech at a FTSE 100 company.",
   },
   {
     name: "Emma Lewis",
@@ -23,8 +23,8 @@ const teamMembers = [
   },
   {
     name: "David Patel",
-    role: "Lead metaverse Artist",
-    bio: "Award-winning metaverse artist specializing in architectural visualization. Master's in Digital Architecture.",
+    role: "Lead 3D Artist",
+    bio: "Award-winning 3D artist specialising in architectural visualisation. Master's in Digital Architecture.",
   },
 ];
 
@@ -32,22 +32,22 @@ const values = [
   {
     icon: FaLightbulb,
     title: "Innovation",
-    description: "We constantly push the boundaries of what's possible in metaverse visualization technology and techniques.",
+    description: "We apply appropriate real-time, rendering and digital-twin technologies to solve project communication challenges.",
   },
   {
     icon: FaTrophy,
     title: "Excellence",
-    description: "We're committed to delivering the highest quality visualizations that exceed expectations.",
+    description: "We're committed to delivering the highest quality visualisations that exceed expectations.",
   },
   {
     icon: FaUsers,
     title: "Collaboration",
-    description: "We work closely with our clients to understand their vision and translate it perfectly.",
+    description: "We work closely with our clients to translate the project vision into accurate, engaging visual material.",
   },
   {
     icon: FaGlobe,
     title: "Sustainability",
-    description: "We're dedicated to supporting sustainable development through better visualization and communication.",
+    description: "We're dedicated to supporting sustainable development through better visualisation and communication.",
   },
 ];
 
@@ -71,7 +71,7 @@ const About = () => {
                 About <span className="text-gradient">Twinblueprint</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Transforming how the world visualizes architectural projects through cutting-edge metaverse technology and exceptional service.
+                Transforming how the world visualises architectural projects through cutting-edge digital twin technology and exceptional service.
               </p>
             </motion.div>
           </div>
@@ -91,10 +91,10 @@ const About = () => {
                   Our Mission
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To revolutionize the architectural industry by making photorealistic metaverse visualization accessible and affordable for developers, architects, and urban planners worldwide.
+                  To support the architectural industry by making photorealistic immersive visualisation accessible and affordable for developers, architects, and urban planners worldwide.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  We believe that better visualization leads to better decision-making, faster approvals, and ultimately, better buildings and cities.
+                  We believe that better visualisation leads to better decision-making, clearer planning outcomes, and ultimately, better buildings and cities.
                 </p>
               </motion.div>
 
@@ -107,11 +107,8 @@ const About = () => {
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                   Our Vision
                 </h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To be the global leader in architectural visualization, setting new standards for quality, innovation, and client service.
-                </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  A world where every architectural project can be visualized with stunning clarity before a single brick is laid, enabling confident decision-making and faster approvals.
+                  To be a trusted partner in architectural visualisation — combining quality, innovation and client service to deliver one complete, focused vision: helping every project be understood with clarity before construction begins, enabling confident decision-making and clearer planning outcomes.
                 </p>
               </motion.div>
             </div>
@@ -203,7 +200,7 @@ const About = () => {
                 Let's create something amazing together
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Ready to transform your project with stunning metaverse visualization?
+                Ready to translate your project vision into accurate, engaging visual material?
               </p>
               <Button
                 size="lg"

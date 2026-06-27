@@ -15,10 +15,10 @@ const CTASection = () => {
         className="text-center max-w-2xl mx-auto"
       >
         <h2 className="text-3xl md:text-4xl text-hero-foreground mb-6">
-          Ready to bring your project to life?
+          Ready to translate your project vision into accurate, engaging visual material?
         </h2>
         <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-          Book a free consultation and see how metaverse visualisation can transform your next development.
+          Book a free consultation and see how immersive visualisation can support your next development — from design review to planning submissions and off-plan marketing.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
