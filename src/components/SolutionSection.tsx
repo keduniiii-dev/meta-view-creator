@@ -21,7 +21,7 @@ const SolutionSection = () => (
         <h2 className="text-2xl md:text-3xl lg:text-4xl leading-[1.2] tracking-tight text-foreground text-balance max-w-3xl mx-auto">
           Immersive Property Visualisation that supports clearer planning decisions
         </h2>
-        <p className="mt-4 text-muted-foreground text-lg">
+        <p className="mt-4 text-muted-foreground text-base md:text-lg leading-relaxed text-pretty max-w-2xl mx-auto">
           We transform your plans into stunning, interactive metaverse visualisations - so every stakeholder sees exactly what you're building.
         </p>
       </motion.div>
