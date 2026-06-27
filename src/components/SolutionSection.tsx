@@ -18,7 +18,7 @@ const SolutionSection = () => (
         className="text-center max-w-2xl mx-auto mb-16"
       >
         <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">Our Solution</p>
-        <h2 className="text-3xl md:text-4xl text-foreground">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl leading-[1.2] tracking-tight text-foreground text-balance max-w-3xl mx-auto">
           Immersive Property Visualisation that supports clearer planning decisions
         </h2>
         <p className="mt-4 text-muted-foreground text-lg">
