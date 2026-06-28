@@ -151,7 +151,7 @@ const Blog = () => {
                 Our <span className="text-gradient">Blog</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Insights, trends, and best practices in metaverse architectural visualization and the future of development approvals.
+                Insights, trends, best practices in architectural visualization, Digital Twin technology, BIM visualisation, Immersive property visualisation, and the future of development approvals.
               </p>
             </motion.div>
           </div>
