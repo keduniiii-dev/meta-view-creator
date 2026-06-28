@@ -58,7 +58,7 @@ const BookDemoDialog = () => {
             <CheckCircle className="w-14 h-14 text-primary mb-4" />
             <h3 className="text-2xl font-bold text-foreground mb-2">You're In!</h3>
             <p className="text-muted-foreground max-w-sm">
-              Our team will reach out within 24 hours with a tailored metaverse lead strategy for your business.
+              Our team will reach out within 24 hours with a tailored Immersive Property Visualisation strategy for your project.
             </p>
             <Button className="mt-6" onClick={() => handleOpenChange(false)}>Close</Button>
           </div>

@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 
 const steps = [
   { number: "01", title: "Share Your Plans", desc: "Send us your blueprints, CAD files, or even sketches. We work with what you have." },
-  { number: "02", title: "We Build in metaverse", desc: "Our team creates photorealistic metaverse models and interactive walkthroughs of your project." },
+  { number: "02", title: "We Build the Digital Twin", desc: "Our team creates a photorealistic digital twin and interactive walkthroughs of your project." },
   { number: "03", title: "Review & Refine", desc: "We collaborate with you to perfect every detail until it matches your vision." },
-  { number: "04", title: "Present & Win", desc: "Use your metaverse visuals to win approvals, impress investors, and sell off-plan." },
+  { number: "04", title: "Present & Win", desc: "Use your immersive visuals to win approvals, impress investors, and sell off-plan." },
 ];
 
 const HowItWorksSection = () => (

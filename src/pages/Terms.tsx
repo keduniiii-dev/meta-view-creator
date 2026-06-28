@@ -11,7 +11,7 @@ const sections = [
   {
     title: "Description of Services",
     content:
-      "Twinblueprint provides metaverse architectural visualization services, including but not limited to: photorealistic rendering, metaverse modeling, interactive walkthroughs, and VR-ready content. We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice.",
+      "Twinblueprint provides immersive architectural visualisation services, including but not limited to: photorealistic rendering, digital twin modelling, interactive walkthroughs, and VR-ready content. We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice.",
   },
   {
     title: "User Responsibilities",

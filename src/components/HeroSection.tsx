@@ -24,7 +24,7 @@ const HeroSection = () => {
 
         <ul className="mt-6 space-y-2.5">
           {[
-            "Photorealistic metaverse renders & walkthroughs",
+            "Photorealistic renders and immersive walkthroughs",
             "Faster planning approvals with visual clarity",
             "Better communication across every stakeholder",
           ].map((item) => (

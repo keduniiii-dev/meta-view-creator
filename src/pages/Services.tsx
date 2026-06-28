@@ -58,8 +58,8 @@ const process = [
   },
   {
     step: 3,
-    title: "Metaverse Modeling",
-    description: "Create detailed metaverse models with photorealistic rendering and environmental integration.",
+    title: "Digital Twin Modelling",
+    description: "Build detailed digital twin models with photorealistic rendering and accurate environmental context.",
   },
   {
     step: 4,

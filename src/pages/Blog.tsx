@@ -16,7 +16,7 @@ const blogPosts = [
   {
     id: 1,
     title: "How Architectural Visualisation is Transforming Planning Approvals",
-    excerpt: "Discover why planning authorities are embracing photorealistic metaverse renders as the new standard for development applications.",
+    excerpt: "Discover why planning authorities are embracing photorealistic architectural renders as the new standard for development applications.",
     category: "Industry Trends",
     author: "Sarah Mitchell",
     date: "March 15, 2026",
@@ -38,7 +38,7 @@ const blogPosts = [
   {
     id: 3,
     title: "Stakeholder Communication: From Drawings to Digital Experiences",
-    excerpt: "Explore how interactive metaverse models bridge the communication gap between architects, planners, and community stakeholders.",
+    excerpt: "Explore how interactive digital twins bridge the communication gap between architects, planners, and community stakeholders.",
     category: "Communication",
     author: "Emma Rodriguez",
     date: "February 28, 2026",
@@ -82,7 +82,7 @@ const blogPosts = [
   {
     id: 7,
     title: "Maximizing Marketing Impact with Hyper-Realistic Renders",
-    excerpt: "Learn how high-quality metaverse renders can transform your property marketing and accelerate sales.",
+    excerpt: "Learn how high-quality photorealistic renders can transform your property marketing and accelerate sales.",
     category: "Marketing",
     author: "Anna Wilson",
     date: "January 28, 2026",

@@ -147,7 +147,7 @@ const caseStudies = [
     location: "Manchester, UK",
     developer: "UK Infrastructure Partners",
     challenge: "A local authority couldn't align 12 stakeholder groups on a major infrastructure project. Each group had different concerns and priorities.",
-    solution: "Interactive metaverse model with flythrough animations presented at council meetings. Different stakeholder versions highlighted relevant considerations for transport, environment, and community groups.",
+    solution: "Interactive digital twin with flythrough animations presented at council meetings. Different stakeholder versions highlighted relevant considerations for transport, environment, and community groups.",
     result: "Unanimous stakeholder approval achieved in a single session - a first for the authority.",
     metrics: [
       { label: "Stakeholders", value: "12" },
