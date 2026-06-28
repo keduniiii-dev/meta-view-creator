@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const services = [
   {
@@ -73,6 +74,11 @@ const Services = () => {
 
   return (
     <>
+      <SEO
+        title="Services | Architectural Visualisation & Digital Twins | Twinblueprint"
+        description="Photorealistic architectural renders, interactive walkthroughs and digital twin services for planning approvals, design review and stakeholder engagement."
+        path="/services"
+      />
       <Navbar />
       <main>
         {/* Hero Section */}

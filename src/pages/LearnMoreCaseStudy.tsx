@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
+import SEO from "@/components/SEO";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
 
@@ -64,6 +65,12 @@ const LearnMoreCaseStudy = () => {
 
   return (
     <>
+      <SEO
+        title={`${study.title} | Case Study | Twinblueprint`}
+        description={study.challenge.slice(0, 155)}
+        path={`/case-studies/${study.id}`}
+        type="article"
+      />
       <Navbar />
       <main>
         {/* Hero */}

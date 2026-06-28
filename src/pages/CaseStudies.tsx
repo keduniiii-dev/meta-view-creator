@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
@@ -162,6 +163,11 @@ const CaseStudies = () => {
 
   return (
     <>
+      <SEO
+        title="Case Studies | Digital Twin & Visualisation Projects | Twinblueprint"
+        description="Real-world projects where digital twins and immersive property visualisation have accelerated approvals, secured investment and aligned stakeholders."
+        path="/case-studies"
+      />
       <Navbar />
       <main>
         {/* Hero Section */}

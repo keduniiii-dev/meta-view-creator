@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const teamMembers = [
   {
@@ -56,6 +57,11 @@ const About = () => {
 
   return (
     <>
+      <SEO
+        title="About Twinblueprint | Digital Twin & Visualisation Specialists"
+        description="Twinblueprint helps property, infrastructure and planning teams accelerate approvals through immersive visualisation, digital twins and stakeholder engagement."
+        path="/about"
+      />
       <Navbar />
       <main>
         {/* Hero Section */}

@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
+import SEO from "@/components/SEO";
 
 import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } from "react-icons/fa";
 
@@ -137,6 +138,11 @@ const Blog = () => {
 
   return (
     <>
+      <SEO
+        title="Blog | Architectural Visualisation & Digital Twin Insights | Twinblueprint"
+        description="Insights, trends and best practices in architectural visualisation, digital twin technology, BIM visualisation and the future of development approvals."
+        path="/blog"
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

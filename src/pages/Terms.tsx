@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 
 const sections = [
@@ -73,6 +74,11 @@ const sections = [
 const Terms = () => {
   return (
     <>
+      <SEO
+        title="Terms of Service | Twinblueprint"
+        description="Terms and conditions for using Twinblueprint's architectural visualisation, digital twin and immersive property visualisation services."
+        path="/terms"
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
