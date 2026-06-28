@@ -142,6 +142,35 @@ const Blog = () => {
         title="Blog | Architectural Visualisation & Digital Twin Insights | Twinblueprint"
         description="Insights, trends and best practices in architectural visualisation, digital twin technology, BIM visualisation and the future of development approvals."
         path="/blog"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Twinblueprint Blog",
+            url: "https://meta-view-creator.lovable.app/blog",
+            blogPost: blogPosts.map((p) => ({
+              "@type": "BlogPosting",
+              headline: p.title,
+              description: p.excerpt,
+              datePublished: p.date,
+              author: { "@type": "Person", name: p.author },
+              publisher: {
+                "@type": "Organization",
+                name: "Twinblueprint",
+                logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
+              },
+              mainEntityOfPage: `https://meta-view-creator.lovable.app/blog#post-${p.id}`,
+            })),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://meta-view-creator.lovable.app/" },
+              { "@type": "ListItem", position: 2, name: "Blog", item: "https://meta-view-creator.lovable.app/blog" },
+            ],
+          },
+        ]}
       />
       <Navbar />
       <main>
