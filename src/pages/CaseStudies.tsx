@@ -167,6 +167,27 @@ const CaseStudies = () => {
         title="Case Studies | Digital Twin & Visualisation Projects | Twinblueprint"
         description="Real-world projects where digital twins and immersive property visualisation have accelerated approvals, secured investment and aligned stakeholders."
         path="/case-studies"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://meta-view-creator.lovable.app/" },
+              { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://meta-view-creator.lovable.app/case-studies" },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Twinblueprint Case Studies",
+            itemListElement: successStories.map((s, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: s.title,
+              description: s.description,
+            })),
+          },
+        ]}
       />
       <Navbar />
       <main>
@@ -384,7 +405,7 @@ const CaseStudies = () => {
                 Ready to be a case study?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss how our architectural visualisation services can accelerate your next project.
+                Explore our <Link to="/services" className="text-primary underline-offset-4 hover:underline">architectural visualisation services</Link>, learn about <Link to="/how-it-works" className="text-primary underline-offset-4 hover:underline">our four-step delivery process</Link>, or read the latest from the <Link to="/blog" className="text-primary underline-offset-4 hover:underline">Twinblueprint blog</Link>.
               </p>
               <Button
                 size="lg"
