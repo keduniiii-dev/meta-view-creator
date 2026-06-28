@@ -70,6 +70,32 @@ const LearnMoreCaseStudy = () => {
         description={study.challenge.slice(0, 155)}
         path={`/case-studies/${study.id}`}
         type="article"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: study.title,
+            description: study.challenge,
+            image: `https://meta-view-creator.lovable.app${study.image}`,
+            datePublished: `${study.year}-01-01`,
+            author: { "@type": "Organization", name: "Twinblueprint" },
+            publisher: {
+              "@type": "Organization",
+              name: "Twinblueprint",
+              logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
+            },
+            mainEntityOfPage: `https://meta-view-creator.lovable.app/case-studies/${study.id}`,
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://meta-view-creator.lovable.app/" },
+              { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://meta-view-creator.lovable.app/case-studies" },
+              { "@type": "ListItem", position: 3, name: study.title, item: `https://meta-view-creator.lovable.app/case-studies/${study.id}` },
+            ],
+          },
+        ]}
       />
       <Navbar />
       <main>
