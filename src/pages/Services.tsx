@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const services = [
   {
@@ -58,8 +59,8 @@ const process = [
   },
   {
     step: 3,
-    title: "Metaverse Modeling",
-    description: "Create detailed metaverse models with photorealistic rendering and environmental integration.",
+    title: "Digital Twin Modelling",
+    description: "Build detailed digital twin models with photorealistic rendering and accurate environmental context.",
   },
   {
     step: 4,
@@ -73,6 +74,11 @@ const Services = () => {
 
   return (
     <>
+      <SEO
+        title="Services | Architectural Visualisation & Digital Twins | Twinblueprint"
+        description="Photorealistic architectural renders, interactive walkthroughs and digital twin services for planning approvals, design review and stakeholder engagement."
+        path="/services"
+      />
       <Navbar />
       <main>
         {/* Hero Section */}

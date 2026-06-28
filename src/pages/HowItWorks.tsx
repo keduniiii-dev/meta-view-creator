@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const steps = [
   {
@@ -70,6 +71,11 @@ const HowItWorks = () => {
 
   return (
     <>
+      <SEO
+        title="How It Works | Our Visualisation Process | Twinblueprint"
+        description="A four-step process from concept to construction. Discovery, project development, review and delivery of immersive property visualisation that accelerates approvals."
+        path="/how-it-works"
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

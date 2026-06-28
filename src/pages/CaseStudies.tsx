@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
@@ -147,7 +148,7 @@ const caseStudies = [
     location: "Manchester, UK",
     developer: "UK Infrastructure Partners",
     challenge: "A local authority couldn't align 12 stakeholder groups on a major infrastructure project. Each group had different concerns and priorities.",
-    solution: "Interactive metaverse model with flythrough animations presented at council meetings. Different stakeholder versions highlighted relevant considerations for transport, environment, and community groups.",
+    solution: "Interactive digital twin with flythrough animations presented at council meetings. Different stakeholder versions highlighted relevant considerations for transport, environment, and community groups.",
     result: "Unanimous stakeholder approval achieved in a single session - a first for the authority.",
     metrics: [
       { label: "Stakeholders", value: "12" },
@@ -162,6 +163,11 @@ const CaseStudies = () => {
 
   return (
     <>
+      <SEO
+        title="Case Studies | Digital Twin & Visualisation Projects | Twinblueprint"
+        description="Real-world projects where digital twins and immersive property visualisation have accelerated approvals, secured investment and aligned stakeholders."
+        path="/case-studies"
+      />
       <Navbar />
       <main>
         {/* Hero Section */}
@@ -315,9 +321,9 @@ const CaseStudies = () => {
                     <Badge className="mb-4 bg-primary/10 text-primary border-0">
                       {study.category}
                     </Badge>
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+                    <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
                       {study.title}
-                    </h2>
+                    </h3>
                     <p className="text-muted-foreground text-sm mb-6">
                       📍 {study.location} • {study.developer}
                     </p>

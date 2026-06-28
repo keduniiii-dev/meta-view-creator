@@ -17,7 +17,7 @@ const studies = [
     tag: "Infrastructure",
     title: "City Bridge Project - Stakeholder Buy-In",
     problem: "A local authority couldn't align 12 stakeholder groups on a major infrastructure project.",
-    solution: "Interactive metaverse model with flythrough animations presented at council meetings.",
+    solution: "Interactive digital twin with flythrough animations presented at council meetings.",
     result: "Unanimous stakeholder approval achieved in a single session - a first for the authority.",
   },
 ];

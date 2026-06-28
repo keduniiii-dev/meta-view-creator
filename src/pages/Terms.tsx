@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 
 const sections = [
@@ -11,7 +12,7 @@ const sections = [
   {
     title: "Description of Services",
     content:
-      "Twinblueprint provides metaverse architectural visualization services, including but not limited to: photorealistic rendering, metaverse modeling, interactive walkthroughs, and VR-ready content. We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice.",
+      "Twinblueprint provides immersive architectural visualisation services, including but not limited to: photorealistic rendering, digital twin modelling, interactive walkthroughs, and VR-ready content. We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice.",
   },
   {
     title: "User Responsibilities",
@@ -73,6 +74,11 @@ const sections = [
 const Terms = () => {
   return (
     <>
+      <SEO
+        title="Terms of Service | Twinblueprint"
+        description="Terms and conditions for using Twinblueprint's architectural visualisation, digital twin and immersive property visualisation services."
+        path="/terms"
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

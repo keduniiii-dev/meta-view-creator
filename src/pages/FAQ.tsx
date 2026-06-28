@@ -11,6 +11,7 @@ import {
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const faqs = [
   {
@@ -61,6 +62,20 @@ const FAQ = () => {
 
   return (
     <>
+      <SEO
+        title="FAQ | Architectural Visualisation Questions | Twinblueprint"
+        description="Answers to common questions about our architectural visualisation services, accepted file formats, timelines, revisions, pricing and confidentiality."
+        path="/faq"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }}
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

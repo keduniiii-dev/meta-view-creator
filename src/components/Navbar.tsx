@@ -46,14 +46,20 @@ const Navbar = () => {
         </div>
 
         {/* Mobile toggle */}
-        <button className="md:hidden text-hero-foreground" onClick={() => setOpen(!open)}>
-          {open ? <X size={24} /> : <Menu size={24} />}
+        <button
+          className="md:hidden text-hero-foreground inline-flex items-center justify-center min-h-11 min-w-11 rounded-md"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+        >
+          {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-hero border-t border-hero-muted/10 pb-6">
+        <div id="mobile-nav" className="md:hidden bg-hero border-t border-hero-muted/10 pb-6">
           <div className="container flex flex-col gap-4 pt-4">
             {navLinks.map((link) => (
               <Link

@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
+import SEO from "@/components/SEO";
 
 import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } from "react-icons/fa";
 
@@ -16,7 +17,7 @@ const blogPosts = [
   {
     id: 1,
     title: "How Architectural Visualisation is Transforming Planning Approvals",
-    excerpt: "Discover why planning authorities are embracing photorealistic metaverse renders as the new standard for development applications.",
+    excerpt: "Discover why planning authorities are embracing photorealistic architectural renders as the new standard for development applications.",
     category: "Industry Trends",
     author: "Sarah Mitchell",
     date: "March 15, 2026",
@@ -38,7 +39,7 @@ const blogPosts = [
   {
     id: 3,
     title: "Stakeholder Communication: From Drawings to Digital Experiences",
-    excerpt: "Explore how interactive metaverse models bridge the communication gap between architects, planners, and community stakeholders.",
+    excerpt: "Explore how interactive digital twins bridge the communication gap between architects, planners, and community stakeholders.",
     category: "Communication",
     author: "Emma Rodriguez",
     date: "February 28, 2026",
@@ -82,7 +83,7 @@ const blogPosts = [
   {
     id: 7,
     title: "Maximizing Marketing Impact with Hyper-Realistic Renders",
-    excerpt: "Learn how high-quality metaverse renders can transform your property marketing and accelerate sales.",
+    excerpt: "Learn how high-quality photorealistic renders can transform your property marketing and accelerate sales.",
     category: "Marketing",
     author: "Anna Wilson",
     date: "January 28, 2026",
@@ -137,6 +138,11 @@ const Blog = () => {
 
   return (
     <>
+      <SEO
+        title="Blog | Architectural Visualisation & Digital Twin Insights | Twinblueprint"
+        description="Insights, trends and best practices in architectural visualisation, digital twin technology, BIM visualisation and the future of development approvals."
+        path="/blog"
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
@@ -258,7 +264,9 @@ const Blog = () => {
                   </div>
                 ) : (
                   <>
+                    <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                     <input
+                      id="newsletter-email"
                       type="email"
                       placeholder="Enter your email"
                       value={subscribeEmail}

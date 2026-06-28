@@ -4,17 +4,18 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const teamMembers = [
   {
     name: "Sarah Chen",
     role: "Founder & CEO",
-    bio: "20+ years in architectural visualization and metaverse technology. Former head of visualization at a major UK architecture firm.",
+    bio: "20+ years in architectural visualisation and immersive technology. Former head of visualisation at a major UK architecture firm.",
   },
   {
     name: "James Murphy",
     role: "Chief Technology Officer",
-    bio: "Expert in photorealistic rendering and real-time metaverse. Previously led visualization tech at a FTSE 100 company.",
+    bio: "Expert in photorealistic rendering and real-time visualisation. Previously led visualisation tech at a FTSE 100 company.",
   },
   {
     name: "Emma Lewis",
@@ -23,8 +24,8 @@ const teamMembers = [
   },
   {
     name: "David Patel",
-    role: "Lead metaverse Artist",
-    bio: "Award-winning metaverse artist specializing in architectural visualization. Master's in Digital Architecture.",
+    role: "Lead Visualisation Artist",
+    bio: "Award-winning visualisation artist specialising in architectural rendering and digital twins. Master's in Digital Architecture.",
   },
 ];
 
@@ -56,6 +57,11 @@ const About = () => {
 
   return (
     <>
+      <SEO
+        title="About Twinblueprint | Digital Twin & Visualisation Specialists"
+        description="Twinblueprint helps property, infrastructure and planning teams accelerate approvals through immersive visualisation, digital twins and stakeholder engagement."
+        path="/about"
+      />
       <Navbar />
       <main>
         {/* Hero Section */}

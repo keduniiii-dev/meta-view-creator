@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 
 const sections = [
@@ -58,6 +59,11 @@ const sections = [
 const PrivacyPolicy = () => {
   return (
     <>
+      <SEO
+        title="Privacy Policy | Twinblueprint"
+        description="How Twinblueprint collects, uses and protects personal information across our visualisation and digital twin services."
+        path="/privacy-policy"
+      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
