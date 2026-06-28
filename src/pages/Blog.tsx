@@ -150,7 +150,7 @@ const Blog = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
                 Our <span className="text-gradient">Blog</span>
               </h1>
-              <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
+              <p className="text-hero-muted text-base md:text-lg leading-relaxed text-pretty max-w-2xl mx-auto">
                 Insights, trends, best practices in architectural visualization, Digital Twin technology, BIM visualisation, Immersive property visualisation, and the future of development approvals.
               </p>
             </motion.div>
