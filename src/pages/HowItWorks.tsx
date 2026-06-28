@@ -85,7 +85,7 @@ const HowItWorks = () => {
                 How It <span className="text-gradient">Works</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                From blueprint to breathtaking in four simple steps. We've streamlined the entire process to deliver stunning 3D visualizations with minimal effort on your end.
+                A four-step process from concept to construction, built for architecture, construction, infrastructure, and planning teams. We translate complex projects into Immersive Property Visualisation that accelerates approvals and facilitates stakeholder alignment.
               </p>
             </motion.div>
           </div>
