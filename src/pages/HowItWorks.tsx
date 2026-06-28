@@ -9,50 +9,50 @@ import Footer from "@/components/Footer";
 const steps = [
   {
     number: "01",
-    title: "Share Your Plans",
+    title: "Discovery",
     description:
-      "Send us your blueprints, CAD files, or even rough sketches. We work with whatever format you have available. The more detail you can provide, the better we can bring your vision to life.",
+      "We start by understanding your project, stakeholders and approval pathway. Together we define how Immersive Property Visualisation outputs will support your planning, investment and delivery goals.",
     details: [
-      "Architectural drawings (2D/3D)",
-      "CAD files (AutoCAD, Revit, SketchUp)",
-      "Reference images and mood boards",
-      "Design briefs and specifications",
+      "Project scope and stakeholder mapping",
+      "Planning and approval pathway review",
+      "Data, BIM and source asset audit",
+      "Visualisation strategy and success measures",
     ],
   },
   {
     number: "02",
-    title: "We Build in 3D",
+    title: "Project Development",
     description:
-      "Our expert team creates photorealistic 3D models and interactive walkthroughs of your project. We pay meticulous attention to materials, lighting, and scale to deliver stunning realism.",
+      "Our specialists build your Immersive Property Visualisation from architectural, engineering and site data. Every model is constructed with accurate geometry, materiality and context.",
     details: [
-      "Detailed 3D modeling",
-      "Photorealistic rendering",
-      "Realistic materials and textures",
-      "Dynamic lighting simulation",
+      "BIM and CAD integration",
+      "Photorealistic materials and lighting",
+      "Site, townscape and infrastructure context",
+      "Interactive walkthrough authoring",
     ],
   },
   {
     number: "03",
-    title: "Review & Refine",
+    title: "Review & Collaboration",
     description:
-      "We collaborate closely with you to perfect every detail. You'll receive regular updates and have full input until the result matches your exact vision.",
+      "You review your Immersive Property Visualisation with our team in structured sessions. We refine detail, resolve design questions and align the model with stakeholder requirements.",
     details: [
-      "Regular progress updates",
-      "Interactive review sessions",
-      "Multiple revision rounds",
-      "Direct access to our team",
+      "Collaborative review sessions",
+      "Design and constructability feedback",
+      "Iterative refinements",
+      "Sign-off ready outputs",
     ],
   },
   {
     number: "04",
-    title: "Present & Win",
+    title: "Delivery & Support",
     description:
-      "Receive your completed 3D visuals in multiple formats ready for any platform. Use them to win planning approvals, impress investors, and sell off-plan properties faster.",
+      "We deliver planning-ready visuals, virtual walkthroughs and immersive assets in the formats your teams need. Ongoing support keeps your Immersive Property Visualisation current across the project lifecycle.",
     details: [
-      "High-resolution images",
-      "Interactive 3D walkthroughs",
-      "VR-ready exports",
-      "Marketing-ready assets",
+      "High-resolution renders and stills",
+      "Interactive web walkthroughs",
+      "VR and presentation-ready exports",
+      "Long-term model updates",
     ],
   },
 ];
@@ -85,7 +85,7 @@ const HowItWorks = () => {
                 How It <span className="text-gradient">Works</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                From blueprint to breathtaking in four simple steps. We've streamlined the entire process to deliver stunning 3D visualizations with minimal effort on your end.
+                A four-step process from concept to construction, built for architecture, construction, infrastructure, and planning teams. We translate complex projects into Immersive Property Visualisation that accelerates approvals and facilitates stakeholder alignment.
               </p>
             </motion.div>
           </div>
@@ -176,7 +176,7 @@ const HowItWorks = () => {
                 Ready to get started?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss your project and show you what's possible with stunning 3D visualization.
+                Let's discuss your project and show you what's possible with stunning Immersive Property Visualisation.
               </p>
               <Button
                 size="lg"
