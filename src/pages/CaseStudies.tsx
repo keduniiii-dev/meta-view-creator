@@ -405,7 +405,7 @@ const CaseStudies = () => {
                 Ready to be a case study?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss how our architectural visualisation services can accelerate your next project.
+                Explore our <Link to="/services" className="text-primary underline-offset-4 hover:underline">architectural visualisation services</Link>, learn about <Link to="/how-it-works" className="text-primary underline-offset-4 hover:underline">our four-step delivery process</Link>, or read the latest from the <Link to="/blog" className="text-primary underline-offset-4 hover:underline">Twinblueprint blog</Link>.
               </p>
               <Button
                 size="lg"
