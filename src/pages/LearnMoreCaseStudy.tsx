@@ -254,7 +254,7 @@ const LearnMoreCaseStudy = () => {
                 Ready to transform your project?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss how our digital twin services can help you achieve faster approvals.
+                See the full range of our <Link to="/services" className="text-primary underline-offset-4 hover:underline">visualisation services</Link> or learn about <Link to="/how-it-works" className="text-primary underline-offset-4 hover:underline">how we deliver projects</Link>.
               </p>
               <Button
                 size="lg"
