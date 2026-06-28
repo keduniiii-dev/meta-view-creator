@@ -58,12 +58,11 @@ const steps = [
 ];
 
 const benefits = [
-  "Reduce approval times by up to 40%",
-  "Increase investor engagement by 3x",
+  "Faster planning approvals",
+  "Stronger stakeholder engagement",
+  "Earlier design validation",
+  "Improved investor confidence",
   "Sell off-plan properties 60% faster",
-  "Reduce physical costs by 8-11%",
-  "Win more planning applications",
-  "Impress stakeholders with stunning visuals",
 ];
 
 const HowItWorks = () => {
