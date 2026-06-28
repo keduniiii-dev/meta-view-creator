@@ -148,18 +148,33 @@ const Blog = () => {
             "@type": "Blog",
             name: "Twinblueprint Blog",
             url: "https://meta-view-creator.lovable.app/blog",
+            publisher: {
+              "@type": "Organization",
+              name: "Twinblueprint",
+              logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
+            },
             blogPost: blogPosts.map((p) => ({
               "@type": "BlogPosting",
               headline: p.title,
               description: p.excerpt,
-              datePublished: p.date,
-              author: { "@type": "Person", name: p.author },
+              image: "https://meta-view-creator.lovable.app/og-image.jpg",
+              datePublished: new Date(p.date).toISOString(),
+              dateModified: new Date(p.date).toISOString(),
+              articleSection: p.category,
+              author: {
+                "@type": "Person",
+                name: p.author,
+                url: `https://meta-view-creator.lovable.app/about#${p.author.toLowerCase().replace(/\s+/g, "-")}`,
+              },
               publisher: {
                 "@type": "Organization",
                 name: "Twinblueprint",
                 logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
               },
-              mainEntityOfPage: `https://meta-view-creator.lovable.app/blog#post-${p.id}`,
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://meta-view-creator.lovable.app/blog#post-${p.id}`,
+              },
             })),
           },
           {
@@ -171,6 +186,7 @@ const Blog = () => {
             ],
           },
         ]}
+
       />
       <Navbar />
       <main>

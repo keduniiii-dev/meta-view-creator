@@ -183,11 +183,23 @@ const CaseStudies = () => {
             itemListElement: successStories.map((s, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              name: s.title,
-              description: s.description,
+              item: {
+                "@type": "CreativeWork",
+                name: s.title,
+                description: s.description,
+                image: "https://meta-view-creator.lovable.app/og-image.jpg",
+                about: s.category,
+                author: { "@type": "Organization", name: "Twinblueprint" },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Twinblueprint",
+                  logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
+                },
+              },
             })),
           },
         ]}
+
       />
       <Navbar />
       <main>
