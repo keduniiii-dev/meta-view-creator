@@ -167,6 +167,27 @@ const CaseStudies = () => {
         title="Case Studies | Digital Twin & Visualisation Projects | Twinblueprint"
         description="Real-world projects where digital twins and immersive property visualisation have accelerated approvals, secured investment and aligned stakeholders."
         path="/case-studies"
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://meta-view-creator.lovable.app/" },
+              { "@type": "ListItem", position: 2, name: "Case Studies", item: "https://meta-view-creator.lovable.app/case-studies" },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Twinblueprint Case Studies",
+            itemListElement: successStories.map((s, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: s.title,
+              description: s.description,
+            })),
+          },
+        ]}
       />
       <Navbar />
       <main>
