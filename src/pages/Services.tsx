@@ -10,8 +10,8 @@ const services = [
   {
     icon: FaCube,
     title: "Architectural Visualisation",
-    description: "Photorealistic metaverse renders of your architectural projects, bringing designs to life before construction begins.",
-    features: ["High-fidelity renders", "Multiple viewing angles", "Environmental context"],
+    description: "Photorealistic spatial renders, convey the full appearance, scale, materiality, and environmental context of a proposed development through precise interior, exterior, and site-specific Spatial Property Visualisation.",
+    features: ["Photorealistic architectural renders", "Street-level, aerial and agreed stakeholder viewpoints", "Site, landscape and surrounding-development context"],
   },
   {
     icon: FaUsers,
@@ -22,7 +22,7 @@ const services = [
   {
     icon: FaChartLine,
     title: "Planning Approval Support",
-    description: "Comprehensive visual documentation to accelerate planning approvals and reduce rejection cycles.",
+    description: "Create clear visual material that helps planning teams, consultees and communities understand a proposal and its relationship with the surrounding area.",
     features: ["Compliance documentation", "Impact analysis visuals", "Regulatory alignment"],
   },
   {
@@ -34,7 +34,7 @@ const services = [
   {
     icon: FaClock,
     title: "Timeline Acceleration",
-    description: "Cut approval timelines by months through clear visual communication that eliminates ambiguity.",
+    description: "Provide project teams with a shared visual reference that can support clearer discussions, earlier feedback and more efficient decision-making.",
     features: ["Faster consensus", "Reduced delays", "Early visibility"],
   },
   {
@@ -88,7 +88,7 @@ const Services = () => {
                 Our <span className="text-gradient">Services</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Comprehensive architectural visualisation and architectural communication solutions designed to accelerate your project approvals and stakeholder alignment.
+                We create architectural renders, interactive Immersive Property Visualisation, Digital walkthroughs experiences for planning, design review, stakeholder engagement and property development solutions designed to accelerate your project approvals and stakeholder alignment.
               </p>
             </motion.div>
           </div>
@@ -105,7 +105,7 @@ const Services = () => {
             >
               <h2 className="text-3xl md:text-4xl text-foreground mb-4">What We Offer</h2>
               <p className="text-muted-foreground text-lg">
-                Tailored solutions for every stage of your architectural project
+                Virtual Property Visualisation services for key stages of planning, design, consultation and development.
               </p>
             </motion.div>
 
