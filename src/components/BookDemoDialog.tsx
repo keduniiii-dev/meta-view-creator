@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import { z } from "zod";
+
 import {
   Dialog,
   DialogContent,
@@ -61,6 +62,8 @@ const BookDemoDialog = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState | "captcha", string>>>({});
   const [captchaAnswer, setCaptchaAnswer] = useState("");
   const [openedAt] = useState(() => Date.now());
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   // Simple math captcha generated per mount — no third-party keys required.
   const captcha = useMemo(() => {
@@ -74,17 +77,28 @@ const BookDemoDialog = () => {
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
+  const focusFirstError = (errs: Partial<Record<string, string>>) => {
+    const firstKey = Object.keys(errs).find((k) => errs[k]);
+    if (!firstKey) return;
+    const el = document.getElementById(firstKey === "captcha" ? "captcha" : firstKey) as HTMLElement | null;
+    el?.focus();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Time-trap: submissions in under 1.5s are almost certainly bots.
     if (Date.now() - openedAt < 1500) {
-      setErrors({ captcha: "Please take a moment to complete the form." });
+      const errs = { captcha: "Please take a moment to complete the form." };
+      setErrors(errs);
+      requestAnimationFrame(() => errorSummaryRef.current?.focus());
       return;
     }
 
     if (Number(captchaAnswer) !== captcha.answer) {
-      setErrors({ captcha: "Incorrect answer to the verification question." });
+      const errs = { captcha: "Incorrect answer to the verification question." };
+      setErrors(errs);
+      requestAnimationFrame(() => errorSummaryRef.current?.focus());
       return;
     }
 
@@ -96,12 +110,23 @@ const BookDemoDialog = () => {
         if (key && !fieldErrors[key]) fieldErrors[key] = issue.message;
       });
       setErrors(fieldErrors);
+      requestAnimationFrame(() => {
+        errorSummaryRef.current?.focus();
+        focusFirstError(fieldErrors);
+      });
       return;
     }
 
     setErrors({});
     setSubmitted(true);
   };
+
+  useEffect(() => {
+    if (submitted) {
+      requestAnimationFrame(() => successRef.current?.focus());
+    }
+  }, [submitted]);
+
 
   const handleOpenChange = (next: boolean) => {
     setOpen(next);
