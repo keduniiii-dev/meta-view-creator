@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { FaCube, FaUsers, FaChartLine, FaPaintBrush, FaClock, FaShieldAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+
 
 const services = [
   {
@@ -194,6 +196,24 @@ const Services = () => {
           </div>
         </section>
 
+        {/* Related Resources */}
+        <section className="section-padding bg-background border-t border-border">
+          <div className="container">
+            <div className="max-w-3xl mx-auto text-center">
+              <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">Continue Exploring</p>
+              <h2 className="text-2xl md:text-3xl text-foreground mb-6">Related resources</h2>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                See how these services come together in our{" "}
+                <Link to="/case-studies" className="text-primary underline-offset-4 hover:underline">real-world case studies</Link>,
+                walk through{" "}
+                <Link to="/how-it-works" className="text-primary underline-offset-4 hover:underline">our four-step delivery process</Link>,
+                or read the latest insights on the{" "}
+                <Link to="/blog" className="text-primary underline-offset-4 hover:underline">Twinblueprint blog</Link>.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="bg-hero section-padding">
           <div className="container">
@@ -219,6 +239,7 @@ const Services = () => {
             </motion.div>
           </div>
         </section>
+
       </main>
       <Footer />
     </>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, User, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -148,18 +148,33 @@ const Blog = () => {
             "@type": "Blog",
             name: "Twinblueprint Blog",
             url: "https://meta-view-creator.lovable.app/blog",
+            publisher: {
+              "@type": "Organization",
+              name: "Twinblueprint",
+              logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
+            },
             blogPost: blogPosts.map((p) => ({
               "@type": "BlogPosting",
               headline: p.title,
               description: p.excerpt,
-              datePublished: p.date,
-              author: { "@type": "Person", name: p.author },
+              image: "https://meta-view-creator.lovable.app/og-image.jpg",
+              datePublished: new Date(p.date).toISOString(),
+              dateModified: new Date(p.date).toISOString(),
+              articleSection: p.category,
+              author: {
+                "@type": "Person",
+                name: p.author,
+                url: `https://meta-view-creator.lovable.app/about#${p.author.toLowerCase().replace(/\s+/g, "-")}`,
+              },
               publisher: {
                 "@type": "Organization",
                 name: "Twinblueprint",
                 logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
               },
-              mainEntityOfPage: `https://meta-view-creator.lovable.app/blog#post-${p.id}`,
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://meta-view-creator.lovable.app/blog#post-${p.id}`,
+              },
             })),
           },
           {
@@ -171,6 +186,7 @@ const Blog = () => {
             ],
           },
         ]}
+
       />
       <Navbar />
       <main>
@@ -268,8 +284,21 @@ const Blog = () => {
                 </motion.article>
               ))}
             </div>
+
+            <div className="mt-16 max-w-3xl mx-auto text-center border-t border-border pt-12">
+              <h2 className="text-2xl md:text-3xl text-foreground mb-4">Keep exploring</h2>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                Browse our{" "}
+                <Link to="/services" className="text-primary underline-offset-4 hover:underline">architectural visualisation services</Link>,
+                see{" "}
+                <Link to="/case-studies" className="text-primary underline-offset-4 hover:underline">real-world case studies</Link>,
+                or learn about{" "}
+                <Link to="/how-it-works" className="text-primary underline-offset-4 hover:underline">our four-step delivery process</Link>.
+              </p>
+            </div>
           </div>
         </section>
+
 
         <section className="bg-hero section-padding">
           <div className="container">

@@ -241,6 +241,30 @@ const LearnMoreCaseStudy = () => {
           </div>
         </section>
 
+        {/* Related Case Studies */}
+        <section className="section-padding bg-background border-t border-border">
+          <div className="container">
+            <h2 className="text-2xl md:text-3xl text-foreground text-center mb-8">Related case studies</h2>
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {Object.values(caseStudiesData)
+                .filter((s) => s.id !== study.id)
+                .map((s) => (
+                  <Link
+                    key={s.id}
+                    to={`/case-studies/${s.id}`}
+                    className="group rounded-2xl border border-border bg-card p-6 hover:border-primary/50 transition-all"
+                  >
+                    <Badge className="mb-3 bg-primary/10 text-primary border-0">{s.category}</Badge>
+                    <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      Read the {s.title} case study
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{s.challenge}</p>
+                  </Link>
+                ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="bg-hero section-padding">
           <div className="container text-center">
@@ -266,6 +290,7 @@ const LearnMoreCaseStudy = () => {
             </motion.div>
           </div>
         </section>
+
       </main>
       <Footer />
       <BookDemoDialog />
