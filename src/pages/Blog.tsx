@@ -258,7 +258,9 @@ const Blog = () => {
                   </div>
                 ) : (
                   <>
+                    <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                     <input
+                      id="newsletter-email"
                       type="email"
                       placeholder="Enter your email"
                       value={subscribeEmail}

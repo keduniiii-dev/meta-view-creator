@@ -315,9 +315,9 @@ const CaseStudies = () => {
                     <Badge className="mb-4 bg-primary/10 text-primary border-0">
                       {study.category}
                     </Badge>
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+                    <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
                       {study.title}
-                    </h2>
+                    </h3>
                     <p className="text-muted-foreground text-sm mb-6">
                       📍 {study.location} • {study.developer}
                     </p>
