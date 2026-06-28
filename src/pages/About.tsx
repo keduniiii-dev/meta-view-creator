@@ -71,7 +71,7 @@ const About = () => {
                 About <span className="text-gradient">Twinblueprint</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Transforming how the world visualizes architectural projects through cutting-edge metaverse technology and exceptional service.
+                Transforming how the world visualises architectural, construction, infrastructure, property development, and urban planning projects through cutting-edge immersive visualisation technology.
               </p>
             </motion.div>
           </div>
