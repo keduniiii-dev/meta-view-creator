@@ -151,7 +151,13 @@ const BookDemoDialog = () => {
         </DialogHeader>
 
         {submitted ? (
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-10">
+          <div
+            ref={successRef}
+            tabIndex={-1}
+            role="status"
+            aria-live="polite"
+            className="flex-1 flex flex-col items-center justify-center text-center py-10 focus:outline-none"
+          >
             <CheckCircle className="w-14 h-14 text-primary mb-4" aria-hidden="true" />
             <h3 className="text-2xl font-bold text-foreground mb-2">You're In!</h3>
             <p className="text-muted-foreground max-w-sm">
@@ -161,7 +167,34 @@ const BookDemoDialog = () => {
           </div>
         ) : (
           <div className="flex-1 overflow-y-auto pr-1 hide-scrollbar">
-            <form onSubmit={handleSubmit} className="space-y-5 pr-2 text-left" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-5 pr-2 text-left" noValidate aria-describedby={Object.values(errors).some(Boolean) ? "form-error-summary" : undefined}>
+              {Object.values(errors).some(Boolean) && (
+                <div
+                  ref={errorSummaryRef}
+                  id="form-error-summary"
+                  tabIndex={-1}
+                  role="alert"
+                  aria-live="assertive"
+                  className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 focus:outline-none focus:ring-2 focus:ring-destructive"
+                >
+                  <p className="flex items-center gap-2 text-sm font-semibold text-destructive mb-2">
+                    <AlertCircle className="w-4 h-4" aria-hidden="true" />
+                    Please fix the following before submitting:
+                  </p>
+                  <ul className="list-disc list-inside text-xs text-destructive space-y-1">
+                    {Object.entries(errors)
+                      .filter(([, v]) => v)
+                      .map(([k, v]) => (
+                        <li key={k}>
+                          <a href={`#${k === "captcha" ? "captcha" : k}`} className="underline-offset-2 hover:underline">
+                            {v}
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Honeypot field — hidden from real users, attractive to bots */}
               <div className="hidden" aria-hidden="true">
                 <Label htmlFor="website">Website</Label>
