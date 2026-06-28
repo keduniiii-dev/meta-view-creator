@@ -176,7 +176,7 @@ const HowItWorks = () => {
                 Ready to get started?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss your project and show you what's possible with stunning 3D visualization.
+                Let's discuss your project and show you what's possible with stunning Immersive Property Visualisation.
               </p>
               <Button
                 size="lg"
