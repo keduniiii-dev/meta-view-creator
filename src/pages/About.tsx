@@ -38,7 +38,7 @@ const values = [
   {
     icon: FaTrophy,
     title: "Excellence",
-    description: "We're committed to delivering the highest quality visualizations that exceed expectations.",
+    description: "We're committed to delivering the highest quality visualisations that exceed expectations.",
   },
   {
     icon: FaUsers,
@@ -48,7 +48,7 @@ const values = [
   {
     icon: FaGlobe,
     title: "Sustainability",
-    description: "We're dedicated to supporting sustainable development through better visualization and communication.",
+    description: "We're dedicated to supporting sustainable development through better visualisation and communication.",
   },
 ];
 
@@ -100,7 +100,7 @@ const About = () => {
                   To revolutionize the architectural industry by making photorealistic digital twins accessible and affordable for developers, architects, and urban planners worldwide.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  We believe that better visualization leads to better decision-making, faster approvals, and ultimately, better buildings and cities.
+                  We believe that better visualisation leads to better decision-making, faster approvals, and ultimately, better buildings and cities.
                 </p>
               </motion.div>
 
@@ -114,7 +114,7 @@ const About = () => {
                   Our Vision
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To be the global leader in architectural visualization, setting new standards for quality, innovation, and client service.
+                  To be the global leader in architectural visualisation, setting new standards for quality, innovation, and client service.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   A world where every architectural project can be visualized with stunning clarity before a single brick is laid, enabling confident decision-making and faster approvals.

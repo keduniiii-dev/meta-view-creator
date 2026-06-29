@@ -22,10 +22,10 @@ const faqs = [
   {
     question: "How long does a typical project take?",
     answer:
-      "Turnaround times vary based on project complexity. A single-property visualization typically takes 5-7 business days, while larger developments may take 2-4 weeks. We always agree on deadlines upfront and offer rush delivery for urgent requirements.",
+      "Turnaround times vary based on project complexity. A single-property visualisation typically takes 5-7 business days, while larger developments may take 2-4 weeks. We always agree on deadlines upfront and offer rush delivery for urgent requirements.",
   },
   {
-    question: "Can I request changes to the visualization?",
+    question: "Can I request changes to the visualisation?",
     answer:
       "Absolutely. We include multiple revision rounds in every project. You'll have opportunities to request changes to materials, lighting, surrounding landscaping, and any other elements until you're completely satisfied with the result.",
   },
@@ -47,12 +47,12 @@ const faqs = [
   {
     question: "What's your pricing structure?",
     answer:
-      "Pricing depends on property type, complexity, and deliverables required. We offer competitive rates for single properties and attractive volume discounts for developers with multiple units. Contact us for a customized quote based on your specific requirements.",
+      "Pricing depends on property type, complexity, and deliverables required. We offer competitive rates for single properties and attractive volume discounts for developers with multiple units. Contact us for a customised quote based on your specific requirements.",
   },
   {
     question: "Can you match existing brand guidelines?",
     answer:
-      "Yes. We can match any brand guidelines, color palettes, or style preferences. Just provide your brand assets and we'll ensure consistency across all visualizations, whether for internal presentations or external marketing materials.",
+      "Yes. We can match any brand guidelines, colour palettes, or style preferences. Just provide your brand assets and we'll ensure consistency across all visualisations, whether for internal presentations or external marketing materials.",
   },
 ];
 

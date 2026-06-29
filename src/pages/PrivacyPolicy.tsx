@@ -12,7 +12,7 @@ const sections = [
   {
     title: "How We Use Your Information",
     content:
-      "We use the information we collect to: provide, maintain, and improve our services; process transactions and send related information; send promotional communications (with your consent); respond to your comments, questions, and requests; monitor and analyze usage patterns and trends; and detect, investigate, and prevent fraudulent or unauthorized activities.",
+      "We use the information we collect to: provide, maintain, and improve our services; process transactions and send related information; send promotional communications (with your consent); respond to your comments, questions, and requests; monitor and analyse usage patterns and trends; and detect, investigate, and prevent fraudulent or unauthorized activities.",
   },
   {
     title: "Information Sharing and Disclosure",
@@ -22,7 +22,7 @@ const sections = [
   {
     title: "Data Security",
     content:
-      "We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.",
+      "We implement appropriate technical and organisational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.",
   },
   {
     title: "Cookies and Tracking Technologies",
