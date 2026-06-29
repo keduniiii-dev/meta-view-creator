@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +15,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import Terms from "./pages/Terms.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import LearnMoreCaseStudy from "./pages/LearnMoreCaseStudy.tsx";
+import CrmLayout from "./crm/layout/CrmLayout.tsx";
+import CrmDashboard from "./crm/pages/Dashboard.tsx";
+import CrmPipeline from "./crm/pages/Pipeline.tsx";
+import CrmCapture from "./crm/pages/Capture.tsx";
+import CrmOutreach from "./crm/pages/Outreach.tsx";
+import CrmAnalytics from "./crm/pages/Analytics.tsx";
 
 const queryClient = new QueryClient();
 
