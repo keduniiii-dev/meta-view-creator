@@ -1,8 +1,10 @@
+import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import VirtualTour from "@/components/VirtualTour";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
+
+const VirtualTour = lazy(() => import("@/components/VirtualTour"));
 
 const HeroSection = () => {
   const { setOpen } = useDemoDialogStore();
@@ -36,11 +38,11 @@ const HeroSection = () => {
         </ul>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" onClick={() => setOpen(true)}>
+          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base shadow-glow" onClick={() => setOpen(true)}>
             Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
           </Button>
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base" asChild>
-            <a href="#case-studies">View Case Studies</a>
+          <Button size="lg" variant="outline" className="rounded-full px-8 text-base border-hero-muted/30 text-hero-foreground hover:bg-hero-foreground/5" asChild>
+            <a href="#case-studies">View case studies</a>
           </Button>
         </div>
       </motion.div>
@@ -52,7 +54,10 @@ const HeroSection = () => {
         className="relative"
       >
         <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl aspect-[16/10] group bg-muted">
-          <VirtualTour />
+          <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-muted to-background animate-pulse" aria-hidden="true" />}>
+            <VirtualTour />
+          </Suspense>
+
 
           {/* Virtual tour HUD */}
           <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full bg-background/70 backdrop-blur px-3 py-1.5 text-xs font-medium text-foreground shadow pointer-events-none">
