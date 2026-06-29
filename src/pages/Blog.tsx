@@ -251,14 +251,21 @@ const Blog = () => {
                       {post.excerpt}
                     </p>
 
-                    <div className="space-y-2 text-xs text-muted-foreground mb-4">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        {post.date}
+                    <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border/60">
+                      <div
+                        aria-hidden="true"
+                        className={`h-9 w-9 rounded-full bg-gradient-to-br ${post.gradient} flex items-center justify-center text-white text-xs font-bold shrink-0`}
+                      >
+                        {post.author.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <User className="h-4 w-4" />
-                        {post.author} • {post.readTime}
+                      <div className="text-xs text-muted-foreground leading-tight">
+                        <div className="font-medium text-foreground">{post.author}</div>
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="h-3 w-3" />
+                          <span>{post.date}</span>
+                          <span aria-hidden="true">·</span>
+                          <span>{post.readTime}</span>
+                        </div>
                       </div>
                     </div>
 
