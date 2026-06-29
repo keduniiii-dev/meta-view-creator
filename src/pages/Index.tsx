@@ -32,10 +32,12 @@ const Index = () => {
       <ProblemSection />
       <SolutionSection />
       <CaseStudiesSection />
+      <TestimonialsSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />
       <BookDemoDialog />
+      <MobileStickyCTA />
     </>
   );
 };
