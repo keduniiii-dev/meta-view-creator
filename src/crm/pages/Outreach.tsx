@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Linkedin, Mail, Send, Copy, CheckCircle, Eye, MousePointerClick } from "lucide-react";
+import { MessageSquare, Mail, Send, Copy, CheckCircle, Eye, MousePointerClick } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -43,7 +43,7 @@ const campaigns = [
 const Outreach = () => {
   const [activeTab, setActiveTab] = useState<"linkedin" | "email" | "campaigns">("linkedin");
   const [copied, setCopied] = useState(false);
-  const [linkedinMsg, setLinkedinMsg] = useState(linkedInTemplate);
+  const [linkedinMsg, setMessageSquareMsg] = useState(linkedInTemplate);
   const [emailMsg, setEmailMsg] = useState(emailTemplate);
 
   const handleCopy = (text: string) => {
@@ -59,7 +59,7 @@ const Outreach = () => {
 
       <div className="flex gap-1 mb-8 bg-secondary/50 rounded-lg p-1 w-fit">
         {[
-          { key: "linkedin" as const, label: "LinkedIn", icon: Linkedin },
+          { key: "linkedin" as const, label: "LinkedIn", icon: MessageSquare },
           { key: "email" as const, label: "Email", icon: Mail },
           { key: "campaigns" as const, label: "Campaigns", icon: Send },
         ].map(tab => (
@@ -74,13 +74,13 @@ const Outreach = () => {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl">
           <div className="gradient-card rounded-xl border border-border p-6 shadow-card">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2"><Linkedin className="w-5 h-5 text-primary" /> LinkedIn Executive Message</h3>
+              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2"><MessageSquare className="w-5 h-5 text-primary" /> LinkedIn Executive Message</h3>
               <Button variant="outline" size="sm" onClick={() => handleCopy(linkedinMsg)}>
                 {copied ? <CheckCircle className="w-4 h-4 mr-1 text-success" /> : <Copy className="w-4 h-4 mr-1" />}
                 {copied ? "Copied!" : "Copy"}
               </Button>
             </div>
-            <Textarea value={linkedinMsg} onChange={(e) => setLinkedinMsg(e.target.value)} className="min-h-[280px] bg-secondary border-border font-mono text-sm text-foreground" />
+            <Textarea value={linkedinMsg} onChange={(e) => setMessageSquareMsg(e.target.value)} className="min-h-[280px] bg-secondary border-border font-mono text-sm text-foreground" />
             <p className="text-xs text-muted-foreground mt-3">Replace [Name], [Company], and [sector] with actual prospect details before sending.</p>
           </div>
         </motion.div>
@@ -139,7 +139,7 @@ const Outreach = () => {
                   {campaigns.map((c) => (
                     <tr key={c.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
                       <td className="py-3 px-5 font-medium text-foreground">{c.name}</td>
-                      <td className="py-3 px-5"><span className="flex items-center gap-1 text-muted-foreground">{c.type === "LinkedIn" ? <Linkedin className="w-3 h-3" /> : <Mail className="w-3 h-3" />}{c.type}</span></td>
+                      <td className="py-3 px-5"><span className="flex items-center gap-1 text-muted-foreground">{c.type === "LinkedIn" ? <MessageSquare className="w-3 h-3" /> : <Mail className="w-3 h-3" />}{c.type}</span></td>
                       <td className="py-3 px-5 text-muted-foreground font-mono">{c.sent}</td>
                       <td className="py-3 px-5 text-muted-foreground font-mono">{c.opened}</td>
                       <td className="py-3 px-5 text-muted-foreground font-mono">{c.clicked}</td>
