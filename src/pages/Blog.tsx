@@ -27,7 +27,7 @@ const blogPosts = [
   },
   {
     id: 2,
-    title: "The ROI of Early Visualization: A Developer's Guide",
+    title: "The ROI of Early Visualisation: A Developer's Guide",
     excerpt: "Learn how investing in planning visualisation early in the project lifecycle can save months and millions in approval delays.",
     category: "Business Strategy",
     author: "James Chen",
@@ -49,7 +49,7 @@ const blogPosts = [
   },
   {
     id: 4,
-    title: "The Future of Architectural Visualization",
+    title: "The Future of Architectural Visualisation",
     excerpt: "A deep dive into emerging technologies like AI-powered rendering and real-time collaboration in architectural visualisation.",
     category: "Technology",
     author: "David Park",
@@ -60,7 +60,7 @@ const blogPosts = [
   },
   {
     id: 5,
-    title: "Environmental Impact Visualization: Making Sustainability Visible",
+    title: "Environmental Impact Visualisation: Making Sustainability Visible",
     excerpt: "How contextual renders help communicate environmental considerations and sustainability features to all stakeholders.",
     category: "Sustainability",
     author: "Lisa Thompson",
@@ -202,7 +202,7 @@ const Blog = () => {
                 Our <span className="text-gradient">Blog</span>
               </h1>
               <p className="text-hero-muted text-base md:text-lg leading-relaxed text-pretty max-w-2xl mx-auto">
-                Insights, trends, best practices in architectural visualization, Digital Twin technology, BIM visualisation, Immersive property visualisation, and the future of development approvals.
+                Insights, trends, best practices in architectural visualisation, Digital Twin technology, BIM visualisation, Immersive property visualisation, and the future of development approvals.
               </p>
             </motion.div>
           </div>
@@ -309,10 +309,10 @@ const Blog = () => {
               className="text-center max-w-2xl mx-auto"
             >
               <h2 className="text-3xl md:text-4xl text-hero-foreground mb-6">
-                Stay updated on the latest in visualization
+                Stay updated on the latest in visualisation
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Subscribe to our newsletter for insights and trends in architectural visualization.
+                Subscribe to our newsletter for insights and trends in architectural visualisation.
               </p>
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubscribe}>
                 {subscribed ? (

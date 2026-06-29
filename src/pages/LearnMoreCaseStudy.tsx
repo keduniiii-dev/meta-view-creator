@@ -23,7 +23,7 @@ const caseStudiesData = {
     year: "2025",
     timeline: "8 weeks",
     challenge: "A developer struggled with multiple planning rejections for a 200-unit residential project. The local planning authority had concerns about the visual impact and integration with the surrounding Victorian buildings.",
-    solution: "We created photorealistic interactive 3D walkthroughs showing the development in context with its surroundings. The visualization included seasonal variations and different times of day to demonstrate how the building would integrate with the neighborhood.",
+    solution: "We created photorealistic interactive 3D walkthroughs showing the development in context with its surroundings. The visualisation included seasonal variations and different times of day to demonstrate how the building would integrate with the neighbourhood.",
     result: "Planning approval granted on first resubmission, saving 6 months and £120K in delays.",
     services: ["Architectural Visualisation", "Interactive Walkthroughs", "Contextual Renders", "VR Experience"],
     metrics: [

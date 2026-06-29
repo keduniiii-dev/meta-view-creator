@@ -31,7 +31,7 @@ const services = [
   {
     icon: FaPaintBrush,
     title: "Design Iteration",
-    description: "Rapid visualization of design alternatives, enabling faster decision-making and design refinement.",
+    description: "Rapid visualisation of design alternatives, enabling faster decision-making and design refinement.",
     features: ["Quick turnarounds", "Multiple variants", "Version control"],
   },
   {
@@ -43,7 +43,7 @@ const services = [
   {
     icon: FaShieldAlt,
     title: "Risk Mitigation",
-    description: "Identify potential issues early through comprehensive visualization and stakeholder alignment.",
+    description: "Identify potential issues early through comprehensive visualisation and stakeholder alignment.",
     features: ["Issue identification", "Stakeholder buy-in", "Project confidence"],
   },
 ];
@@ -52,7 +52,7 @@ const process = [
   {
     step: 1,
     title: "Initial Consultation",
-    description: "Understand your project scope, timeline, and specific visualization requirements.",
+    description: "Understand your project scope, timeline, and specific visualisation requirements.",
   },
   {
     step: 2,
@@ -67,7 +67,7 @@ const process = [
   {
     step: 4,
     title: "Refinement & Delivery",
-    description: "Incorporate feedback and deliver final visualizations in your preferred formats.",
+    description: "Incorporate feedback and deliver final visualisations in your preferred formats.",
   },
 ];
 
@@ -227,7 +227,7 @@ const Services = () => {
                 Ready to get started?
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss how our visualization services can transform your next project.
+                Let's discuss how our visualisation services can transform your next project.
               </p>
               <Button
                 size="lg"
