@@ -3,11 +3,13 @@ import HeroSection from "@/components/HeroSection";
 import TrustStrip from "@/components/TrustStrip";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SEO from "@/components/SEO";
 
 const Index = () => {
@@ -29,11 +31,13 @@ const Index = () => {
       <TrustStrip />
       <ProblemSection />
       <SolutionSection />
+      <TestimonialsSection />
       <CaseStudiesSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />
       <BookDemoDialog />
+      <MobileStickyCTA />
     </>
   );
 };

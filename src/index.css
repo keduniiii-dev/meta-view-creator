@@ -123,7 +123,7 @@
   }
 
   .section-padding {
-    @apply py-20 md:py-28 px-6 md:px-8;
+    @apply py-12 md:py-24 px-5 md:px-8;
   }
 
   .hide-scrollbar::-webkit-scrollbar {

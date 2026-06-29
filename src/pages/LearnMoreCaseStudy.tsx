@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import SEO from "@/components/SEO";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
@@ -102,6 +103,13 @@ const LearnMoreCaseStudy = () => {
         {/* Hero */}
         <section className="bg-hero pt-32 pb-12">
           <div className="container">
+            <Breadcrumbs
+              className="mb-5"
+              items={[
+                { label: "Case Studies", href: "/case-studies" },
+                { label: study.title },
+              ]}
+            />
             <Link to="/case-studies">
               <Button variant="ghost" className="mb-6 text-hero-muted hover:text-hero-foreground pl-0">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
