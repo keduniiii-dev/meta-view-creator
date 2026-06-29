@@ -41,6 +41,14 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/crm" element={<CrmLayout />}>
+            <Route index element={<Navigate to="/crm/dashboard" replace />} />
+            <Route path="dashboard" element={<CrmDashboard />} />
+            <Route path="pipeline" element={<CrmPipeline />} />
+            <Route path="capture" element={<CrmCapture />} />
+            <Route path="outreach" element={<CrmOutreach />} />
+            <Route path="analytics" element={<CrmAnalytics />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
         <BookDemoDialog />
