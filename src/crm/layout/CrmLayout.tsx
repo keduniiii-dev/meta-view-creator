@@ -1,11 +1,12 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { LayoutDashboard, GitBranch, UserPlus, Send, BarChart3, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, GitBranch, UserPlus, Send, BarChart3 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -28,13 +29,8 @@ function CrmSidebar() {
   const { pathname } = useLocation();
   return (
     <Sidebar collapsible="icon" className="border-r border-border">
+      <SidebarHeader className="h-14 border-b border-border" />
       <SidebarContent>
-        <div className="px-4 py-5 border-b border-border">
-          <NavLink to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4" />
-            {!collapsed && <span>Back to site</span>}
-          </NavLink>
-        </div>
         <SidebarGroup>
           <SidebarGroupLabel>CRM</SidebarGroupLabel>
           <SidebarGroupContent>

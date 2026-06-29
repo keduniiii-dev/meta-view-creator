@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import { MessageSquare, Mail, Send, Copy, CheckCircle, Eye, MousePointerClick } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const linkedInTemplate = `Hi [Name],
 
@@ -41,9 +45,8 @@ const campaigns = [
 ];
 
 const Outreach = () => {
-  const [activeTab, setActiveTab] = useState<"linkedin" | "email" | "campaigns">("linkedin");
   const [copied, setCopied] = useState(false);
-  const [linkedinMsg, setMessageSquareMsg] = useState(linkedInTemplate);
+  const [linkedinMsg, setLinkedinMsg] = useState(linkedInTemplate);
   const [emailMsg, setEmailMsg] = useState(emailTemplate);
 
   const handleCopy = (text: string) => {
@@ -53,107 +56,118 @@ const Outreach = () => {
   };
 
   return (
-    <div className="p-6 lg:p-8">
-      <h1 className="text-3xl font-bold text-foreground mb-2">Outreach Center</h1>
-      <p className="text-muted-foreground mb-8">LinkedIn & email templates, campaign tracking, and engagement analytics</p>
-
-      <div className="flex gap-1 mb-8 bg-secondary/50 rounded-lg p-1 w-fit">
-        {[
-          { key: "linkedin" as const, label: "LinkedIn", icon: MessageSquare },
-          { key: "email" as const, label: "Email", icon: Mail },
-          { key: "campaigns" as const, label: "Campaigns", icon: Send },
-        ].map(tab => (
-          <button key={tab.key} onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === tab.key ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-            <tab.icon className="w-4 h-4" />{tab.label}
-          </button>
-        ))}
+    <div className="p-6 lg:p-8 space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold text-foreground mb-2">Outreach Center</h1>
+        <p className="text-muted-foreground">LinkedIn & email templates, campaign tracking, and engagement analytics</p>
       </div>
 
-      {activeTab === "linkedin" && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl">
-          <div className="gradient-card rounded-xl border border-border p-6 shadow-card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2"><MessageSquare className="w-5 h-5 text-primary" /> LinkedIn Executive Message</h3>
-              <Button variant="outline" size="sm" onClick={() => handleCopy(linkedinMsg)}>
-                {copied ? <CheckCircle className="w-4 h-4 mr-1 text-success" /> : <Copy className="w-4 h-4 mr-1" />}
-                {copied ? "Copied!" : "Copy"}
-              </Button>
-            </div>
-            <Textarea value={linkedinMsg} onChange={(e) => setMessageSquareMsg(e.target.value)} className="min-h-[280px] bg-secondary border-border font-mono text-sm text-foreground" />
-            <p className="text-xs text-muted-foreground mt-3">Replace [Name], [Company], and [sector] with actual prospect details before sending.</p>
-          </div>
-        </motion.div>
-      )}
+      <Tabs defaultValue="linkedin" className="w-full">
+        <TabsList>
+          <TabsTrigger value="linkedin"><MessageSquare className="w-4 h-4 mr-2" />LinkedIn</TabsTrigger>
+          <TabsTrigger value="email"><Mail className="w-4 h-4 mr-2" />Email</TabsTrigger>
+          <TabsTrigger value="campaigns"><Send className="w-4 h-4 mr-2" />Campaigns</TabsTrigger>
+        </TabsList>
 
-      {activeTab === "email" && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-3xl">
-          <div className="gradient-card rounded-xl border border-border p-6 shadow-card">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-foreground flex items-center gap-2"><Mail className="w-5 h-5 text-primary" /> Executive Email Template</h3>
-              <Button variant="outline" size="sm" onClick={() => handleCopy(emailMsg)}>
-                {copied ? <CheckCircle className="w-4 h-4 mr-1 text-success" /> : <Copy className="w-4 h-4 mr-1" />}
-                {copied ? "Copied!" : "Copy"}
-              </Button>
-            </div>
-            <Textarea value={emailMsg} onChange={(e) => setEmailMsg(e.target.value)} className="min-h-[380px] bg-secondary border-border font-mono text-sm text-foreground" />
-            <p className="text-xs text-muted-foreground mt-3">Personalise [Name], [Company], and [current project] before sending.</p>
-          </div>
-        </motion.div>
-      )}
+        <TabsContent value="linkedin">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Card className="max-w-3xl">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle className="text-lg flex items-center gap-2"><MessageSquare className="w-5 h-5 text-primary" /> LinkedIn Executive Message</CardTitle>
+                <Button variant="outline" size="sm" onClick={() => handleCopy(linkedinMsg)}>
+                  {copied ? <CheckCircle className="w-4 h-4 mr-1 text-green-500" /> : <Copy className="w-4 h-4 mr-1" />}
+                  {copied ? "Copied!" : "Copy"}
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <Textarea value={linkedinMsg} onChange={(e) => setLinkedinMsg(e.target.value)} className="min-h-[280px] font-mono text-sm" />
+                <p className="text-xs text-muted-foreground mt-3">Replace [Name], [Company], and [sector] with actual prospect details before sending.</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </TabsContent>
 
-      {activeTab === "campaigns" && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {[
-              { label: "Total Sent", value: "1,345", icon: Send },
-              { label: "Total Opens", value: "909", icon: Eye },
-              { label: "Total Clicks", value: "277", icon: MousePointerClick },
-              { label: "Avg CTR", value: "20.6%", icon: MousePointerClick },
-            ].map((s, i) => (
-              <div key={i} className="gradient-card rounded-xl border border-border p-5 shadow-card">
-                <s.icon className="w-5 h-5 text-primary mb-2" />
-                <p className="text-2xl font-bold text-foreground">{s.value}</p>
-                <p className="text-sm text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
-          </div>
+        <TabsContent value="email">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Card className="max-w-3xl">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle className="text-lg flex items-center gap-2"><Mail className="w-5 h-5 text-primary" /> Executive Email Template</CardTitle>
+                <Button variant="outline" size="sm" onClick={() => handleCopy(emailMsg)}>
+                  {copied ? <CheckCircle className="w-4 h-4 mr-1 text-green-500" /> : <Copy className="w-4 h-4 mr-1" />}
+                  {copied ? "Copied!" : "Copy"}
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <Textarea value={emailMsg} onChange={(e) => setEmailMsg(e.target.value)} className="min-h-[380px] font-mono text-sm" />
+                <p className="text-xs text-muted-foreground mt-3">Personalise [Name], [Company], and [current project] before sending.</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </TabsContent>
 
-          <div className="gradient-card rounded-xl border border-border shadow-card overflow-hidden">
-            <div className="p-5 border-b border-border"><h3 className="text-lg font-semibold text-foreground">Campaign History</h3></div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border text-muted-foreground">
-                    <th className="text-left py-3 px-5 font-medium">Campaign</th>
-                    <th className="text-left py-3 px-5 font-medium">Type</th>
-                    <th className="text-left py-3 px-5 font-medium">Sent</th>
-                    <th className="text-left py-3 px-5 font-medium">Opened</th>
-                    <th className="text-left py-3 px-5 font-medium">Clicked</th>
-                    <th className="text-left py-3 px-5 font-medium">Open Rate</th>
-                    <th className="text-left py-3 px-5 font-medium">CTR</th>
-                    <th className="text-left py-3 px-5 font-medium">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {campaigns.map((c) => (
-                    <tr key={c.id} className="border-b border-border/50 hover:bg-secondary/30 transition-colors">
-                      <td className="py-3 px-5 font-medium text-foreground">{c.name}</td>
-                      <td className="py-3 px-5"><span className="flex items-center gap-1 text-muted-foreground">{c.type === "LinkedIn" ? <MessageSquare className="w-3 h-3" /> : <Mail className="w-3 h-3" />}{c.type}</span></td>
-                      <td className="py-3 px-5 text-muted-foreground font-mono">{c.sent}</td>
-                      <td className="py-3 px-5 text-muted-foreground font-mono">{c.opened}</td>
-                      <td className="py-3 px-5 text-muted-foreground font-mono">{c.clicked}</td>
-                      <td className="py-3 px-5 text-primary font-mono font-medium">{((c.opened / c.sent) * 100).toFixed(1)}%</td>
-                      <td className="py-3 px-5 text-accent font-mono font-medium">{((c.clicked / c.sent) * 100).toFixed(1)}%</td>
-                      <td className="py-3 px-5"><span className={`px-2 py-1 rounded-md text-xs font-medium ${c.status === "Active" ? "bg-success/20 text-success" : "bg-secondary text-muted-foreground"}`}>{c.status}</span></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <TabsContent value="campaigns">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { label: "Total Sent", value: "1,345", icon: Send },
+                { label: "Total Opens", value: "909", icon: Eye },
+                { label: "Total Clicks", value: "277", icon: MousePointerClick },
+                { label: "Avg CTR", value: "20.6%", icon: MousePointerClick },
+              ].map((s, i) => (
+                <Card key={i}>
+                  <CardContent className="p-5">
+                    <s.icon className="w-5 h-5 text-primary mb-2" />
+                    <p className="text-2xl font-bold text-foreground">{s.value}</p>
+                    <p className="text-sm text-muted-foreground">{s.label}</p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
-          </div>
-        </motion.div>
-      )}
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Campaign History</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Campaign</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Sent</TableHead>
+                      <TableHead>Opened</TableHead>
+                      <TableHead>Clicked</TableHead>
+                      <TableHead>Open Rate</TableHead>
+                      <TableHead>CTR</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {campaigns.map((c) => (
+                      <TableRow key={c.id}>
+                        <TableCell className="font-medium">{c.name}</TableCell>
+                        <TableCell>
+                          <span className="flex items-center gap-1 text-muted-foreground">
+                            {c.type === "LinkedIn" ? <MessageSquare className="w-3 h-3" /> : <Mail className="w-3 h-3" />}{c.type}
+                          </span>
+                        </TableCell>
+                        <TableCell className="font-mono text-muted-foreground">{c.sent}</TableCell>
+                        <TableCell className="font-mono text-muted-foreground">{c.opened}</TableCell>
+                        <TableCell className="font-mono text-muted-foreground">{c.clicked}</TableCell>
+                        <TableCell className="font-mono font-medium text-primary">{((c.opened / c.sent) * 100).toFixed(1)}%</TableCell>
+                        <TableCell className="font-mono font-medium text-accent">{((c.clicked / c.sent) * 100).toFixed(1)}%</TableCell>
+                        <TableCell>
+                          <Badge variant={c.status === "Active" ? "default" : "secondary"}>{c.status}</Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
