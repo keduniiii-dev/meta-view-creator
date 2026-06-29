@@ -31,8 +31,8 @@ const Index = () => {
       <TrustStrip />
       <ProblemSection />
       <SolutionSection />
-      <CaseStudiesSection />
       <TestimonialsSection />
+      <CaseStudiesSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />
