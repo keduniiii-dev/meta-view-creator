@@ -6,6 +6,7 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import propertyTourVideo from "@/assets/property-tour.mp4.asset.json";
 
 const steps = [
   {
