@@ -1,4 +1,13 @@
 import { Link } from "react-router-dom";
+import { ShieldCheck, Award, Leaf, Lock } from "lucide-react";
+
+const accreditations = [
+  { icon: ShieldCheck, label: "ISO 27001 aligned" },
+  { icon: Award, label: "RIBA-ready workflow" },
+  { icon: Leaf, label: "BREEAM-aware visuals" },
+  { icon: Lock, label: "GDPR compliant" },
+];
+
 
 const Footer = () => {
   return (
@@ -43,8 +52,22 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-hero-muted/10 text-center">
-          <p className="text-hero-muted text-sm">© 2026 Twinblueprint. Digital Twin and architectural visualisation specialists. All rights reserved.</p>
+        <div className="mt-10 pt-8 border-t border-hero-muted/10">
+          <ul
+            aria-label="Accreditations and standards"
+            className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 mb-6"
+          >
+            {accreditations.map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-hero-muted/15 bg-background/30 px-3 py-1.5 text-xs text-hero-muted"
+              >
+                <Icon className="h-3.5 w-3.5 text-primary/80" aria-hidden="true" />
+                <span>{label}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-hero-muted text-sm text-center">© 2026 Twinblueprint. Digital Twin and architectural visualisation specialists. All rights reserved.</p>
         </div>
       </div>
     </footer>
