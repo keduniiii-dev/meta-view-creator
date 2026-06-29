@@ -97,6 +97,38 @@ const HowItWorks = () => {
           </div>
         </section>
 
+        <section className="bg-background pt-12 md:pt-16">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl md:text-4xl text-foreground mb-3">
+                  See It In Action
+                </h2>
+                <p className="text-muted-foreground text-lg">
+                  Discover how immersive property tours transform off-plan sales and stakeholder engagement.
+                </p>
+              </div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border aspect-video bg-muted">
+                <video
+                  src={propertyTourVideo.url}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                  aria-label="The future of property tours: immersive 3D walkthrough demonstration"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         <section className="section-padding bg-background">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-16">
