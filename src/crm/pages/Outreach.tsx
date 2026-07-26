@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageSquare, Mail, Send, Copy, CheckCircle, Eye, MousePointerClick } from "lucide-react";
+import { MessageSquare, Mail, Send, Copy, CheckCircle, Eye, MousePointerClick, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useCampaigns, useCampaignStats } from "@/hooks/use-campaigns";
 
 const linkedInTemplate = `Hi [Name],
 
@@ -37,23 +38,37 @@ Best regards,
 [Your Name]
 Twinblueprint`;
 
-const campaigns = [
-  { id: 1, name: "C-Suite LinkedIn Wave 1", type: "LinkedIn", sent: 245, opened: 187, clicked: 63, status: "Completed", date: "2026-03-15" },
-  { id: 2, name: "Executive Email Blast", type: "Email", sent: 500, opened: 312, clicked: 89, status: "Completed", date: "2026-03-20" },
-  { id: 3, name: "Follow-up LinkedIn Wave", type: "LinkedIn", sent: 180, opened: 142, clicked: 51, status: "Active", date: "2026-03-28" },
-  { id: 4, name: "Follow-up Email Sequence", type: "Email", sent: 420, opened: 268, clicked: 74, status: "Active", date: "2026-04-01" },
-];
-
 const Outreach = () => {
   const [copied, setCopied] = useState(false);
   const [linkedinMsg, setLinkedinMsg] = useState(linkedInTemplate);
   const [emailMsg, setEmailMsg] = useState(emailTemplate);
+
+  const { data: campaignsData, isLoading: campaignsLoading } = useCampaigns(1, 50);
+  const { data: statsData, isLoading: statsLoading } = useCampaignStats();
+
+  const campaigns = campaignsData?.campaigns ?? [];
+  const loading = campaignsLoading || statsLoading;
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const campaignStats = [
+    { label: "Total Sent", value: (statsData?.total_sent ?? 0).toLocaleString(), icon: Send },
+    { label: "Total Opens", value: (statsData?.total_opens ?? 0).toLocaleString(), icon: Eye },
+    { label: "Total Clicks", value: (statsData?.total_clicks ?? 0).toLocaleString(), icon: MousePointerClick },
+    { label: "Avg CTR", value: `${(statsData?.avg_ctr ?? 0).toFixed(1)}%`, icon: MousePointerClick },
+  ];
 
   return (
     <div className="p-6 lg:p-8 space-y-8">
@@ -108,12 +123,7 @@ const Outreach = () => {
         <TabsContent value="campaigns">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {[
-                { label: "Total Sent", value: "1,345", icon: Send },
-                { label: "Total Opens", value: "909", icon: Eye },
-                { label: "Total Clicks", value: "277", icon: MousePointerClick },
-                { label: "Avg CTR", value: "20.6%", icon: MousePointerClick },
-              ].map((s, i) => (
+              {campaignStats.map((s, i) => (
                 <Card key={i}>
                   <CardContent className="p-5">
                     <s.icon className="w-5 h-5 text-primary mb-2" />
@@ -129,40 +139,44 @@ const Outreach = () => {
                 <CardTitle className="text-lg">Campaign History</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Campaign</TableHead>
-                      <TableHead>Type</TableHead>
-                      <TableHead>Sent</TableHead>
-                      <TableHead>Opened</TableHead>
-                      <TableHead>Clicked</TableHead>
-                      <TableHead>Open Rate</TableHead>
-                      <TableHead>CTR</TableHead>
-                      <TableHead>Status</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {campaigns.map((c) => (
-                      <TableRow key={c.id}>
-                        <TableCell className="font-medium">{c.name}</TableCell>
-                        <TableCell>
-                          <span className="flex items-center gap-1 text-muted-foreground">
-                            {c.type === "LinkedIn" ? <MessageSquare className="w-3 h-3" /> : <Mail className="w-3 h-3" />}{c.type}
-                          </span>
-                        </TableCell>
-                        <TableCell className="font-mono text-muted-foreground">{c.sent}</TableCell>
-                        <TableCell className="font-mono text-muted-foreground">{c.opened}</TableCell>
-                        <TableCell className="font-mono text-muted-foreground">{c.clicked}</TableCell>
-                        <TableCell className="font-mono font-medium text-primary">{((c.opened / c.sent) * 100).toFixed(1)}%</TableCell>
-                        <TableCell className="font-mono font-medium text-accent">{((c.clicked / c.sent) * 100).toFixed(1)}%</TableCell>
-                        <TableCell>
-                          <Badge variant={c.status === "Active" ? "default" : "secondary"}>{c.status}</Badge>
-                        </TableCell>
+                {campaigns.length > 0 ? (
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Campaign</TableHead>
+                        <TableHead>Type</TableHead>
+                        <TableHead>Sent</TableHead>
+                        <TableHead>Opened</TableHead>
+                        <TableHead>Clicked</TableHead>
+                        <TableHead>Open Rate</TableHead>
+                        <TableHead>CTR</TableHead>
+                        <TableHead>Status</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {campaigns.map((c) => (
+                        <TableRow key={c.id}>
+                          <TableCell className="font-medium">{c.name}</TableCell>
+                          <TableCell>
+                            <span className="flex items-center gap-1 text-muted-foreground">
+                              {c.type === "LinkedIn" ? <MessageSquare className="w-3 h-3" /> : <Mail className="w-3 h-3" />}{c.type}
+                            </span>
+                          </TableCell>
+                          <TableCell className="font-mono text-muted-foreground">{c.sent}</TableCell>
+                          <TableCell className="font-mono text-muted-foreground">{c.opened}</TableCell>
+                          <TableCell className="font-mono text-muted-foreground">{c.clicked}</TableCell>
+                          <TableCell className="font-mono font-medium text-primary">{c.sent > 0 ? ((c.opened / c.sent) * 100).toFixed(1) : 0}%</TableCell>
+                          <TableCell className="font-mono font-medium text-accent">{c.sent > 0 ? ((c.clicked / c.sent) * 100).toFixed(1) : 0}%</TableCell>
+                          <TableCell>
+                            <Badge variant={c.status === "Active" ? "default" : "secondary"}>{c.status}</Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <p className="text-sm text-muted-foreground text-center py-8">No campaigns yet</p>
+                )}
               </CardContent>
             </Card>
           </motion.div>

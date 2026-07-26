@@ -1,77 +1,231 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Building2, HardHat, Landmark, TrendingUp, FileText, FileSpreadsheet } from "lucide-react";
+import {
+  Building2,
+  HardHat,
+  Landmark,
+  TrendingUp,
+  FileText,
+  FileSpreadsheet,
+  Loader2,
+  Factory,
+  Hammer,
+  TreePine,
+  Warehouse,
+  Shovel,
+  Pickaxe,
+  Wrench,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+} from "recharts";
+import { useLeads } from "@/hooks/use-leads";
+import type { Lead } from "@/lib/types";
 
-const buckets = [
-  { name: "Construction", count: 847, icon: HardHat, color: "hsl(210,100%,56%)" },
-  { name: "Architecture", count: 523, icon: Building2, color: "hsl(170,80%,45%)" },
-  { name: "Urban Dev", count: 312, icon: Landmark, color: "hsl(38,92%,50%)" },
-  { name: "Infrastructure", count: 198, icon: TrendingUp, color: "hsl(280,70%,55%)" },
+const colorPalette = [
+  "hsl(210,100%,56%)",
+  "hsl(170,80%,45%)",
+  "hsl(38,92%,50%)",
+  "hsl(280,70%,55%)",
+  "hsl(340,82%,52%)",
+  "hsl(160,60%,40%)",
+  "hsl(25,95%,53%)",
+  "hsl(190,70%,45%)",
+  "hsl(320,65%,50%)",
+  "hsl(85,60%,42%)",
+  "hsl(240,60%,60%)",
+  "hsl(15,85%,55%)",
 ];
-const pieData = buckets.map(b => ({ name: b.name, value: b.count }));
-const pieColors = buckets.map(b => b.color);
-const appData = [
-  { name: "Revit", leads: 420 }, { name: "AutoCAD", leads: 380 }, { name: "SketchUp", leads: 290 },
-  { name: "Rhino", leads: 180 }, { name: "3ds Max", leads: 150 }, { name: "Blender", leads: 120 },
-  { name: "ArchiCAD", leads: 95 }, { name: "Navisworks", leads: 70 },
+
+const iconPalette = [
+  HardHat,
+  Building2,
+  Landmark,
+  TrendingUp,
+  Factory,
+  Hammer,
+  TreePine,
+  Warehouse,
+  Shovel,
+  Pickaxe,
+  Wrench,
 ];
-const leads = [
-  { id: 1, company: "Turner Construction", category: "Construction", app: "Revit, Navisworks", score: 94, status: "Hot" },
-  { id: 2, company: "Gensler Architects", category: "Architecture", app: "Revit, Rhino", score: 91, status: "Hot" },
-  { id: 3, company: "AECOM", category: "Infrastructure", app: "AutoCAD, 3ds Max", score: 87, status: "Warm" },
-  { id: 4, company: "Skidmore Owings", category: "Architecture", app: "Rhino, SketchUp", score: 85, status: "Warm" },
-  { id: 5, company: "Bechtel Corp", category: "Construction", app: "Revit, AutoCAD", score: 82, status: "Warm" },
-  { id: 6, company: "WSP Global", category: "Urban Dev", app: "AutoCAD, ArchiCAD", score: 79, status: "Cool" },
-  { id: 7, company: "Jacobs Engineering", category: "Infrastructure", app: "Navisworks, Revit", score: 76, status: "Cool" },
-  { id: 8, company: "HDR Inc.", category: "Architecture", app: "Revit, 3ds Max", score: 73, status: "Cool" },
-];
+
 const statusVariant: Record<string, "destructive" | "default" | "secondary"> = {
-  Hot: "destructive",
-  Warm: "default",
-  Cool: "secondary",
+  won: "default",
+  qualified: "default",
+  contacted: "secondary",
+  new: "outline",
+  lost: "destructive",
 };
 
 const Dashboard = () => {
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useLeads(page, 20);
+
+  const leads = useMemo(
+    () => data?.leads ?? [],
+    [data?.leads],
+  );
+  const pagination = data?.pagination;
+
   const [filter, setFilter] = useState("All");
-  const filtered = filter === "All" ? leads : leads.filter(l => l.category === filter);
+
+  const industryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+      leads.forEach((l) => {
+        const ind = l.category;
+        if (!ind) return;
+        counts[ind] = (counts[ind] || 0) + 1;
+    });
+    return counts;
+  }, [leads]);
+
+  const buckets = useMemo(() => {
+    const entries = Object.entries(industryCounts);
+    const sorted = entries.sort((a, b) => b[1] - a[1]);
+    return sorted.map(([name, count], idx) => ({
+      name,
+      count,
+      icon: iconPalette[idx % iconPalette.length],
+      color: colorPalette[idx % colorPalette.length],
+    }));
+  }, [industryCounts]);
+
+  const pieData = buckets.map((b) => ({ name: b.name, value: b.count }));
+  const pieColors = buckets.map((b) => b.color);
+
+  const companyCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    leads.forEach((l) => {
+      const co = l.company || "Unknown";
+      counts[co] = (counts[co] || 0) + 1;
+    });
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([name, count]) => ({ name, leads: count }));
+  }, [leads]);
+
+  const filtered = useMemo(
+    () =>
+      filter === "All"
+        ? leads
+        : leads.filter((l) => l.category === filter),
+    [leads, filter],
+  );
+
   const handleExportCsv = () => {
-    const header = "Company,Category,Applications,Score,Status\n";
-    const rows = filtered.map(l => `${l.company},${l.category},"${l.app}",${l.score},${l.status}`).join("\n");
+    const header = "Name,Email,Company,Job Title,Industry,Status\n";
+    const rows = filtered
+      .map(
+        (l) =>
+          `"${l.full_name}","${l.email}","${l.company}","${l.job_title}","${l.category}","${l.status}"`,
+      )
+      .join("\n");
     const blob = new Blob([header + rows], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "leads-report.csv"; a.click();
+    a.href = url;
+    a.download = "leads-report.csv";
+    a.click();
     URL.revokeObjectURL(url);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 lg:p-8 space-y-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Lead Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Categorised prospects across sectors</p>
+          <p className="text-muted-foreground mt-1">
+            Categorised prospects across sectors
+          </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={handleExportCsv}><FileSpreadsheet className="w-4 h-4 mr-1" /> CSV</Button>
-          <Button variant="outline" size="sm"><FileText className="w-4 h-4 mr-1" /> PDF</Button>
+          <Button variant="outline" size="sm" onClick={handleExportCsv}>
+            <FileSpreadsheet className="w-4 h-4 mr-1" /> CSV
+          </Button>
+          <Button variant="outline" size="sm">
+            <FileText className="w-4 h-4 mr-1" /> PDF
+          </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Card
+            className={`cursor-pointer transition-all ${
+              filter === "All"
+                ? "border-primary shadow-md"
+                : "hover:border-primary/30"
+            }`}
+            onClick={() => setFilter("All")}
+          >
+            <CardContent className="p-5">
+              <TrendingUp className="w-6 h-6 mb-3 text-primary" />
+              <p className="text-2xl font-bold text-foreground">
+                {leads.length}
+              </p>
+              <p className="text-sm text-muted-foreground">All Leads</p>
+            </CardContent>
+          </Card>
+        </motion.div>
         {buckets.map((b, i) => (
-          <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}>
+          <motion.div
+            key={b.name}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.08 }}
+          >
             <Card
-              className={`cursor-pointer transition-all ${filter === b.name ? "border-primary shadow-md" : "hover:border-primary/30"}`}
-              onClick={() => setFilter(b.name === filter ? "All" : b.name)}
+              className={`cursor-pointer transition-all ${
+                filter === b.name
+                  ? "border-primary shadow-md"
+                  : "hover:border-primary/30"
+              }`}
+              onClick={() =>
+                setFilter(b.name === filter ? "All" : b.name)
+              }
             >
               <CardContent className="p-5">
-                <b.icon className="w-6 h-6 mb-3" style={{ color: b.color }} />
-                <p className="text-2xl font-bold text-foreground">{b.count}</p>
+                <b.icon
+                  className="w-6 h-6 mb-3"
+                  style={{ color: b.color }}
+                />
+                <p className="text-2xl font-bold text-foreground">
+                  {b.count}
+                </p>
                 <p className="text-sm text-muted-foreground">{b.name}</p>
               </CardContent>
             </Card>
@@ -85,38 +239,100 @@ const Dashboard = () => {
             <CardTitle className="text-lg">Lead Distribution</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={260}>
-              <PieChart>
-                <Pie data={pieData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={4} dataKey="value">
-                  {pieData.map((_, i) => <Cell key={i} fill={pieColors[i]} />)}
-                </Pie>
-                <Tooltip contentStyle={{ backgroundColor: "#fff", border: "1px solid hsl(220,16%,30%)", borderRadius: 8, color: "#111" }} labelStyle={{ color: "#111" }} itemStyle={{ color: "#111" }} />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="flex flex-wrap gap-4 justify-center mt-2">
-              {buckets.map((b, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: b.color }} />{b.name}
+            {pieData.length > 0 ? (
+              <>
+                <ResponsiveContainer width="100%" height={260}>
+                  <PieChart>
+                    <Pie
+                      data={pieData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={100}
+                      paddingAngle={4}
+                      dataKey="value"
+                    >
+                      {pieData.map((_, i) => (
+                        <Cell key={i} fill={pieColors[i]} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#fff",
+                        border: "1px solid hsl(220,16%,30%)",
+                        borderRadius: 8,
+                        color: "#111",
+                      }}
+                      labelStyle={{ color: "#111" }}
+                      itemStyle={{ color: "#111" }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="flex flex-wrap gap-4 justify-center mt-2">
+                  {buckets.map((b) => (
+                    <div
+                      key={b.name}
+                      className="flex items-center gap-2 text-xs text-muted-foreground"
+                    >
+                      <div
+                        className="w-3 h-3 rounded-full"
+                        style={{ backgroundColor: b.color }}
+                      />
+                      {b.name}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-10">
+                No leads yet
+              </p>
+            )}
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Leads by Application</CardTitle>
+            <CardTitle className="text-lg">Leads by Company</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={appData} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,16%,18%)" />
-                <XAxis type="number" tick={{ fill: "hsl(215,12%,55%)", fontSize: 12 }} />
-                <YAxis type="category" dataKey="name" tick={{ fill: "hsl(215,12%,55%)", fontSize: 12 }} width={90} />
-                <Tooltip contentStyle={{ backgroundColor: "hsl(220,18%,10%)", border: "1px solid hsl(220,16%,18%)", borderRadius: 8, color: "#fff" }} />
-                <Bar dataKey="leads" fill="hsl(210,100%,56%)" radius={[0, 6, 6, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+            {companyCounts.length > 0 ? (
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={companyCounts} layout="vertical">
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke="hsl(220,16%,18%)"
+                  />
+                  <XAxis
+                    type="number"
+                    tick={{ fill: "hsl(215,12%,55%)", fontSize: 12 }}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    tick={{ fill: "hsl(215,12%,55%)", fontSize: 12 }}
+                    width={120}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "hsl(220,18%,10%)",
+                      border: "1px solid hsl(220,16%,18%)",
+                      borderRadius: 8,
+                      color: "#fff",
+                    }}
+                  />
+                  <Bar
+                    dataKey="leads"
+                    fill="hsl(210,100%,56%)"
+                    radius={[0, 6, 6, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-10">
+                No leads yet
+              </p>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -124,42 +340,81 @@ const Dashboard = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg">Qualified Leads</CardTitle>
-          <span className="text-sm text-muted-foreground">{filtered.length} leads</span>
+          <span className="text-sm text-muted-foreground">
+            {pagination?.total ?? filtered.length} leads
+          </span>
         </CardHeader>
         <CardContent className="p-0">
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>Name</TableHead>
                 <TableHead>Company</TableHead>
                 <TableHead>Category</TableHead>
-                <TableHead>Applications</TableHead>
-                <TableHead>Score</TableHead>
+                <TableHead>Email</TableHead>
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filtered.map((lead) => (
+              {filtered.map((lead: Lead) => (
                 <TableRow key={lead.id}>
-                  <TableCell className="font-medium">{lead.company}</TableCell>
-                  <TableCell className="text-muted-foreground">{lead.category}</TableCell>
-                  <TableCell className="text-muted-foreground font-mono text-xs">{lead.app}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <div className="w-16 h-1.5 bg-secondary rounded-full overflow-hidden">
-                        <div className="h-full rounded-full bg-primary" style={{ width: `${lead.score}%` }} />
-                      </div>
-                      <span className="text-xs text-foreground font-mono">{lead.score}</span>
-                    </div>
+                  <TableCell className="font-medium">
+                    {lead.full_name}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {lead.company}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {lead.category}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground font-mono text-xs">
+                    {lead.email}
                   </TableCell>
                   <TableCell>
-                    <Badge variant={statusVariant[lead.status]}>{lead.status}</Badge>
+                    <Badge variant={statusVariant[lead.status] || "secondary"}>
+                      {lead.status}
+                    </Badge>
                   </TableCell>
                 </TableRow>
               ))}
+              {filtered.length === 0 && (
+                <TableRow>
+                  <TableCell
+                    colSpan={5}
+                    className="text-center text-muted-foreground py-8"
+                  >
+                    No leads found
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
+
+      {pagination && pagination.pages > 1 && (
+        <div className="flex items-center justify-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page <= 1}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            Page {page} of {pagination.pages}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={page >= pagination.pages}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
