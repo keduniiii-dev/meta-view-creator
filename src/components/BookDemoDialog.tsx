@@ -13,8 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
+import { useDemo } from "@/api/hooks/useApi";
 
-const categories = ["Construction", "Architecture", "Urban Development", "Infrastructure"];
+const categories = ["Construction", "Architecture", "Urban Development", "Infrastructure"] as const;
+const categorySchema = z.enum(categories);
 
 const demoSchema = z.object({
   name: z.string().trim().min(2, "Please enter your full name").max(100),
@@ -25,12 +27,10 @@ const demoSchema = z.object({
     .string()
     .trim()
     .max(30)
-    .regex(/^[+\d][\d\s()\-]{6,}$/i, "Enter a valid phone number")
+    .regex(/^[+\d][\d\s()-]{6,}$/i, "Enter a valid phone number")
     .optional()
     .or(z.literal("")),
-  category: z.enum(categories as [string, ...string[]], {
-    errorMap: () => ({ message: "Select an industry" }),
-  }),
+  category: categorySchema,
   // Honeypot — must remain empty
   website: z.string().max(0, "Spam detected").optional().or(z.literal("")),
 });
@@ -57,9 +57,11 @@ const initialForm: FormState = {
 
 const BookDemoDialog = () => {
   const { open, setOpen } = useDemoDialogStore();
+  const { useCreateDemoRequest } = useDemo();
+  const { mutate: submitDemoRequest, isPending, error: submitMutationError } = useCreateDemoRequest();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState<FormState>(initialForm);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState | "captcha", string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof FormState | "captcha" | "submit", string>>>({});
   const [captchaAnswer, setCaptchaAnswer] = useState("");
   const [openedAt] = useState(() => Date.now());
   const errorSummaryRef = useRef<HTMLDivElement>(null);
@@ -70,7 +72,7 @@ const BookDemoDialog = () => {
     const a = Math.floor(Math.random() * 8) + 2;
     const b = Math.floor(Math.random() * 8) + 2;
     return { a, b, answer: a + b };
-  }, [open]);
+  }, []);
 
   const handleChange = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -118,7 +120,23 @@ const BookDemoDialog = () => {
     }
 
     setErrors({});
-    setSubmitted(true);
+    submitDemoRequest(
+      {
+        ...form,
+        category: form.category as (typeof categories)[number],
+        website: form.website || undefined,
+      },
+      {
+        onSuccess: () => {
+          setSubmitted(true);
+        },
+        onError: (error) => {
+          const message = error instanceof Error ? error.message : "We couldn't submit your request right now. Please try again.";
+          setErrors({ submit: message });
+          requestAnimationFrame(() => errorSummaryRef.current?.focus());
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -331,11 +349,15 @@ const BookDemoDialog = () => {
               <Button
                 type="submit"
                 size="lg"
+                disabled={isPending}
                 className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 text-base px-8 py-6 animate-pulse-glow"
               >
-                Book a Demo
+                {isPending ? "Submitting..." : "Book a Demo"}
                 <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
               </Button>
+              {submitMutationError ? (
+                <p className="text-sm text-destructive text-center">{submitMutationError instanceof Error ? submitMutationError.message : "Submission failed."}</p>
+              ) : null}
               <p className="text-xs text-center text-muted-foreground">
                 We respect your privacy. Your details are only used to schedule your demo.
               </p>

@@ -3,13 +3,14 @@ import { Calendar, MapPin, Users, AlertTriangle, CheckCircle, Clock, ArrowRight 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { useBids, useProjects } from "@/crm/hooks/useApi";
 
-const bids = [
+const sampleBids = [
   { project: "Hudson Yards Phase 4", client: "Related Companies", phase: "RFP Review", deadline: "2026-05-15", suppliers: ["Turner", "Skanska", "PCL"], value: "$420M" },
   { project: "LAX Terminal Modernization", client: "LAWA", phase: "Technical Eval", deadline: "2026-04-28", suppliers: ["Bechtel", "AECOM", "Fluor"], value: "$2.1B" },
   { project: "Chicago Riverfront Tower", client: "Sterling Bay", phase: "Shortlist", deadline: "2026-06-01", suppliers: ["Clark Construction", "Lendlease"], value: "$310M" },
 ];
-const inflightProjects = [
+const sampleProjects = [
   { project: "Miami Worldcenter", client: "MDM Group", start: "2024-03", end: "2027-08", progress: 42, suppliers: ["Suffolk", "Moss", "Coastal"], uses3D: true, competitor: "Enscape", issue: "Clash detection delays" },
   { project: "Austin Tech Campus", client: "Apple Inc.", start: "2025-01", end: "2027-12", progress: 18, suppliers: ["DPR", "Hensel Phelps"], uses3D: false, competitor: null, issue: "No visualisation in stakeholder reviews" },
   { project: "Denver Transit Hub", client: "RTD Denver", start: "2024-06", end: "2026-11", progress: 67, suppliers: ["Kiewit", "Granite"], uses3D: true, competitor: "Lumion", issue: "Rendering bottlenecks at scale" },
@@ -20,7 +21,15 @@ const phaseVariant: Record<string, "default" | "secondary" | "outline"> = {
   "Shortlist": "outline",
 };
 
-const Pipeline = () => (
+const Pipeline = () => {
+  const { useBids: useBidsQuery } = useBids();
+  const { data: bidsData, isLoading: bidsLoading, isError: bidsError } = useBidsQuery();
+  const { useProjects: useProjectsQuery } = useProjects();
+  const { data: projectsData, isLoading: projectsLoading, isError: projectsError } = useProjectsQuery();
+  const bids = (bidsData?.length ? bidsData : sampleBids) as typeof sampleBids;
+  const inflightProjects = (projectsData?.length ? projectsData : sampleProjects) as typeof sampleProjects;
+
+  return (
   <div className="p-6 lg:p-8 space-y-10">
     <div>
       <h1 className="text-3xl font-bold text-foreground mb-2">Project Pipeline</h1>
@@ -31,6 +40,8 @@ const Pipeline = () => (
       <h2 className="text-xl font-semibold text-foreground mb-5 flex items-center gap-2">
         <Clock className="w-5 h-5 text-primary" /> Active Bids
       </h2>
+      {bidsLoading ? <p className="text-sm text-muted-foreground">Loading active bids...</p> : null}
+      {bidsError ? <p className="text-sm text-destructive">We could not load the latest bid data. Showing a fallback view.</p> : null}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {bids.map((bid, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
@@ -57,6 +68,8 @@ const Pipeline = () => (
       <h2 className="text-xl font-semibold text-foreground mb-5 flex items-center gap-2">
         <MapPin className="w-5 h-5 text-accent" /> Inflight Projects
       </h2>
+      {projectsLoading ? <p className="text-sm text-muted-foreground">Loading project pipeline...</p> : null}
+      {projectsError ? <p className="text-sm text-destructive">We could not load the latest project pipeline. Showing a fallback view.</p> : null}
       <div className="space-y-4">
         {inflightProjects.map((proj, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
@@ -92,6 +105,7 @@ const Pipeline = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default Pipeline;

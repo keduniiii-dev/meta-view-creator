@@ -16,6 +16,7 @@ import Terms from "./pages/Terms.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import LearnMoreCaseStudy from "./pages/LearnMoreCaseStudy.tsx";
 import CrmLayout from "./crm/layout/CrmLayout.tsx";
+import CrmLoginPage from "./crm/pages/Login.tsx";
 import CrmDashboard from "./crm/pages/Dashboard.tsx";
 import CrmPipeline from "./crm/pages/Pipeline.tsx";
 import CrmCapture from "./crm/pages/Capture.tsx";
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/crm/login" element={<CrmLoginPage />} />
           <Route path="/crm" element={<CrmLayout />}>
             <Route index element={<Navigate to="/crm/dashboard" replace />} />
             <Route path="dashboard" element={<CrmDashboard />} />

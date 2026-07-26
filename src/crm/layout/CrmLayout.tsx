@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
 import { LayoutDashboard, GitBranch, UserPlus, Send, BarChart3 } from "lucide-react";
 import {
   Sidebar,
@@ -54,6 +54,12 @@ function CrmSidebar() {
 }
 
 const CrmLayout = () => {
+  const isAuthenticated = typeof window !== "undefined" && Boolean(window.localStorage.getItem("crm-auth"));
+
+  if (!isAuthenticated) {
+    return <Navigate to="/crm/login" replace />;
+  }
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">

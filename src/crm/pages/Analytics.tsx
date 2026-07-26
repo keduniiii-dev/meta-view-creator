@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { TrendingUp, Users, MousePointerClick, Eye, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, AreaChart, Area } from "recharts";
+import { useAnalytics } from "@/crm/hooks/useApi";
 
 const weeklyData = [
   { week: "W1", leads: 42, emails: 120, opens: 78, clicks: 24 },
@@ -14,7 +15,7 @@ const weeklyData = [
   { week: "W8", leads: 147, emails: 350, opens: 252, clicks: 102 },
 ];
 
-const conversionFunnel = [
+const funnelData = [
   { stage: "Identified", count: 2400, pct: 100 },
   { stage: "Qualified", count: 1880, pct: 78 },
   { stage: "Contacted", count: 1345, pct: 56 },
@@ -24,7 +25,7 @@ const conversionFunnel = [
   { stage: "Closed Won", count: 67, pct: 3 },
 ];
 
-const kpis = [
+const statCards = [
   { label: "Lead Growth", value: "+147%", icon: TrendingUp, trend: "up" },
   { label: "Qualified Rate", value: "78.3%", icon: Users, trend: "up" },
   { label: "Email Open Rate", value: "67.6%", icon: Eye, trend: "up" },
@@ -33,13 +34,25 @@ const kpis = [
 
 const tooltipStyle = { backgroundColor: "hsl(220,18%,10%)", border: "1px solid hsl(220,16%,18%)", borderRadius: 8, color: "#fff" };
 
-const Analytics = () => (
+const Analytics = () => {
+  const { useWeeklyAnalytics, useFunnelAnalytics, useKpis } = useAnalytics();
+  const { data: weeklySeries, isLoading: weeklyLoading, isError: weeklyError } = useWeeklyAnalytics();
+  const { data: funnelSeries, isLoading: funnelLoading, isError: funnelError } = useFunnelAnalytics();
+  const { data: kpisSeries, isLoading: kpisLoading, isError: kpisError } = useKpis();
+
+  const weeklyDataToRender = (weeklySeries?.length ? weeklySeries : weeklyData) as typeof weeklyData;
+  const conversionFunnel = (funnelSeries?.length ? funnelSeries : funnelData) as typeof funnelData;
+  const kpis = (kpisSeries?.length ? kpisSeries : statCards) as typeof statCards;
+
+  return (
   <div className="p-6 lg:p-8 space-y-8">
     <div>
       <h1 className="text-3xl font-bold text-foreground mb-2">Analytics</h1>
       <p className="text-muted-foreground">Performance metrics, engagement funnels, and campaign ROI</p>
     </div>
 
+    {weeklyLoading || funnelLoading || kpisLoading ? <p className="text-sm text-muted-foreground">Refreshing analytics...</p> : null}
+    {weeklyError || funnelError || kpisError ? <p className="text-sm text-destructive">Using cached analytics while the live API is unavailable.</p> : null}
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {kpis.map((kpi, i) => (
         <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}>
@@ -64,7 +77,7 @@ const Analytics = () => (
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={weeklyData}>
+            <AreaChart data={weeklyDataToRender}>
               <defs>
                 <linearGradient id="leadGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="hsl(210,100%,56%)" stopOpacity={0.3} />
@@ -87,7 +100,7 @@ const Analytics = () => (
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={weeklyData}>
+            <LineChart data={weeklyDataToRender}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,16%,18%)" />
               <XAxis dataKey="week" tick={{ fill: "hsl(215,12%,55%)", fontSize: 12 }} />
               <YAxis tick={{ fill: "hsl(215,12%,55%)", fontSize: 12 }} />
@@ -123,6 +136,7 @@ const Analytics = () => (
       </CardContent>
     </Card>
   </div>
-);
+  );
+};
 
 export default Analytics;

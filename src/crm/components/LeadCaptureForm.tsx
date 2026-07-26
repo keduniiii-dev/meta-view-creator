@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLeads } from "@/crm/hooks/useApi";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,6 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 const categories = ["Construction", "Architecture", "Urban Development", "Infrastructure"];
 
 const LeadCaptureForm = () => {
+  const { useCreateLead } = useLeads();
+  const { mutate: createLead, isPending, error: submitError } = useCreateLead();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", company: "", role: "", category: "", phone: "",
@@ -17,10 +20,18 @@ const LeadCaptureForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const stored = JSON.parse(localStorage.getItem("crm_captured_leads") || "[]");
-    stored.unshift({ ...form, id: Date.now(), createdAt: new Date().toISOString() });
-    localStorage.setItem("crm_captured_leads", JSON.stringify(stored));
-    setSubmitted(true);
+    createLead(
+      {
+        ...form,
+        role: form.role || undefined,
+        phone: form.phone || undefined,
+      },
+      {
+        onSuccess: () => {
+          setSubmitted(true);
+        },
+      }
+    );
   };
 
   if (submitted) {
@@ -88,9 +99,12 @@ const LeadCaptureForm = () => {
                   </Select>
                 </div>
               </div>
-              <Button type="submit" className="w-full py-6 text-base">
+              {submitError ? (
+                <p className="text-sm text-destructive text-center">{submitError instanceof Error ? submitError.message : "Unable to save the lead right now."}</p>
+              ) : null}
+              <Button type="submit" className="w-full py-6 text-base" disabled={isPending}>
                 <Send className="w-4 h-4 mr-2" />
-                Save Lead to Pipeline
+                {isPending ? "Saving Lead..." : "Save Lead to Pipeline"}
               </Button>
             </form>
           </CardContent>

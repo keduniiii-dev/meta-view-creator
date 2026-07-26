@@ -142,14 +142,6 @@ bun run build:dev        # Build in development mode
 bun run preview          # Preview production build locally
 ```
 
-### SSR (Server-Side Rendering)
-```bash
-bun run build:client     # Build client assets to dist/client
-bun run build:ssr        # Build SSR server bundle to dist/server
-bun run build:full       # Build both client and server
-bun run preview:ssr      # Run SSR server locally (port 3000)
-```
-
 ## 🎨 Styling & Design
 
 - **Tailwind CSS** for utility-first styling

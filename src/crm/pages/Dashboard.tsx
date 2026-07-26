@@ -2,25 +2,18 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, HardHat, Landmark, TrendingUp, FileText, FileSpreadsheet } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLeads } from "@/crm/hooks/useApi";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
-const buckets = [
-  { name: "Construction", count: 847, icon: HardHat, color: "hsl(210,100%,56%)" },
-  { name: "Architecture", count: 523, icon: Building2, color: "hsl(170,80%,45%)" },
-  { name: "Urban Dev", count: 312, icon: Landmark, color: "hsl(38,92%,50%)" },
-  { name: "Infrastructure", count: 198, icon: TrendingUp, color: "hsl(280,70%,55%)" },
-];
-const pieData = buckets.map(b => ({ name: b.name, value: b.count }));
-const pieColors = buckets.map(b => b.color);
 const appData = [
   { name: "Revit", leads: 420 }, { name: "AutoCAD", leads: 380 }, { name: "SketchUp", leads: 290 },
   { name: "Rhino", leads: 180 }, { name: "3ds Max", leads: 150 }, { name: "Blender", leads: 120 },
   { name: "ArchiCAD", leads: 95 }, { name: "Navisworks", leads: 70 },
 ];
-const leads = [
+const sampleLeads = [
   { id: 1, company: "Turner Construction", category: "Construction", app: "Revit, Navisworks", score: 94, status: "Hot" },
   { id: 2, company: "Gensler Architects", category: "Architecture", app: "Revit, Rhino", score: 91, status: "Hot" },
   { id: 3, company: "AECOM", category: "Infrastructure", app: "AutoCAD, 3ds Max", score: 87, status: "Warm" },
@@ -37,8 +30,19 @@ const statusVariant: Record<string, "destructive" | "default" | "secondary"> = {
 };
 
 const Dashboard = () => {
+  const { useLeads: useLeadsQuery } = useLeads();
+  const { data, isLoading, isError } = useLeadsQuery();
   const [filter, setFilter] = useState("All");
+  const leads = (data?.length ? data : sampleLeads) as typeof sampleLeads;
   const filtered = filter === "All" ? leads : leads.filter(l => l.category === filter);
+  const bucketsWithCounts = [
+    { name: "Construction", count: leads.filter((lead) => lead.category === "Construction").length, icon: HardHat, color: "hsl(210,100%,56%)" },
+    { name: "Architecture", count: leads.filter((lead) => lead.category === "Architecture").length, icon: Building2, color: "hsl(170,80%,45%)" },
+    { name: "Urban Development", count: leads.filter((lead) => lead.category === "Urban Development").length, icon: Landmark, color: "hsl(38,92%,50%)" },
+    { name: "Infrastructure", count: leads.filter((lead) => lead.category === "Infrastructure").length, icon: TrendingUp, color: "hsl(280,70%,55%)" },
+  ];
+  const pieData = bucketsWithCounts.map((b) => ({ name: b.name, value: b.count }));
+  const pieColors = bucketsWithCounts.map((b) => b.color);
   const handleExportCsv = () => {
     const header = "Company,Category,Applications,Score,Status\n";
     const rows = filtered.map(l => `${l.company},${l.category},"${l.app}",${l.score},${l.status}`).join("\n");
@@ -62,8 +66,10 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {isLoading ? <p className="text-sm text-muted-foreground">Loading lead data...</p> : null}
+      {isError ? <p className="text-sm text-destructive">We could not load the latest lead data. Showing the fallback view.</p> : null}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {buckets.map((b, i) => (
+        {bucketsWithCounts.map((b, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}>
             <Card
               className={`cursor-pointer transition-all ${filter === b.name ? "border-primary shadow-md" : "hover:border-primary/30"}`}
@@ -94,7 +100,7 @@ const Dashboard = () => {
               </PieChart>
             </ResponsiveContainer>
             <div className="flex flex-wrap gap-4 justify-center mt-2">
-              {buckets.map((b, i) => (
+              {bucketsWithCounts.map((b, i) => (
                 <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: b.color }} />{b.name}
                 </div>
