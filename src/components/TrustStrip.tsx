@@ -24,7 +24,7 @@ const TrustStrip = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-4 gap-y-3"
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-x-4 gap-y-3"
       >
         {items.map(({ icon: Icon, label }) => (
           <li

@@ -11,9 +11,9 @@ const accreditations = [
 
 const Footer = () => {
   return (
-    <footer className="bg-hero border-t border-hero-muted/10 py-12">
+    <footer className="bg-hero border-t border-hero-muted/10 pt-12 pb-28 md:pb-12">
       <div className="container">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link to="/" className="text-hero-foreground font-heading font-extrabold text-xl">
               Twin<span className="text-gradient">blueprint</span>

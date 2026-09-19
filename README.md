@@ -1,269 +1,266 @@
-# Twinblueprint - 3D Architectural Visualization Platform
+﻿# Twinblueprint Website and CRM
 
-A modern, high-performance marketing website for Twinblueprint, a leading provider of photorealistic 3D visualization services for developers, architects, and urban planners.
+Twinblueprint is a React/Vite application with two parts:
 
-## 🎯 Overview
+- A public marketing website for Twinblueprint 3D visualisation services.
+- A protected CRM for capturing, qualifying, organising, and progressing construction/AEC leads.
 
-Twinblueprint transforms how the world visualizes architectural projects through cutting-edge 3D technology. This website showcases our services, case studies, and expertise in accelerating project approvals and stakeholder communication.
+This repository is the frontend. It consumes the separate Twinblueprint Express API; it does not connect to Supabase directly.
 
-## ✨ Features
+## What this project is about
 
-### Pages & Routes
-- **Home (`/`)** - Hero section with value proposition, how it works, case studies, problem/solution overview, and CTA
-- **Services (`/services`)** - Detailed service offerings with 6 core services, our process, and consultation CTA
-- **Case Studies (`/case-studies`)** - In-depth project showcases with challenges, solutions, and metrics
-- **Blog (`/blog`)** - Thought leadership content with category filtering and article metadata
-- **About (`/about`)** - Company mission, vision, core values, team profiles, and company statistics
+Twinblueprint CRM is a lead-generation and sales-operations workspace built for construction, architecture, engineering, and infrastructure teams. It helps the Twinblueprint team turn website interest into qualified commercial opportunities.
 
-### Core Components
-- **Dynamic Demo Dialog** - Contextual demo booking form accessible from throughout the site
-- **Navigation** - Responsive navbar with smooth scrolling and mobile support
-- **Footer** - Comprehensive site navigation and company information
-- **3D Visualization Showcase** - Hero section with 3D architectural imagery
-- **Shadcn UI Components** - Pre-built, accessible UI components (buttons, dialogs, badges, etc.)
+The public site explains Twinblueprint's 3D visualisation offering and collects Demo & Lead Report requests. Each request becomes a CRM lead. Internal users then review the lead, add business context such as industry, region, project, deal stage, score, and temperature, and decide whether it should move into the active pipeline.
 
-### Design & Experience
-- ✅ Smooth animations with Framer Motion
-- ✅ Fully responsive (mobile, tablet, desktop)
-- ✅ Dark/light theme support via Tailwind CSS
-- ✅ Accessible components (WCAG compliant)
-- ✅ SEO optimized structure
-- ✅ Fast performance with Vite
+In practical terms, the CRM gives the team one place to:
 
-## 🛠 Tech Stack
+- Capture website enquiries and manually add prospects.
+- Keep leads organised by industry, region, project, phase, and qualification status.
+- Archive or remove outdated records safely.
+- View qualified opportunities and performance metrics on the dashboard.
+- Turn qualified leads into bids and in-flight projects.
+- Prepare for targeted outreach, regional reporting, and analytics.
 
-### Frontend Framework
-- **React 18** - UI library
-- **TypeScript** - Type-safe development
-- **Vite** - Lightning-fast build tool
-- **Tailwind CSS** - Utility-first styling
+## Tech stack
 
-### Libraries & Tools
-- **React Router** - Client-side routing
-- **Framer Motion** - Smooth animations
-- **React Query** - State management & data fetching
-- **Shadcn UI** - Pre-built component library
-- **Lucide React** - Icon library
-- **Radix UI** - Headless UI components
+- React and TypeScript
+- Vite
+- Tailwind CSS and shadcn/ui
+- React Router
+- TanStack Query
+- Axios
+- Recharts
+- Framer Motion
 
-### Backend & SSR
-- **Express.js** - Node.js server framework
-- **Vite SSR** - Server-side rendering capability
-
-## 📁 Project Structure
-
-```
-meta-view-creator/
-├── src/
-│   ├── components/
-│   │   ├── ui/                    # Shadcn UI components
-│   │   ├── Navbar.tsx             # Main navigation
-│   │   ├── Footer.tsx             # Site footer
-│   │   ├── HeroSection.tsx         # Home hero
-│   │   ├── CaseStudiesSection.tsx  # Home case studies
-│   │   ├── BookDemoDialog.tsx      # Demo request form
-│   │   └── ...other components
-│   ├── pages/
-│   │   ├── Index.tsx              # Home page
-│   │   ├── Services.tsx           # Services page
-│   │   ├── CaseStudies.tsx        # Case studies page
-│   │   ├── Blog.tsx               # Blog page
-│   │   ├── About.tsx              # About page
-│   │   └── NotFound.tsx           # 404 page
-│   ├── contexts/
-│   │   └── DemoDialogContext.tsx  # Global demo dialog state
-│   ├── hooks/
-│   │   └── use-toast.ts           # Toast notifications
-│   ├── lib/
-│   │   └── utils.ts               # Utility functions
-│   ├── App.tsx                    # Main app component with routing
-│   ├── main.tsx                   # React entry point
-│   ├── entry-server.ts            # SSR entry point
-│   └── index.css                  # Global styles
-├── public/
-│   └── robots.txt                 # SEO metadata
-├── server.ts                      # Express SSR server
-├── vite.config.ts                 # Vite configuration
-├── tailwind.config.ts             # Tailwind styling config
-├── tsconfig.json                  # TypeScript config
-├── package.json                   # Dependencies & scripts
-└── README.md                      # This file
-```
-
-## 🚀 Getting Started
+## Local development
 
 ### Prerequisites
-- Node.js 18+ or Bun runtime
-- npm, yarn, or bun package manager
 
-### Installation
+- Node.js 18+
+- Twinblueprint API running locally on port 5000
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd meta-view-creator
-   ```
+### Install and run
 
-2. **Install dependencies**
-   ```bash
-   bun install
-   # or
-   npm install
-   # or
-   yarn install
-   ```
+~~~bash
+npm install
+npm run dev
+~~~
 
-3. **Start development server**
-   ```bash
-   bun run dev
-   # or
-   npm run dev
-   ```
+Open the website at http://localhost:8080.
 
-4. **Open in browser**
-   ```
-   http://localhost:8080
-   ```
+CRM login route: http://localhost:8080/crm/login
 
-## 📦 Available Scripts
+### API configuration
 
-### Development
-```bash
-bun run dev              # Start Vite dev server (port 8080)
-bun run lint             # Run ESLint
-bun run test             # Run tests once
-bun run test:watch       # Run tests in watch mode
-```
+Create .env.local:
 
-### Production Build
-```bash
-bun run build            # Build for production
-bun run build:dev        # Build in development mode
-bun run preview          # Preview production build locally
-```
+~~~env
+VITE_API_BASE_URL=/api
+~~~
 
-### SSR (Server-Side Rendering)
-```bash
-bun run build:client     # Build client assets to dist/client
-bun run build:ssr        # Build SSR server bundle to dist/server
-bun run build:full       # Build both client and server
-bun run preview:ssr      # Run SSR server locally (port 3000)
-```
+Vite proxies /api requests to http://localhost:5000. For another environment, set VITE_API_BASE_URL to the full API base URL, including /api.
 
-## 🎨 Styling & Design
+Never commit credentials or production tokens.
 
-- **Tailwind CSS** for utility-first styling
-- **CSS Variables** for theme customization
-- **Dark theme** support built-in
-- **Responsive Design** - Mobile-first approach
-- **Animations** - Smooth Framer Motion transitions
+## Routes
 
-### Color Scheme
-- Primary color for CTAs and highlights
-- Hero background for dark sections
-- Muted tones for secondary elements
-- Gradient text effects for emphasis
+### Public website
 
-## 🔐 Form & Data Handling
+| Route | Purpose |
+| --- | --- |
+| / | Marketing homepage |
+| /services | Services |
+| /case-studies | Case studies |
+| /blog | Blog |
+| /about | About Twinblueprint |
+| /how-it-works | Process overview |
+| /faq | Frequently asked questions |
 
-### Demo Dialog Form
-The "Book a Demo" dialog captures:
-- First/Last Name
-- Email (required)
-- Phone
-- Company (required)
-- Job Title
-- Country (dropdown)
-- Newsletter consent checkbox
+### CRM
 
-Form validation and toast notifications are included.
+| Route | Purpose |
+| --- | --- |
+| /crm/login | Admin login |
+| /crm | CRM home and Demo & Lead Report form |
+| /crm/dashboard | KPI, funnel, trend, and qualified-lead dashboard |
+| /crm/leads | Active lead management |
+| /crm/archived | Archived leads, restore, and delete |
+| /crm/capture | Manual Add Lead form |
+| /crm/pipeline | Pipeline workspace |
+| /crm/outreach | Outreach workspace |
+| /crm/emea | EMEA dashboard |
+| /crm/americas | Americas dashboard |
+| /crm/analytics | Analytics workspace |
 
-## 🌐 Routing Structure
+## CRM lead lifecycle
 
-All routes use React Router with automatic code splitting:
+~~~text
+Visitor submits Demo & Lead Report
+  -> POST /api/demo
+  -> backend creates a new lead
+  -> lead appears in /crm/leads
+  -> admin qualifies and enriches the lead
+  -> lead appears on Dashboard as qualified
+  -> admin creates a bid or project
+  -> record progresses through Pipeline
+~~~
 
-| Path | Component | Description |
-|------|-----------|-------------|
-| `/` | Index | Home page with full overview |
-| `/services` | Services | Detailed service offerings |
-| `/case-studies` | CaseStudies | Project showcases |
-| `/blog` | Blog | Thought leadership articles |
-| `/about` | About | Company information & team |
-| `*` | NotFound | 404 error page |
+### Incoming demo requests
 
-## ⚙️ Configuration
+The CRM Home form loads options from GET /api/industries, then submits to POST /api/demo.
 
-### Vite Config
-- Configured for SPA and SSR modes
-- Path alias `@` pointing to `src/`
-- React Fast Refresh for HMR
-- Component tagging for development
+It captures basic contact data: name, work email, company, job title, phone, and industry. The backend creates a lead with default status new. The form always sends `confirmationEmail: true`, so the backend should email the submitted `workEmail` a confirmation and the personalised lead report.
 
-### Tailwind Config
-- Custom color palette (hero, primary, etc.)
-- Responsive breakpoints
-- Custom animations
-- Extended typography
+### Qualification
 
-## 🚀 Performance Optimizations
+An admin adds business information during review:
 
-- **Code Splitting** - Lazy loading via React Router
-- **Image Optimization** - Responsive images with proper dimensions
-- **CSS Purging** - Tailwind removes unused styles
-- **Tree Shaking** - Unused code removed in production
-- **Compression** - Gzip/Brotli compression on server
+- Region
+- Project and project size
+- Phase
+- Lead status
+- Applications and application tools
+- Score and temperature
 
-## 📱 Browser Support
+Use PATCH /api/leads/:id to update this data. Leads with status qualified or won appear in the Dashboard Qualified Leads table.
 
-- Modern browsers (Chrome, Firefox, Safari, Edge)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-- IE11 not supported
+## API integration
 
-## 🔄 SSR (Server-Side Rendering)
+Protected requests use the JWT returned by login:
 
-This project includes optional SSR capabilities:
+~~~http
+Authorization: Bearer <token>
+~~~
 
-1. **Development**: Run with Vite dev server (CSR)
-2. **Production**: Build and run with Express server (SSR-ready)
+The backend is responsible for authorization. UI controls alone are not a security boundary.
 
-### SSR Benefits
-- Better SEO (server-rendered HTML)
-- Faster initial page load
-- Improved performance on slow connections
+### Authentication
 
-### To use SSR:
-```bash
-bun run build:full       # Build for both client and server
-bun run preview:ssr      # Run SSR server on port 3000
-```
+~~~text
+POST /api/auth/login
+POST /api/auth/passcode
+GET  /api/auth/me
+POST /api/auth/logout
+~~~
 
-## 🎯 Next Steps / Future Enhancements
+`POST /api/auth/passcode` accepts `{ "passcode": "..." }` and returns `{ user, token }` when the server-side admin passcode matches, `401` for a wrong passcode, `429` when rate-limited (5 attempts per 60s per IP), and `400` for an empty passcode. It is independent of username/password login and mints the same admin JWT the archive/delete endpoints already trust.
 
-- [ ] Add actual blog articles with content management
-- [ ] Implement contact form backend integration
-- [ ] Add image gallery for case studies
-- [ ] Integrate analytics
-- [ ] Add testimonials carousel
-- [ ] Implement team member profiles with images
-- [ ] Add FAQ accordion section
-- [ ] Newsletter signup integration
+### Leads
 
-## 🤝 Contributing
+~~~text
+GET    /api/leads
+GET    /api/leads/:id
+POST   /api/leads
+PATCH  /api/leads/:id
+PATCH  /api/leads/:id/assign
+DELETE /api/leads/:id
+POST   /api/leads/import
+GET    /api/leads/export
+~~~
 
-1. Create a feature branch (`git checkout -b feature/amazing-feature`)
-2. Commit your changes (`git commit -m 'Add amazing feature'`)
-3. Push to the branch (`git push origin feature/amazing-feature`)
-4. Open a Pull Request
+The Leads page uses live data, search, filters, pagination, Industry/Region options, CSV import/export, a details dialog, archive, restore, and delete actions. The Capture page sends `send_confirmation_email: true`, so creating a lead through POST /api/leads should email the lead's `email` address a confirmation.
 
-## 📄 License
+Archive:
 
-This project is proprietary software. All rights reserved.
+~~~json
+{ "archived": true }
+~~~
 
-## 📞 Contact & Support
+Archived leads are loaded with GET /api/leads?archived=true. Restore with archived set to false. Delete uses DELETE /api/leads/:id and should be admin-only.
 
-- Email: hello@meta-dology.com
-- Website: https://twinblueprint.com
+### Supporting options and regions
 
----
+~~~text
+GET /api/industries
+GET /api/regions
+GET /api/regions/emea
+GET /api/regions/americas
+~~~
 
-**Built with ❤️ by the Twinblueprint team**
+### Dashboard
+
+~~~text
+GET /api/analytics/kpis
+GET /api/analytics/weekly?weeks=8
+GET /api/analytics/funnel
+GET /api/leads
+GET /api/bids
+GET /api/projects
+GET /api/campaigns
+~~~
+
+### Pipeline
+
+~~~text
+GET    /api/pipeline
+GET    /api/bids
+POST   /api/bids
+PATCH  /api/bids/:id
+DELETE /api/bids/:id
+GET    /api/projects
+POST   /api/projects
+PATCH  /api/projects/:id
+DELETE /api/projects/:id
+~~~
+
+## Current integration status
+
+Connected to the Express API:
+
+- Authentication
+- Demo request submission
+- Industry and region option lists
+- Leads list, filters, pagination, import, export, archive/restore, delete, and detail view
+- Dashboard KPIs, analytics, qualified leads, bids, projects, and campaigns
+
+Outreach, EMEA, Americas, and Analytics now consume live API responses with loading, retry, and empty states. Outreach supports preview/send, paginated email history, campaign create/update/delete, and campaign tracking statistics. LinkedIn messages can be previewed and copied for manual sending. Persistent four-touch sequences use `/api/outreach/sequences`, with lead history, 15-second progress refresh, admin-only creation and controls, editable unattempted steps, manual completion notes, and linked email tracking. Recording a reply explicitly pauses the sequence; reply detection is not automatic. Resume retains due dates and can dispatch overdue emails immediately.
+
+Outreach activity cards use `GET /api/outreach/stats` with one shared reporting period. The default omits both bounds for a rolling 30-day window; custom bounds send `start` and `end` as UTC timestamps. Null metrics show “Unavailable”; zero remains zero; response rate is already a percentage. The existing email metrics endpoint does not support periods, so those cards are explicitly labeled “All time”.
+
+Admins can record and view replies and meetings for a selected lead through `/api/outreach/replies` and `/api/outreach/meetings`. Creation generates a UUID once and retains the exact payload for retries after uncertain failures. Meetings are rescheduled and outcomes updated with PATCH using their existing ID; unchanged scheduled times retain their original precision. Saving a reply automatically pauses its applicable active sequence on the backend; a manual pause alone does not create a reply record. Successful activity changes invalidate Outreach stats, lead activity, and sequence progress.
+
+Live scheduled-send testing remains on hold. The backend team must apply the CRM, sequence, and activity migrations in order (`scripts/outreach-sequences-migration.sql`, then `scripts/outreach-activity-migration.sql` after CRM), enable `OUTREACH_SCHEDULER_ENABLED=true`, and keep at least one backend worker process running with `RESEND_API_KEY` and `FROM_EMAIL` configured. The stats response reports schema readiness and the scheduler flag, but these do not establish worker health or provider readiness. LinkedIn and phone activities stay manual; completing them is not a prerequisite for scheduled email delivery. Archived leads cancel sequences and closed outcomes pause them on the backend. Immediate email and Deal Flow endpoints are unchanged.
+
+Regional dashboards label in-flight counts as leads and country data as region groupings, matching the current backend semantics. Pipeline values are shown without an assumed currency. The workflow field is not displayed until its item structure is documented.
+
+## Project structure
+
+~~~text
+src/
+  components/       Public-site components and UI primitives
+  crm/
+    components/     CRM-specific components
+    layout/         CRM navigation and footer
+    pages/          CRM route pages
+  hooks/            React Query API hooks and authentication
+  lib/              API client, shared types, utilities
+  pages/            Public-site route pages
+  App.tsx           Application routes and providers
+~~~
+
+## Commands
+
+~~~bash
+npm run dev        # Start Vite on port 8080
+npm run build      # Production build
+npm run build:dev  # Development-mode build
+npm run lint       # ESLint
+npm run test       # Run Vitest once
+npm run test:watch # Run Vitest in watch mode
+~~~
+
+## Backend handoff expectations
+
+The API should:
+
+- Return the common response envelope: success, data, and optional message.
+- Enforce authentication and admin-only permissions on protected actions.
+- Treat leads.archived as the source of truth for archived state.
+- Return lead fields used by the CRM: industry, region, project, project_size, phase, status, lead_status, applications, score, temperature, and archived.
+- Send a confirmation email to the submitted address when creating via POST /api/demo with `confirmationEmail: true` and via POST /api/leads with `send_confirmation_email: true`. Confirmations use the submitted `workEmail`/`email` field (RESEND_API_KEY and FROM_EMAIL).
+
+## License
+
+Proprietary software. All rights reserved.
+

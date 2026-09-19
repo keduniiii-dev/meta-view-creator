@@ -1,3 +1,5 @@
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -5,7 +7,7 @@ import { Calendar, User, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
@@ -119,7 +121,6 @@ const categories = ["Twinblueprint Trending"];
 
 const Blog = () => {
   const { setOpen } = useDemoDialogStore();
-  const { toast } = useToast();
   const navigate = useNavigate();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -131,7 +132,7 @@ const Blog = () => {
     e.preventDefault();
     if (subscribeEmail) {
       setSubscribed(true);
-      toast({ title: "Subscribed!", description: "You'll receive our latest updates." });
+      toast.success("Subscribed!", { description: "You'll receive our latest updates." });
       setSubscribeEmail("");
     }
   };
@@ -329,8 +330,8 @@ const Blog = () => {
                   </div>
                 ) : (
                   <>
-                    <label htmlFor="newsletter-email" className="sr-only">Email address</label>
-                    <input
+                    <Label htmlFor="newsletter-email" className="sr-only">Email address</Label>
+                    <Input
                       id="newsletter-email"
                       type="email"
                       placeholder="Enter your email"

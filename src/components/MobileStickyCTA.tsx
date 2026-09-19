@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { FaArrowRight } from "react-icons/fa";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 
@@ -9,13 +10,13 @@ const MobileStickyCTA = () => {
       role="region"
       aria-label="Quick contact"
     >
-      <button
+      <Button variant="ghost"
         type="button"
         onClick={() => setOpen(true)}
         className="pointer-events-auto w-full flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground font-semibold text-base px-6 py-3.5 shadow-glow active:scale-[0.98] transition-transform"
       >
         Book a Demo <FaArrowRight className="h-4 w-4" aria-hidden="true" />
-      </button>
+      </Button>
     </div>
   );
 };
