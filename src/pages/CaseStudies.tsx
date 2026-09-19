@@ -376,7 +376,7 @@ const CaseStudies = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-4 mb-8 p-6 bg-muted rounded-xl">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 p-6 bg-muted rounded-xl">
                       {study.metrics.map((metric) => (
                         <div key={metric.label}>
                           <p className="text-2xl font-bold text-primary">{metric.value}</p>

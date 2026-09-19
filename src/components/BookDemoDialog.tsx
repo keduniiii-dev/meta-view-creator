@@ -22,6 +22,8 @@ import {
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useSubmitDemo } from "@/hooks/use-demo";
 import { useIndustries } from "@/hooks/use-industries";
+import { resolveServerErrors } from "@/lib/server-errors";
+import { ServerErrorBanner } from "@/crm/components/ServerErrorBanner";
 
 const fallbackCategories = [
   "Construction",
@@ -29,6 +31,10 @@ const fallbackCategories = [
   "Urban Development",
   "Infrastructure",
 ];
+
+// Field paths the backend reports in VALIDATION_ERROR fields[] (see
+// twinblueprint-server createDemoRequestSchema).
+const demoFields = ["fullName", "workEmail", "company", "jobTitle", "phone", "industry"] as const;
 
 type FormState = {
   name: string;
@@ -56,6 +62,7 @@ const BookDemoDialog = () => {
   const { data: industriesData } = useIndustries();
   const categories = industriesData?.industries ?? fallbackCategories;
   const [submitted, setSubmitted] = useState(false);
+  const [serverBanner, setServerBanner] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<
     Partial<Record<keyof FormState | "captcha", string>>
@@ -70,7 +77,7 @@ const BookDemoDialog = () => {
       z.object({
         name: z.string().trim().min(2, "Please enter your full name").max(100),
         email: z.string().trim().email("Enter a valid work email").max(255),
-        company: z.string().trim().min(2, "Company is required").max(120),
+        company: z.string().trim().max(120).optional().or(z.literal("")),
         role: z.string().trim().max(120).optional().or(z.literal("")),
         phone: z
           .string()
@@ -79,9 +86,7 @@ const BookDemoDialog = () => {
           .regex(/^[+\d][\d\s()\-]{6,}$/i, "Enter a valid phone number")
           .optional()
           .or(z.literal("")),
-        category: z.enum(categories as [string, ...string[]], {
-          errorMap: () => ({ message: "Select an industry" }),
-        }),
+        category: z.string().trim().max(120).optional().or(z.literal("")),
         website: z.string().max(0, "Spam detected").optional().or(z.literal("")),
       }),
     [categories],
@@ -96,6 +101,8 @@ const BookDemoDialog = () => {
   const handleChange = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
+    setServerBanner(null);
+    if (submitDemo.isError) submitDemo.reset();
   };
 
   const focusFirstError = (errs: Partial<Record<string, string>>) => {
@@ -146,16 +153,25 @@ const BookDemoDialog = () => {
     setErrors({});
 
     submitDemo.mutate(
-      {
+{
         fullName: form.name,
         workEmail: form.email,
-        company: form.company,
+        ...(form.company ? { company: form.company } : {}),
         jobTitle: form.role || undefined,
         phone: form.phone || undefined,
-        category: form.category,
+        ...(form.category ? { industry: form.category } : {}),
+        confirmationEmail: true,
       },
       {
         onSuccess: () => setSubmitted(true),
+        onError: (error: unknown) => {
+          const resolved = resolveServerErrors(error, demoFields);
+          setErrors((prev) => ({ ...prev, ...resolved.fieldErrors }) as typeof prev);
+          setServerBanner(resolved.bannerMessage);
+          if (resolved.bannerMessage) {
+            requestAnimationFrame(() => errorSummaryRef.current?.focus());
+          }
+        },
       },
     );
   };
@@ -173,6 +189,7 @@ const BookDemoDialog = () => {
         setSubmitted(false);
         setForm(initialForm);
         setErrors({});
+        setServerBanner(null);
         setCaptchaAnswer("");
         submitDemo.reset();
       }, 200);
@@ -183,7 +200,7 @@ const BookDemoDialog = () => {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="w-[95vw] max-w-xl bg-background max-h-[90vh] overflow-hidden flex flex-col p-8">
+      <DialogContent className="w-[95vw] max-w-2xl bg-background max-h-[90dvh] flex flex-col p-4 sm:p-8">
         <DialogHeader className="sr-only">
           <DialogTitle>Book a Demo</DialogTitle>
           <DialogDescription>Book a demo with our team.</DialogDescription>
@@ -204,19 +221,19 @@ const BookDemoDialog = () => {
             <h3 className="text-2xl font-bold text-foreground mb-2">
               You're In!
             </h3>
-            <p className="text-muted-foreground max-w-sm">
-              Our team will reach out within 24 hours with a tailored Immersive
-              Property Visualisation strategy for your project.
+<p className="text-muted-foreground max-w-sm">
+              Thanks for booking! Check your email for your confirmation and
+              personalised lead report.
             </p>
             <Button className="mt-6" onClick={() => handleOpenChange(false)}>
               Close
             </Button>
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto pr-1 hide-scrollbar">
+          <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar pb-8">
             <form
               onSubmit={handleSubmit}
-              className="space-y-5 pr-2 text-left"
+              className="w-full space-y-5 text-left"
               noValidate
               aria-describedby={
                 Object.values(errors).some(Boolean)
@@ -224,6 +241,7 @@ const BookDemoDialog = () => {
                   : undefined
               }
             >
+              <ServerErrorBanner message={serverBanner} />
               {Object.values(errors).some(Boolean) && (
                 <div
                   ref={errorSummaryRef}
@@ -269,7 +287,7 @@ const BookDemoDialog = () => {
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="name"
-                    className="block text-sm text-muted-foreground px-1"
+                    className="block text-sm text-muted-foreground"
                   >
                     Full Name <span className="text-destructive">*</span>
                   </Label>
@@ -277,7 +295,6 @@ const BookDemoDialog = () => {
                     id="name"
                     required
                     autoComplete="name"
-                    placeholder="John Smith"
                     value={form.name}
                     onChange={(e) => handleChange("name", e.target.value)}
                     aria-invalid={!!fieldError("name")}
@@ -303,7 +320,7 @@ const BookDemoDialog = () => {
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="email"
-                    className="block text-sm text-muted-foreground px-1"
+                    className="block text-sm text-muted-foreground"
                   >
                     Work Email <span className="text-destructive">*</span>
                   </Label>
@@ -312,7 +329,6 @@ const BookDemoDialog = () => {
                     type="email"
                     required
                     autoComplete="email"
-                    placeholder="john@company.com"
                     value={form.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                     aria-invalid={!!fieldError("email")}
@@ -341,15 +357,13 @@ const BookDemoDialog = () => {
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="company"
-                    className="block text-sm text-muted-foreground px-1"
+                    className="block text-sm text-muted-foreground"
                   >
-                    Company <span className="text-destructive">*</span>
+                    Company
                   </Label>
                   <Input
                     id="company"
-                    required
                     autoComplete="organization"
-                    placeholder="Acme Construction"
                     value={form.company}
                     onChange={(e) => handleChange("company", e.target.value)}
                     aria-invalid={!!fieldError("company")}
@@ -375,14 +389,13 @@ const BookDemoDialog = () => {
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="role"
-                    className="block text-sm text-muted-foreground px-1"
+                    className="block text-sm text-muted-foreground"
                   >
                     Job Title
                   </Label>
                   <Input
                     id="role"
                     autoComplete="organization-title"
-                    placeholder="VP of Operations"
                     value={form.role}
                     onChange={(e) => handleChange("role", e.target.value)}
                     className="border-input"
@@ -394,7 +407,7 @@ const BookDemoDialog = () => {
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="phone"
-                    className="block text-sm text-muted-foreground px-1"
+                    className="block text-sm text-muted-foreground"
                   >
                     Phone
                   </Label>
@@ -402,7 +415,6 @@ const BookDemoDialog = () => {
                     id="phone"
                     type="tel"
                     autoComplete="tel"
-                    placeholder="+1 (555) 000-0000"
                     value={form.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
                     aria-invalid={!!fieldError("phone")}
@@ -428,12 +440,11 @@ const BookDemoDialog = () => {
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="category"
-                    className="block text-sm text-muted-foreground px-1"
+                    className="block text-sm text-muted-foreground"
                   >
-                    Industry <span className="text-destructive">*</span>
+                    Industry
                   </Label>
                   <Select
-                    required
                     value={form.category}
                     onValueChange={(v) => handleChange("category", v)}
                   >
@@ -474,7 +485,7 @@ const BookDemoDialog = () => {
               <div className="space-y-1.5">
                 <Label
                   htmlFor="captcha"
-                  className="block text-sm text-muted-foreground px-1"
+                  className="block text-sm text-muted-foreground"
                 >
                   Verification: what is {captcha.a} + {captcha.b}?{" "}
                   <span className="text-destructive">*</span>
@@ -513,7 +524,7 @@ const BookDemoDialog = () => {
                 type="submit"
                 size="lg"
                 disabled={submitDemo.isPending}
-                className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 text-base px-8 py-6 animate-pulse-glow"
+                className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 text-base px-8 py-6"
               >
                 {submitDemo.isPending ? (
                   <>

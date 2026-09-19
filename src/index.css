@@ -64,6 +64,62 @@
   }
 }
 
+/* Compact lead-table actions show their purpose on hover. */
+button[aria-label^="View "],
+button[aria-label^="Archive "],
+button[aria-label^="Delete "] {
+  position: relative;
+}
+
+button[aria-label^="View "]::after,
+button[aria-label^="Archive "]::after,
+button[aria-label^="Delete "]::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: calc(100% + 0.4rem);
+  left: 50%;
+  z-index: 60;
+  width: max-content;
+  max-width: 14rem;
+  transform: translateX(-50%);
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  background: hsl(var(--popover));
+  padding: 0.35rem 0.55rem;
+  color: hsl(var(--popover-foreground));
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+  white-space: nowrap;
+}
+
+button[aria-label^="View "]:hover::after,
+button[aria-label^="View "]:focus-visible::after,
+button[aria-label^="Archive "]:hover::after,
+button[aria-label^="Archive "]:focus-visible::after,
+button[aria-label^="Delete "]:hover::after,
+button[aria-label^="Delete "]:focus-visible::after {
+  opacity: 1;
+}
+
+button[aria-label^="View "]::after {
+  content: "View details";
+}
+
+button[aria-label^="Archive "]::after {
+  content: "Archive lead";
+}
+
+button[aria-label^="Delete "]::after {
+  content: "Delete lead";
+}
+
+
+
+
 @layer base {
   * {
     @apply border-border;
@@ -73,8 +129,89 @@
     @apply bg-background text-foreground font-body antialiased;
   }
 
+  /* Let grid children and native form controls shrink with their container. */
+  .grid > *, fieldset, input, textarea, select {
+    min-width: 0;
+  }
+
+  h1, h2, h3, p, a, label {
+    overflow-wrap: anywhere;
+  }
+
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not([aria-disabled="true"]),
+  summary {
+    cursor: pointer;
+  }
+
+  [role="menuitem"],
+  [role="menuitemcheckbox"],
+  [role="menuitemradio"],
+  [role="option"] {
+    cursor: default;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold tracking-tight;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Keep text entry readable without iOS zooming the viewport on focus. */
+  input, textarea, select, button[role="combobox"] {
+    font-size: 16px;
+  }
+
+  .crm-content button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reflow the existing records, preserving a single set of action controls
+     and explicit table roles for assistive technology. */
+  .mobile-records, .mobile-records tbody {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .mobile-records thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .mobile-records tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .mobile-records td:not(.hidden) {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-records td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .mobile-records td[colspan] {
+    padding: 24px 0;
   }
 }
 
@@ -132,5 +269,22 @@
   .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Lead tables keep a slim, visible scrollbar so horizontal scrolling stays
+     discoverable on mobile instead of being fully hidden. */
+  .leads-table-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .leads-table-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .leads-table-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+  .leads-table-scroll::-webkit-scrollbar-track {
+    background: transparent;
   }
 }

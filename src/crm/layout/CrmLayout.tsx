@@ -1,75 +1,69 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { LayoutDashboard, GitBranch, UserPlus, Send, BarChart3 } from "lucide-react";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-  SidebarTrigger,
-  useSidebar,
-} from "@/components/ui/sidebar";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { LogOut, Menu, Zap } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import CrmFooter from "@/crm/components/CrmFooter";
 
 const items = [
-  { title: "Dashboard", url: "/crm/dashboard", icon: LayoutDashboard },
-  { title: "Pipeline", url: "/crm/pipeline", icon: GitBranch },
-  { title: "Capture", url: "/crm/capture", icon: UserPlus },
-  { title: "Outreach", url: "/crm/outreach", icon: Send },
-  { title: "Analytics", url: "/crm/analytics", icon: BarChart3 },
+  { title: "Home", url: "/crm" },
+  { title: "Dashboard", url: "/crm/dashboard" },
+  { title: "Leads", url: "/crm/leads" },
+  { title: "Pipeline", url: "/crm/pipeline" },
+  { title: "Outreach", url: "/crm/outreach" },
+  { title: "EMEA", url: "/crm/emea" },
+  { title: "Americas", url: "/crm/americas" },
+  { title: "Analytics", url: "/crm/analytics" },
 ];
 
-function CrmSidebar() {
-  const { state } = useSidebar();
-  const collapsed = state === "collapsed";
-  const { pathname } = useLocation();
-  return (
-    <Sidebar collapsible="icon" className="border-r border-border">
-      <SidebarHeader className="h-14 border-b border-border" />
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>CRM</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url}>
-                    <NavLink to={item.url} className="flex items-center gap-2">
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
-  );
-}
-
 const CrmLayout = () => {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/crm/login", { replace: true });
+  };
+
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background">
-        <CrmSidebar />
-        <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-14 flex items-center gap-3 border-b border-border px-4 sticky top-0 bg-background/90 backdrop-blur z-40">
-            <SidebarTrigger />
-            <h1 className="text-sm font-semibold text-foreground">Twinblueprint CRM</h1>
-            <span className="ml-auto text-xs text-muted-foreground">Internal · Not indexed</span>
-          </header>
-          <main className="flex-1 overflow-x-hidden">
-            <Outlet />
-          </main>
+    <div className="min-h-screen bg-background">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
+        <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:px-6">
+          <NavLink to="/crm" className="flex shrink-0 items-center gap-2 text-sm font-semibold text-foreground">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground"><Zap className="h-3.5 w-3.5" fill="currentColor" /></span>
+            Twinblueprint
+          </NavLink>
+          <nav className="hidden flex-1 items-center justify-center gap-1 xl:flex" aria-label="CRM navigation">
+            {items.map((item) => item.url ? (
+              <NavLink key={item.url} end={item.url === "/crm"} to={item.url} className={({ isActive }) => `rounded-md px-3 py-2 text-xs transition-colors ${isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>{item.title}</NavLink>
+            ) : <span key={item.title} className="rounded-md px-3 py-2 text-xs text-muted-foreground">{item.title}</span>)}
+          </nav>
+          <div className="ml-auto flex items-center gap-2">
+            <Button size="sm" className="hidden h-11 text-xs sm:h-8 sm:inline-flex" onClick={() => navigate("/crm/capture")}>Get Started</Button>
+            <Tooltip><TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-11 w-11 shrink-0 bg-destructive text-destructive-foreground hover:bg-destructive hover:text-destructive-foreground sm:h-8 sm:w-8" onClick={handleLogout} aria-label="Log out"><LogOut className="h-4 w-4" /></Button></TooltipTrigger><TooltipContent>Log out</TooltipContent></Tooltip>
+            <Sheet>
+              <SheetTrigger asChild><Button variant="outline" size="icon" className="h-11 w-11 shrink-0 sm:h-8 sm:w-8 xl:hidden" aria-label="Open menu"><Menu className="h-4 w-4" /></Button></SheetTrigger>
+              <SheetContent side="right" className="w-72 p-0">
+                <SheetTitle className="sr-only">CRM navigation</SheetTitle>
+                <nav className="flex flex-col gap-1 p-4" aria-label="CRM navigation">
+                  {items.map((item) => item.url ? (
+                    <SheetClose asChild key={item.url}>
+                      <NavLink end={item.url === "/crm"} to={item.url} className={({ isActive }) => `flex min-h-11 items-center rounded-md px-3 py-2 text-sm transition-colors ${isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>{item.title}</NavLink>
+                    </SheetClose>
+                  ) : <span key={item.title} className="flex min-h-11 items-center rounded-md px-3 py-2 text-sm text-muted-foreground">{item.title}</span>)}
+                  <div className="mt-2 border-t border-border pt-2">
+                    <Button variant="outline" className="flex min-h-11 w-full items-center justify-center text-sm" onClick={() => navigate("/crm/capture")}>Get Started</Button>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
-      </div>
-    </SidebarProvider>
+      </header>
+      <main className="crm-content min-h-[calc(100dvh-7rem)] w-full min-w-0"><Outlet /></main>
+      <CrmFooter />
+    </div>
   );
 };
 

@@ -18,6 +18,7 @@ export interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
+  errors?: unknown;
 }
 
 export interface Pagination {
@@ -32,18 +33,42 @@ export interface Lead {
   full_name: string;
   email: string;
   company: string | null;
+  project: string | null;
+  project_size: string | null;
+  project_value: number | null;
+  currency: string | null;
+  region: string | null;
+  country: string | null;
+  phase: "Discovery" | "Bid" | "In-flight" | null;
+  lead_status: "New" | "Identified" | "Bidding" | "Inflight" | "Closed" | null;
+  archived: boolean;
+  temperature: "hot" | "warm" | "cool" | null;
   job_title: string | null;
   phone: string | null;
-  category: string | null;
+  industry: string | null;
   applications: number;
+  application_tools: string[] | null;
   score: number;
-  status: "new" | "contacted" | "qualified" | "lost" | "won";
+  status: "new" | "contacted" | "qualified" | "proposal" | "negotiation" | "lost" | "won";
   assigned_to: number | null;
   created_at: string;
   updated_at: string;
 }
 
+export interface Supplier {
+  id: string;
+  name: string;
+  role: string | null;
+  tools: string[];
+  temperature: "hot" | "warm" | "cool" | null;
+  contact: { name: string | null; job_title: string | null; email: string | null };
+  visualisation_tool: string | null;
+  uses_3d: boolean | null;
+  opportunity: string | null;
+  pain_points: string[];
+}
 export interface Bid {
+  supplier_details?: Supplier[];
   id: string;
   project: string;
   client: string;
@@ -51,6 +76,9 @@ export interface Bid {
   deadline: string;
   suppliers: string[];
   value: number | null;
+  currency?: string | null;
+  status?: string | null;
+  lead_id?: string | null;
   created_at: string;
 }
 
@@ -65,6 +93,10 @@ export interface Project {
   uses_3d: boolean;
   competitor: string | null;
   issue: string | null;
+  status?: string | null;
+  phase?: "Planning" | "Design" | "Construction" | "In Progress" | "Completed" | null;
+  value?: number | null;
+  currency?: string | null;
   created_at: string;
 }
 
@@ -75,6 +107,8 @@ export interface Campaign {
   sent: number;
   opened: number;
   clicked: number;
+  open_rate?: number;
+  ctr?: number;
   status: "Completed" | "Active";
   campaign_date: string;
   created_at: string;
@@ -106,8 +140,9 @@ export interface IndustriesResponse {
 }
 
 export interface Kpis {
-  lead_growth: string;
+  lead_growth: number | string;
   qualified_rate: number;
   email_open_rate: number;
   click_through: number;
 }
+

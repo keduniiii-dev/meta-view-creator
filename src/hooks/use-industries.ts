@@ -5,7 +5,7 @@ import type { IndustriesResponse } from "@/lib/types";
 export function useIndustries() {
   return useQuery({
     queryKey: ["industries"],
-    queryFn: () => api.get<IndustriesResponse>("/api/industries"),
+    queryFn: () => api.get<IndustriesResponse>("/industries"),
     staleTime: 5 * 60 * 1000,
   });
 }

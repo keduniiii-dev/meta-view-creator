@@ -8,15 +8,19 @@ export async function handleDemoSubmit(req: IncomingMessage, res: ServerResponse
       ? body as Record<string, unknown>
       : undefined;
     const payload = parsedBody ?? (await parseJsonBody(req));
-    const { fullName, workEmail, company, jobTitle, phone, category } = payload as Record<string, unknown>;
-    if (!fullName || !workEmail || !company || !category) {
+const { fullName, workEmail, company, jobTitle, phone, industry, confirmationEmail } = payload as Record<string, unknown>;
+    const fields: { path: string; message: string }[] = [];
+    if (!fullName) fields.push({ path: "fullName", message: "Enter your full name." });
+    if (!workEmail) fields.push({ path: "workEmail", message: "Enter your work email." });
+    if (fields.length > 0) {
       res.statusCode = 400;
-      res.end(JSON.stringify({ success: false, message: "Missing required fields" }));
+      res.end(JSON.stringify({ success: false, error: "VALIDATION_ERROR", message: "Please review the highlighted fields.", fields }));
       return;
     }
+    res.statusCode = 201;
     res.end(JSON.stringify({
       success: true,
-      data: { id: `demo-${Date.now()}`, ...payload, created_at: new Date().toISOString() },
+      data: { id: `demo-${Date.now()}`, fullName, workEmail, company, jobTitle, phone, industry, confirmationEmail: confirmationEmail !== false, created_at: new Date().toISOString() },
     }));
   } else {
     res.statusCode = 404;

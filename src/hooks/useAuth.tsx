@@ -6,17 +6,19 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
-import { api, setToken, clearToken } from "@/lib/api";
-import type { User, AuthLoginResponse } from "@/lib/types";
+import { api, clearToken, setToken } from "@/lib/api";
+import type { AuthLoginResponse, User } from "@/lib/types";
 
 interface AuthContextValue {
   user: User | null;
   loading: boolean;
-  login: (username: string, password: string) => Promise<void>;
+  login: (username: string, password: string, requiredRole?: User["role"]) => Promise<void>;
+  loginByPasscode: (passcode: string) => Promise<User>;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
+
 
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
@@ -29,38 +31,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem("crm_token");
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-    api
-      .get<{ user: User }>("/api/auth/me")
-      .then((res) => setUser(res.user))
-      .catch(() => clearToken())
-      .finally(() => setLoading(false));
+    if (!localStorage.getItem("crm_token")) { setLoading(false); return; }
+    api.get<{ user: User }>("/auth/me").then((data) => setUser(data.user)).catch(() => clearToken()).finally(() => setLoading(false));
   }, []);
 
-  const login = useCallback(async (username: string, password: string) => {
-    const res = await api.post<AuthLoginResponse>("/api/auth/login", {
-      username,
-      password,
-    });
-    setToken(res.token);
-    setUser(res.user);
+  const login = useCallback(async (username: string, password: string, requiredRole?: User["role"]) => {
+    const data = await api.post<AuthLoginResponse>("/auth/login", { username, password });
+    if (requiredRole && data.user.role !== requiredRole) throw new Error("An administrator account is required to access archived leads.");
+    setToken(data.token);
+    setUser(data.user);
+  }, []);
+
+  const loginByPasscode = useCallback(async (passcode: string) => {
+    const data = await api.post<AuthLoginResponse>("/auth/passcode", { passcode });
+    setToken(data.token);
+    const me = await api.get<{ user: User }>("/auth/me");
+    setUser(me.user);
+    return me.user;
   }, []);
 
   const logout = useCallback(async () => {
-    try {
-      await api.post("/api/auth/logout");
-    } finally {
-      clearToken();
-      setUser(null);
-    }
+    await api.post("/auth/logout").catch(() => undefined);
+    clearToken();
+    setUser(null);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, loginByPasscode, logout }}>
       {children}
     </AuthContext.Provider>
   );

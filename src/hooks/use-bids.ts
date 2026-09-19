@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
+import { isValidationError } from "@/lib/server-errors";
 import type { Bid, Pagination } from "@/lib/types";
 
 interface BidsListResponse {
@@ -12,14 +13,14 @@ export function useBids(page = 1, limit = 20) {
   return useQuery({
     queryKey: ["bids", page, limit],
     queryFn: () =>
-      api.get<BidsListResponse>("/api/bids", { page, limit }),
+      api.get<BidsListResponse>("/bids", { page, limit }),
   });
 }
 
 export function useBid(id: string) {
   return useQuery({
     queryKey: ["bids", id],
-    queryFn: () => api.get<{ bid: Bid }>(`/api/bids/${id}`),
+    queryFn: () => api.get<{ bid: Bid }>(`/bids/${id}`),
     enabled: !!id,
   });
 }
@@ -33,14 +34,17 @@ export function useCreateBid() {
       phase: "RFP Review" | "Technical Eval" | "Shortlist";
       deadline: string;
       suppliers?: string[];
-      value?: number;
-    }) => api.post<{ bid: Bid }>("/api/bids", data),
+      value?: number | null;
+      lead_id?: string | null;
+      status?: string;
+    }) => api.post<{ bid: Bid }>("/bids", data),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["bids"] });
+      qc.invalidateQueries({ queryKey: ["pipeline"] });
       toast.success("Bid created");
     },
     onError: (err: Error) => {
-      toast.error(err.message || "Failed to create bid");
+      if (!isValidationError(err)) toast.error(err.message || "Failed to create bid");
     },
   });
 }
@@ -58,14 +62,17 @@ export function useUpdateBid() {
       phase?: "RFP Review" | "Technical Eval" | "Shortlist";
       deadline?: string;
       suppliers?: string[];
-      value?: number;
-    }) => api.patch<{ bid: Bid }>(`/api/bids/${id}`, data),
+      value?: number | null;
+      lead_id?: string | null;
+      status?: string;
+    }) => api.patch<{ bid: Bid }>(`/bids/${id}`, data),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["bids"] });
+      qc.invalidateQueries({ queryKey: ["pipeline"] });
       toast.success("Bid updated");
     },
     onError: (err: Error) => {
-      toast.error(err.message || "Failed to update bid");
+      if (!isValidationError(err)) toast.error(err.message || "Failed to update bid");
     },
   });
 }
@@ -73,13 +80,14 @@ export function useUpdateBid() {
 export function useDeleteBid() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (id: string) => api.delete(`/api/bids/${id}`),
+    mutationFn: (id: string) => api.delete<void>(`/bids/${id}`),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["bids"] });
+      qc.invalidateQueries({ queryKey: ["pipeline"] });
       toast.success("Bid deleted");
     },
     onError: (err: Error) => {
-      toast.error(err.message || "Failed to delete bid");
+      if (!isValidationError(err)) toast.error(err.message || "Failed to delete bid");
     },
   });
 }
