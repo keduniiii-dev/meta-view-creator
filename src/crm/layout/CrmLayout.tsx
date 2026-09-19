@@ -1,9 +1,11 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { LogOut, Menu, Zap } from "lucide-react";
+import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import CrmFooter from "@/crm/components/CrmFooter";
 
 const items = [
@@ -20,6 +22,7 @@ const items = [
 const CrmLayout = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [showLogout, setShowLogout] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -41,7 +44,12 @@ const CrmLayout = () => {
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <Button size="sm" className="hidden h-11 text-xs sm:h-8 sm:inline-flex" onClick={() => navigate("/crm/capture")}>Get Started</Button>
-            <Tooltip><TooltipTrigger asChild><Button variant="ghost" size="icon" className="h-11 w-11 shrink-0 bg-destructive text-destructive-foreground hover:bg-destructive hover:text-destructive-foreground sm:h-8 sm:w-8" onClick={handleLogout} aria-label="Log out"><LogOut className="h-4 w-4" /></Button></TooltipTrigger><TooltipContent>Log out</TooltipContent></Tooltip>
+            <Tooltip><TooltipTrigger asChild><Button variant="destructive" size="icon" className="h-11 w-11 shrink-0 sm:h-8 sm:w-8" onClick={() => setShowLogout(true)} aria-label="Log out"><LogOut className="h-4 w-4" /></Button></TooltipTrigger><TooltipContent>Log out</TooltipContent></Tooltip>
+            <AlertDialog open={showLogout} onOpenChange={setShowLogout}>
+              <AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Log out?</AlertDialogTitle><AlertDialogDescription>You will be signed out of the CRM and returned to the login page.</AlertDialogDescription></AlertDialogHeader>
+                <AlertDialogFooter><AlertDialogCancel onClick={() => setShowLogout(false)}>Cancel</AlertDialogCancel><AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90" onClick={handleLogout}>Log out</AlertDialogAction></AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
             <Sheet>
               <SheetTrigger asChild><Button variant="outline" size="icon" className="h-11 w-11 shrink-0 sm:h-8 sm:w-8 xl:hidden" aria-label="Open menu"><Menu className="h-4 w-4" /></Button></SheetTrigger>
               <SheetContent side="right" className="w-72 p-0">
