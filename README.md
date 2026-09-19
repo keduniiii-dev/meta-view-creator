@@ -63,6 +63,16 @@ Vite proxies /api requests to http://localhost:5000. For another environment, se
 
 Never commit credentials or production tokens.
 
+### Deploy to Vercel
+
+Import this repository with the Root Directory set to the folder containing `package.json` and `vercel.json` (the repository root). The committed Vercel configuration selects Vite, runs `npm run build`, and serves `dist`.
+
+In the Vercel project's environment variables, set `VITE_API_BASE_URL` to your deployed Express API's HTTPS base URL, including `/api`, for example `https://your-api.example.com/api`. Enable it for the environments you deploy to. The local Vite `/api` proxy does not run on Vercel; the backend must be deployed separately and allow the frontend's origin through its CORS configuration.
+
+Deploy again after changing environment variables, because Vite includes them at build time. Open `/crm/login` on the deployed domain to access the CRM; `/` is the public marketing homepage.
+
+`vercel.json` rewrites page requests to `index.html` so React Router can handle direct links and refreshes on routes such as `/crm/login` and `/crm/leads`. If Vercel still returns a 404, confirm that the deployment includes this file, the Root Directory is correct, and the production build generated `dist/index.html`.
+
 ## Routes
 
 ### Public website
