@@ -26,10 +26,8 @@ export function useOutreachPreview() {
 export function useSendOutreach() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (input: OutreachInput & { campaign_id?: string | null }) => fallback(
-      () => api.postCreated<{ message: OutreachMessage }>("/outreach/send", input),
-      () => ({ message: crmStore.createMessage(input) }),
-    ),
+    mutationFn: (input: OutreachInput & { campaign_id?: string | null }) =>
+      api.postCreated<{ message: OutreachMessage }>("/outreach/send", input),
     onSuccess: () => {
       for (const key of ["outreach", "campaigns", "analytics"]) void qc.invalidateQueries({ queryKey: [key] });
       toast.success("Email sent");

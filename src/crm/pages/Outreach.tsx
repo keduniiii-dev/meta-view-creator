@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { emailHtmlToText, emailTextToHtml, hasEscapedEmailMarkup } from "@/lib/email-text";
 import OutreachDealFlow, { outreachStages, type OutreachStage } from "@/crm/components/OutreachDealFlow";
 import FollowUpSequence from "@/crm/components/FollowUpSequence";
+import LinkedInActivity from "@/crm/components/LinkedInActivity";
 import type { Lead } from "@/lib/types";
 import { format, parseISO } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
@@ -159,7 +160,7 @@ function Composer({ linkedin = false }: { linkedin?: boolean }) {
     </OutreachForm><div className="space-y-4 rounded-xl bg-muted/30 p-4 sm:p-5"><div className="flex items-center justify-between"><h3 className="text-sm font-semibold">Message preview</h3><Badge variant="outline">{fresh ? "Ready to review" : "Draft"}</Badge></div>{!fresh && <EmptyState title="Preview your message" description="Choose a recipient and generate a preview to review the personalized message here." />}
     {fresh && <div className="space-y-3 rounded-xl border p-4"><p className="text-sm">To: {preview.data.recipient}</p><p className="font-semibold">{preview.data.subject}</p><iframe title="Message preview" sandbox="" referrerPolicy="no-referrer" className="h-64 w-full rounded bg-white" srcDoc={`<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:">${escapedPreview ? emailTextToHtml(emailHtmlToText(preview.data.html)) : preview.data.html}`} /><div className="flex gap-2"><Button variant="outline" onClick={async () => { try { await navigator.clipboard.writeText(`${linkedin ? "" : preview.data.subject + "\n\n"}${emailHtmlToText(preview.data.html)}`); toast.success("Message copied"); } catch { toast.error("Could not copy message"); } }}><Copy className="mr-2 h-4 w-4" />Copy</Button>{!linkedin && <Button disabled={busy || send.isSuccess || escapedPreview} onClick={() => send.mutate({ ...input, campaign_id: campaignId || null })}>{send.isPending ? "Sending..." : send.isSuccess ? "Email sent" : "Send Email"}</Button>}</div></div>}
     {escapedPreview && <p role="alert" className="text-sm text-destructive">The server is escaping email formatting. Sending is paused until the backend fixes this, so recipients do not receive visible HTML tags. You can still copy the message.</p>}
-    {linkedin && <p className="text-xs text-muted-foreground">Copy the message to send it through LinkedIn.</p>}
+    {linkedin && <LinkedInActivity leadId={leadId} message={fresh ? emailHtmlToText(preview.data.html) : ""} />}
   </div></CardContent></Card></div>;
 }
 
@@ -170,9 +171,10 @@ function MessageHistory() {
 }
 
 export default function Outreach() {
+  const [linkedinVisited, setLinkedinVisited] = useState(false);
   return <div className="mx-auto max-w-7xl space-y-8 px-5 py-7 sm:px-8">
     <header><p className="mb-2 text-xs font-medium uppercase tracking-widest text-primary">Engagement</p><h1 className="text-3xl font-semibold tracking-tight">Outreach Center</h1><p className="mt-2 text-sm text-muted-foreground">Build relationships with personalized messages and focused campaigns.</p></header>
     <OutreachMetrics />
-    <Tabs defaultValue="email" className="space-y-6"><TabsList className="grid h-auto w-full grid-cols-2 gap-1 p-1 sm:inline-flex sm:w-auto"><TabsTrigger value="email" className="py-2"><Mail className="mr-2 h-4 w-4" />Email Templates</TabsTrigger><TabsTrigger value="linkedin" className="py-2"><MessageSquare className="mr-2 h-4 w-4" />LinkedIn CTA</TabsTrigger><TabsTrigger value="campaigns" className="py-2"><Megaphone className="mr-2 h-4 w-4" />Campaigns</TabsTrigger><TabsTrigger value="sent" className="py-2"><Inbox className="mr-2 h-4 w-4" />Sent Emails</TabsTrigger></TabsList><TabsContent value="email"><Composer /></TabsContent><TabsContent value="linkedin"><Composer linkedin /></TabsContent><TabsContent value="campaigns"><CampaignManager /></TabsContent><TabsContent value="sent"><MessageHistory /></TabsContent></Tabs>
+    <Tabs defaultValue="email" onValueChange={value => { if (value === "linkedin") setLinkedinVisited(true); }} className="space-y-6"><TabsList className="grid h-auto w-full grid-cols-2 gap-1 p-1 sm:inline-flex sm:w-auto"><TabsTrigger value="email" className="py-2"><Mail className="mr-2 h-4 w-4" />Email Templates</TabsTrigger><TabsTrigger value="linkedin" className="py-2"><MessageSquare className="mr-2 h-4 w-4" />LinkedIn CTA</TabsTrigger><TabsTrigger value="campaigns" className="py-2"><Megaphone className="mr-2 h-4 w-4" />Campaigns</TabsTrigger><TabsTrigger value="sent" className="py-2"><Inbox className="mr-2 h-4 w-4" />Sent Emails</TabsTrigger></TabsList><TabsContent value="email"><Composer /></TabsContent><TabsContent value="linkedin" forceMount className="data-[state=inactive]:hidden">{linkedinVisited && <Composer linkedin />}</TabsContent><TabsContent value="campaigns"><CampaignManager /></TabsContent><TabsContent value="sent"><MessageHistory /></TabsContent></Tabs>
   </div>;
 }

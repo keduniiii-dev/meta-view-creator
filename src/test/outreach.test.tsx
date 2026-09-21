@@ -3,6 +3,8 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Outreach from "@/crm/pages/Outreach";
 import { api } from "@/lib/api";
+import { toast } from "sonner";
+import { crmStore } from "@/crm/lib/store";
 
 vi.mock("@/lib/api", () => ({ api: { get: vi.fn(), post: vi.fn(), postCreated: vi.fn() } }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
@@ -32,6 +34,24 @@ function setup() {
   return client;
 }
 describe("outreach integration", () => {
+  it.each([
+    { status: 500, unreachable: true },
+    { status: 404, unreachable: false },
+    { status: 501, unreachable: false },
+  ])("does not fabricate a sent email when the API fails: %j", async (failure) => {
+    setup();
+    const createLocalMessage = vi.spyOn(crmStore, "createMessage");
+    vi.mocked(api.postCreated).mockRejectedValue(Object.assign(new Error("Send could not be confirmed"), failure));
+    fireEvent.click(await screen.findByRole("button", { name: /Gensler/ }));
+    fireEvent.click(screen.getByRole("button", { name: "Preview" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Send Email" }));
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith("Send could not be confirmed"));
+    expect(createLocalMessage).not.toHaveBeenCalled();
+    expect(toast.success).not.toHaveBeenCalled();
+    expect(screen.queryByRole("button", { name: "Email sent" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Send Email" })).toBeEnabled();
+    createLocalMessage.mockRestore();
+  });
   it("cleans escaped preview markup and prevents sending the broken backend output", async () => {
     setup();
     vi.mocked(api.post).mockResolvedValue({ recipient: "sarah@example.com", subject: "Introduction", html: "&lt;p&gt;Hello Sarah&lt;/p&gt;" });

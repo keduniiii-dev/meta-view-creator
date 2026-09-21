@@ -1,5 +1,7 @@
 ﻿# Twinblueprint Website and CRM
 
+For implementation status, user workflows, architecture, deployment history and outstanding verification, see the [project documentation and workflow](docs/project-overview.md).
+
 Twinblueprint is a React/Vite application with two parts:
 
 - A public marketing website for Twinblueprint 3D visualisation services.
@@ -261,6 +263,12 @@ npm run test:watch # Run Vitest in watch mode
 ~~~
 
 ## Backend handoff expectations
+
+### Standalone LinkedIn activity
+
+Admins can use **Outreach → LinkedIn CTA → Mark as sent** after manually sending the previewed message. The frontend posts `{ id, lead_id, message, sent_at }` to `/api/outreach/linkedin-sends` through the authenticated API client. Failed saves retain the exact UUID and payload for explicit retry while the Outreach page remains open, including when switching tabs. Success refreshes outreach history/statistics and analytics. This action does not send a LinkedIn message or change any sequence step. Use sequence completion instead when recording a sequence activity.
+
+The lead history requests `GET /api/outreach/linkedin-sends?lead_id=<id>`. Its current frontend response assumption is the standard success envelope with `data.linkedin_sends` containing the records; the backend handoff has not yet confirmed the list field or pagination contract. Unexpected response shapes show an error. Confirm this shape before live acceptance. The backend endpoint requires its migration and deployment before live integration testing.
 
 The API should:
 
