@@ -52,6 +52,13 @@ describe("outreach integration", () => {
     expect(screen.getByRole("button", { name: "Send Email" })).toBeEnabled();
     createLocalMessage.mockRestore();
   });
+  it("keeps the email draft and selections when switching tabs and returning", async () => {
+    setup();
+    fireEvent.change(screen.getByLabelText("Subject"), { target: { value: "Persistent subject" } });
+    fireEvent.click(screen.getByRole("tab", { name: /LinkedIn CTA/ }));
+    fireEvent.click(screen.getByRole("tab", { name: /Email Templates/ }));
+    expect(screen.getByLabelText("Subject")).toHaveValue("Persistent subject");
+  });
   it("cleans escaped preview markup and prevents sending the broken backend output", async () => {
     setup();
     vi.mocked(api.post).mockResolvedValue({ recipient: "sarah@example.com", subject: "Introduction", html: "&lt;p&gt;Hello Sarah&lt;/p&gt;" });
