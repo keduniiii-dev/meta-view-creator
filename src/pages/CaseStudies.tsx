@@ -7,7 +7,6 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
-import BookDemoDialog from "@/components/BookDemoDialog";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
 import heroImage from "@/assets/case-studies-hero.jpg";
@@ -431,7 +430,6 @@ const CaseStudies = () => {
         </section>
       </main>
       <Footer />
-      <BookDemoDialog />
     </>
   );
 };

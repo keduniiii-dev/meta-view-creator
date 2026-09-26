@@ -8,7 +8,6 @@ import CaseStudiesSection from "@/components/CaseStudiesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import BookDemoDialog from "@/components/BookDemoDialog";
 import MobileStickyCTA from "@/components/MobileStickyCTA";
 import SEO from "@/components/SEO";
 
@@ -36,7 +35,6 @@ const Index = () => {
       <HowItWorksSection />
       <CTASection />
       <Footer />
-      <BookDemoDialog />
       <MobileStickyCTA />
     </>
   );

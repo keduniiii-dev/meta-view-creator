@@ -202,10 +202,10 @@ const BookDemoDialog = () => {
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="w-[95vw] max-w-2xl border-0 bg-transparent p-0 shadow-none max-h-[90dvh] flex flex-col sm:p-0">
-        <DialogHeader className="sr-only">
-          <DialogTitle>Book a Demo</DialogTitle>
-          <DialogDescription>Book a demo with our team.</DialogDescription>
+      <DialogContent className="flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-2xl flex-col overflow-hidden rounded-2xl border border-border bg-card p-0 shadow-elevated sm:p-0 [&>button]:right-3 [&>button]:top-3 [&>button]:h-11 [&>button]:w-11 [&>button]:flex [&>button]:items-center [&>button]:justify-center">
+        <DialogHeader className="shrink-0 border-b border-border px-5 py-5 pr-16 sm:px-9 sm:pr-16">
+          <DialogTitle className="text-xl sm:text-2xl">Book a Demo</DialogTitle>
+          <DialogDescription>Tell us a little about yourself to get started.</DialogDescription>
         </DialogHeader>
 
         {submitted ? (
@@ -214,16 +214,16 @@ const BookDemoDialog = () => {
             tabIndex={-1}
             role="status"
             aria-live="polite"
-            className="flex-1 flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-8 text-center shadow-elevated focus:outline-none"
+            className="min-h-0 flex-1 overflow-y-auto p-6 text-center focus:outline-none sm:p-8"
           >
             <CheckCircle
-              className="w-14 h-14 text-primary mb-4"
+              className="mx-auto w-14 h-14 text-primary mb-4"
               aria-hidden="true"
             />
             <h3 className="text-2xl font-bold text-foreground mb-2">
               You're In!
             </h3>
-<p className="text-muted-foreground max-w-sm">
+<p className="mx-auto text-muted-foreground max-w-sm">
               Thanks for booking! Check your email for your confirmation and
               personalised lead report.
             </p>
@@ -232,10 +232,10 @@ const BookDemoDialog = () => {
             </Button>
           </div>
         ) : (
-          <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar">
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
             <form
               onSubmit={handleSubmit}
-              className="w-full rounded-2xl border border-border bg-card p-4 text-left shadow-elevated sm:p-9"
+              className="w-full p-5 text-left sm:p-9 [&_input]:h-11 [&_label]:text-sm [&_button[role=combobox]]:h-11 [&_button[role=combobox]]:text-base sm:[&_button[role=combobox]]:text-sm"
               noValidate
               aria-describedby={
                 hasErrors
@@ -483,7 +483,7 @@ const BookDemoDialog = () => {
                 type="submit"
                 size="lg"
                 disabled={submitDemo.isPending}
-                className="mt-6 h-auto min-h-11 w-full whitespace-normal px-3"
+                className="mt-6 h-auto min-h-12 w-full whitespace-normal px-3"
               >
                 {submitDemo.isPending ? (
                   <>
@@ -497,7 +497,7 @@ const BookDemoDialog = () => {
                   </>
                 )}
               </Button>
-              <p className="mt-3 text-center text-[10px] text-muted-foreground">
+              <p className="mt-3 text-center text-xs leading-relaxed text-muted-foreground">
                 We respect your privacy. Your details are only used to schedule
                 your demo.
               </p>

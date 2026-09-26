@@ -10,7 +10,6 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { toast } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BookDemoDialog from "@/components/BookDemoDialog";
 import SEO from "@/components/SEO";
 
 import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } from "react-icons/fa";
@@ -351,7 +350,6 @@ const Blog = () => {
         </section>
       </main>
       <Footer />
-      <BookDemoDialog />
     </>
   );
 };

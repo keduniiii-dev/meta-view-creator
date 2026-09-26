@@ -7,7 +7,6 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BookDemoDialog from "@/components/BookDemoDialog";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SEO from "@/components/SEO";
 import caseStudy1 from "@/assets/case-study-1.jpg";
@@ -301,7 +300,6 @@ const LearnMoreCaseStudy = () => {
 
       </main>
       <Footer />
-      <BookDemoDialog />
     </>
   );
 };
