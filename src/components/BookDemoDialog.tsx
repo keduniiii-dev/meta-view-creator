@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { CheckCircle, AlertCircle, Loader2, Send } from "lucide-react";
 import { z } from "zod";
 
 import {
@@ -23,6 +23,7 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useSubmitDemo } from "@/hooks/use-demo";
 import { useIndustries } from "@/hooks/use-industries";
 import { resolveServerErrors } from "@/lib/server-errors";
+import { cn } from "@/lib/utils";
 import { ServerErrorBanner } from "@/crm/components/ServerErrorBanner";
 
 const fallbackCategories = [
@@ -197,10 +198,11 @@ const BookDemoDialog = () => {
   };
 
   const fieldError = (key: keyof FormState) => errors[key];
+  const hasErrors = Object.values(errors).some(Boolean);
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="w-[95vw] max-w-2xl bg-background max-h-[90dvh] flex flex-col p-4 sm:p-8">
+      <DialogContent className="w-[95vw] max-w-2xl border-0 bg-transparent p-0 shadow-none max-h-[90dvh] flex flex-col sm:p-0">
         <DialogHeader className="sr-only">
           <DialogTitle>Book a Demo</DialogTitle>
           <DialogDescription>Book a demo with our team.</DialogDescription>
@@ -212,7 +214,7 @@ const BookDemoDialog = () => {
             tabIndex={-1}
             role="status"
             aria-live="polite"
-            className="flex-1 flex flex-col items-center justify-center text-center py-10 focus:outline-none"
+            className="flex-1 flex flex-col items-center justify-center rounded-2xl border border-border bg-card p-8 text-center shadow-elevated focus:outline-none"
           >
             <CheckCircle
               className="w-14 h-14 text-primary mb-4"
@@ -230,19 +232,19 @@ const BookDemoDialog = () => {
             </Button>
           </div>
         ) : (
-          <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar pb-8">
+          <div className="flex-1 min-h-0 overflow-y-auto hide-scrollbar">
             <form
               onSubmit={handleSubmit}
-              className="w-full space-y-5 text-left"
+              className="w-full rounded-2xl border border-border bg-card p-4 text-left shadow-elevated sm:p-9"
               noValidate
               aria-describedby={
-                Object.values(errors).some(Boolean)
+                hasErrors
                   ? "form-error-summary"
                   : undefined
               }
             >
               <ServerErrorBanner message={serverBanner} />
-              {Object.values(errors).some(Boolean) && (
+              {hasErrors && (
                 <div
                   ref={errorSummaryRef}
                   id="form-error-summary"
@@ -283,12 +285,14 @@ const BookDemoDialog = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                className={cn(
+                  "grid grid-cols-1 gap-4 sm:grid-cols-2",
+                  (serverBanner || hasErrors) && "mt-6",
+                )}
+              >
                 <div className="space-y-1.5">
-                  <Label
-                    htmlFor="name"
-                    className="block text-sm text-muted-foreground"
-                  >
+                  <Label htmlFor="name" className="text-xs text-muted-foreground">
                     Full Name <span className="text-destructive">*</span>
                   </Label>
                   <Input
@@ -301,11 +305,7 @@ const BookDemoDialog = () => {
                     aria-describedby={
                       fieldError("name") ? "name-error" : undefined
                     }
-                    className={
-                      fieldError("name")
-                        ? "border-destructive"
-                        : "border-input"
-                    }
+                    className={fieldError("name") ? "border-destructive" : ""}
                   />
                   {fieldError("name") && (
                     <p
@@ -318,10 +318,7 @@ const BookDemoDialog = () => {
                   )}
                 </div>
                 <div className="space-y-1.5">
-                  <Label
-                    htmlFor="email"
-                    className="block text-sm text-muted-foreground"
-                  >
+                  <Label htmlFor="email" className="text-xs text-muted-foreground">
                     Work Email <span className="text-destructive">*</span>
                   </Label>
                   <Input
@@ -335,11 +332,7 @@ const BookDemoDialog = () => {
                     aria-describedby={
                       fieldError("email") ? "email-error" : undefined
                     }
-                    className={
-                      fieldError("email")
-                        ? "border-destructive"
-                        : "border-input"
-                    }
+                    className={fieldError("email") ? "border-destructive" : ""}
                   />
                   {fieldError("email") && (
                     <p
@@ -351,14 +344,8 @@ const BookDemoDialog = () => {
                     </p>
                   )}
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <Label
-                    htmlFor="company"
-                    className="block text-sm text-muted-foreground"
-                  >
+                  <Label htmlFor="company" className="text-xs text-muted-foreground">
                     Company
                   </Label>
                   <Input
@@ -370,11 +357,7 @@ const BookDemoDialog = () => {
                     aria-describedby={
                       fieldError("company") ? "company-error" : undefined
                     }
-                    className={
-                      fieldError("company")
-                        ? "border-destructive"
-                        : "border-input"
-                    }
+                    className={fieldError("company") ? "border-destructive" : ""}
                   />
                   {fieldError("company") && (
                     <p
@@ -387,10 +370,7 @@ const BookDemoDialog = () => {
                   )}
                 </div>
                 <div className="space-y-1.5">
-                  <Label
-                    htmlFor="role"
-                    className="block text-sm text-muted-foreground"
-                  >
+                  <Label htmlFor="role" className="text-xs text-muted-foreground">
                     Job Title
                   </Label>
                   <Input
@@ -398,17 +378,10 @@ const BookDemoDialog = () => {
                     autoComplete="organization-title"
                     value={form.role}
                     onChange={(e) => handleChange("role", e.target.value)}
-                    className="border-input"
                   />
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <Label
-                    htmlFor="phone"
-                    className="block text-sm text-muted-foreground"
-                  >
+                  <Label htmlFor="phone" className="text-xs text-muted-foreground">
                     Phone
                   </Label>
                   <Input
@@ -421,11 +394,7 @@ const BookDemoDialog = () => {
                     aria-describedby={
                       fieldError("phone") ? "phone-error" : undefined
                     }
-                    className={
-                      fieldError("phone")
-                        ? "border-destructive"
-                        : "border-input"
-                    }
+                    className={fieldError("phone") ? "border-destructive" : ""}
                   />
                   {fieldError("phone") && (
                     <p
@@ -438,10 +407,7 @@ const BookDemoDialog = () => {
                   )}
                 </div>
                 <div className="space-y-1.5">
-                  <Label
-                    htmlFor="category"
-                    className="block text-sm text-muted-foreground"
-                  >
+                  <Label htmlFor="category" className="text-xs text-muted-foreground">
                     Industry
                   </Label>
                   <Select
@@ -455,9 +421,7 @@ const BookDemoDialog = () => {
                         fieldError("category") ? "category-error" : undefined
                       }
                       className={
-                        fieldError("category")
-                          ? "border-destructive"
-                          : "border-input"
+                        fieldError("category") ? "border-destructive" : ""
                       }
                     >
                       <SelectValue placeholder="Select industry" />
@@ -480,65 +444,60 @@ const BookDemoDialog = () => {
                     </p>
                   )}
                 </div>
-              </div>
 
-              <div className="space-y-1.5">
-                <Label
-                  htmlFor="captcha"
-                  className="block text-sm text-muted-foreground"
-                >
-                  Verification: what is {captcha.a} + {captcha.b}?{" "}
-                  <span className="text-destructive">*</span>
-                </Label>
-                <Input
-                  id="captcha"
-                  type="number"
-                  required
-                  inputMode="numeric"
-                  autoComplete="off"
-                  value={captchaAnswer}
-                  onChange={(e) => {
-                    setCaptchaAnswer(e.target.value);
-                    setErrors((prev) => ({ ...prev, captcha: undefined }));
-                  }}
-                  aria-invalid={!!errors.captcha}
-                  aria-describedby={
-                    errors.captcha ? "captcha-error" : undefined
-                  }
-                  className={
-                    errors.captcha ? "border-destructive" : "border-input"
-                  }
-                />
-                {errors.captcha && (
-                  <p
-                    id="captcha-error"
-                    className="text-xs text-destructive flex items-center gap-1"
-                  >
-                    <AlertCircle className="w-3 h-3" />
-                    {errors.captcha}
-                  </p>
-                )}
+                <div className="space-y-1.5">
+                  <Label htmlFor="captcha" className="text-xs text-muted-foreground">
+                    Verification: what is {captcha.a} + {captcha.b}?{" "}
+                    <span className="text-destructive">*</span>
+                  </Label>
+                  <Input
+                    id="captcha"
+                    type="number"
+                    required
+                    inputMode="numeric"
+                    autoComplete="off"
+                    value={captchaAnswer}
+                    onChange={(e) => {
+                      setCaptchaAnswer(e.target.value);
+                      setErrors((prev) => ({ ...prev, captcha: undefined }));
+                    }}
+                    aria-invalid={!!errors.captcha}
+                    aria-describedby={
+                      errors.captcha ? "captcha-error" : undefined
+                    }
+                    className={errors.captcha ? "border-destructive" : ""}
+                  />
+                  {errors.captcha && (
+                    <p
+                      id="captcha-error"
+                      className="text-xs text-destructive flex items-center gap-1"
+                    >
+                      <AlertCircle className="w-3 h-3" />
+                      {errors.captcha}
+                    </p>
+                  )}
+                </div>
               </div>
 
               <Button
                 type="submit"
                 size="lg"
                 disabled={submitDemo.isPending}
-                className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 text-base px-8 py-6"
+                className="mt-6 h-auto min-h-11 w-full whitespace-normal px-3"
               >
                 {submitDemo.isPending ? (
                   <>
-                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Submitting...
                   </>
                 ) : (
                   <>
+                    <Send className="mr-2 h-4 w-4" />
                     Book a Demo
-                    <ArrowRight className="ml-2 w-5 h-5" aria-hidden="true" />
                   </>
                 )}
               </Button>
-              <p className="text-xs text-center text-muted-foreground">
+              <p className="mt-3 text-center text-[10px] text-muted-foreground">
                 We respect your privacy. Your details are only used to schedule
                 your demo.
               </p>
