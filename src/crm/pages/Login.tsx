@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
 import { resolveServerErrors } from "@/lib/server-errors";
+import { crmPath } from "@/lib/crm-base";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -45,7 +46,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/crm/dashboard", { replace: true });
+      navigate(crmPath("/dashboard"), { replace: true });
     }
   }, [user, navigate]);
 
@@ -61,7 +62,7 @@ const Login = () => {
     try {
       await login(values.username.trim(), values.password);
       toast.success("Welcome back!");
-      navigate("/crm/dashboard", { replace: true });
+      navigate(crmPath("/dashboard"), { replace: true });
     } catch (err) {
       const resolved = resolveServerErrors(err, ["username", "password"]);
       for (const [name, message] of Object.entries(resolved.fieldErrors)) {

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useSubmitDemo } from "@/hooks/use-demo";
 import { useIndustries } from "@/hooks/use-industries";
+import { crmPath } from "@/lib/crm-base";
 
 const metrics = [
   ["12,847", "Leads Generated", "+23%"],
@@ -51,7 +52,7 @@ const Home = () => {
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <Button size="lg" onClick={() => document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })}>Start Generating Leads <span className="ml-2">→</span></Button>
-          <Button size="lg" variant="outline" onClick={() => navigate("/crm/dashboard")}>View Demo Dashboard</Button>
+          <Button size="lg" variant="outline" onClick={() => navigate(crmPath("/dashboard"))}>View Demo Dashboard</Button>
         </div>
         <div className="mt-14 grid w-full max-w-4xl grid-cols-1 gap-5 sm:grid-cols-3">
           {[

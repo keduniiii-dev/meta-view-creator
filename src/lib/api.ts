@@ -1,8 +1,12 @@
 import axios, { type AxiosError, type AxiosRequestConfig, type InternalAxiosRequestConfig } from "axios";
 import { toast } from "sonner";
 import type { ApiResponse } from "./types";
+import { crmPath } from "./crm-base";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5000/api";
 
 function getToken(): string | null {
   return localStorage.getItem("crm_token");
@@ -59,9 +63,9 @@ client.interceptors.response.use(
     const url = err.config?.url || "";
     if (status === 401 && !url.includes("/auth")) {
       clearToken();
-      if (window.location.pathname !== "/crm/login") {
+      if (window.location.pathname !== crmPath("/login")) {
         sessionStorage.setItem("session-expired", "1");
-        window.location.href = "/crm/login";
+        window.location.href = crmPath("/login");
       }
     }
     let body = err.response?.data;

@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "@/hooks/useAuth";
+import { crmPath } from "@/lib/crm-base";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -40,7 +41,7 @@ export default function AdminLoginDialog({ onClose }: { onClose: () => void }) {
       queryClient.clear();
       form.reset();
       onClose();
-      navigate("/crm/archived");
+      navigate(crmPath("/archived"));
     } catch (cause) {
       form.setValue("passcode", "");
       const status = responseStatus(cause);

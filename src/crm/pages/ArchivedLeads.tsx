@@ -6,6 +6,7 @@ import { useDeleteLead, useLeads, useUpdateLead } from "@/hooks/use-leads";
 import type { Lead } from "@/lib/types";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { crmPath } from "@/lib/crm-base";
 
 const ArchivedLeadRecords = () => {
   const { confirm, confirmation } = useConfirmation();
@@ -27,6 +28,6 @@ const ArchivedLeadRecords = () => {
 export default function ArchivedLeads() {
   const { user, loading } = useAuth();
   if (loading) return <p role="status" className="p-6">Checking admin access…</p>;
-  if (user?.role !== "admin") return <Navigate to="/crm/leads" replace />;
+  if (user?.role !== "admin") return <Navigate to={crmPath("/leads")} replace />;
   return <ArchivedLeadRecords />;
 }
