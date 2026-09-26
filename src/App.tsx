@@ -15,7 +15,8 @@ import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import LearnMoreCaseStudy from "./pages/LearnMoreCaseStudy";
 import { AuthProvider } from "./hooks/useAuth";
-import { crmPath, isCrmHost } from "./lib/crm-base";
+import { crmPath, isCrmHost, isCrmOnlyHost } from "./lib/crm-base";
+import CrmHostRedirect from "./components/CrmHostRedirect";
 import CrmLayout from "./crm/layout/CrmLayout";
 import Login from "./crm/pages/Login";
 import ProtectedRoute from "./crm/components/ProtectedRoute";
@@ -36,14 +37,18 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider><TooltipProvider><Sonner /><BrowserRouter>
       <Routes>
-        {!isCrmHost() && <>
+        {!isCrmOnlyHost() && <>
         <Route path="/" element={<Index />} /><Route path="/services" element={<Services />} /><Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/case-studies/:id" element={<LearnMoreCaseStudy />} /><Route path="/blog" element={<Blog />} /><Route path="/about" element={<About />} />
         <Route path="/how-it-works" element={<HowItWorks />} /><Route path="/faq" element={<FAQ />} /><Route path="/privacy-policy" element={<PrivacyPolicy />} /><Route path="/terms" element={<Terms />} />
+        {!isCrmHost() && <Route path="/crm/*" element={<CrmHostRedirect />} />}
         </>}
+        {isCrmHost() && <>
         <Route path={crmPath("/login")} element={<Login />} /><Route path={crmPath()} element={<ProtectedRoute />}><Route element={<CrmLayout />}>
           <Route index element={<CrmHome />} /><Route path="dashboard" element={<CrmDashboard />} /><Route path="leads" element={<CrmLeads />} /><Route path="archived" element={<CrmArchivedLeads />} /><Route path="pipeline" element={<CrmPipeline />} /><Route path="capture" element={<CrmCapture />} /><Route path="outreach" element={<CrmOutreach />} /><Route path="analytics" element={<CrmAnalytics />} /><Route path="emea" element={<CrmEmea />} /><Route path="americas" element={<CrmAmericas />} />
-        </Route></Route><Route path="*" element={<NotFound />} />
+        </Route></Route>
+        </>}
+        <Route path="*" element={<NotFound />} />
       </Routes><BookDemoDialog />
     </BrowserRouter></TooltipProvider></AuthProvider>
   </QueryClientProvider>
